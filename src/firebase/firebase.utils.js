@@ -1,0 +1,51 @@
+import firebase from 'firebase/app';
+import 'firebase/firestore';
+import 'firebase/auth';
+
+const config = {
+    apiKey: "AIzaSyDpfFHATPm9yV3eTwP5iOGfpy4bb1swoOw",
+    authDomain: "ngti-workplace.firebaseapp.com",
+    databaseURL: "https://ngti-workplace.firebaseio.com",
+    projectId: "ngti-workplace",
+    storageBucket: "ngti-workplace.appspot.com",
+    messagingSenderId: "899935600703",
+    appId: "1:899935600703:web:b9a9a9ebef289e732af88a",
+    measurementId: "G-Q9DKFKB4TQ"
+};
+
+export const createUserProfileDocument = async (userAuth, additionalData) => {
+    if (!userAuth) return;
+
+    const userRef = firestore.doc(`users/${userAuth.uid}`);
+
+    const snapShot = await userRef.get();
+
+    if (!snapShot.exists) {
+        const { displayName, email } = userAuth;
+        const createdAt = new Date();
+
+        try {
+            await userRef.set({
+                displayName,
+                email,
+                createdAt,
+                ...additionalData
+            })
+        } catch (error) {
+            console.log('error creating user', error.message);
+        }
+    }
+
+    return userRef;
+};
+
+firebase.initializeApp(config);
+
+export const auth = firebase.auth();
+export const firestore = firebase.firestore();
+
+const provider = new firebase.auth.GoogleAuthProvider();
+provider.setCustomParameters({ prompt: 'select_account' });
+export const signInWithGoogle = () => auth.signInWithPopup(provider);
+
+export default firebase;
