@@ -3,7 +3,12 @@ import React from 'react';
 import './homepage.styles.scss';
 
 const HomePage = () => (
-    <div className='title'>Welcome To NGTI Workplace</div>
+    <body>
+        <div>
+            <img src="/images/loginlogo.png" className="login-image"/>
+            <input type="image"  src="/images/google.jpg" className="google-image"/> 
+        </div>
+    </body>
 );
 
 export default HomePage;
