@@ -21,6 +21,11 @@ body {
     width: 500px;
 }
 
+.welcome {
+    color: white;
+    text-align: center;
+}
+
 .google-image {
     text-align: center;
     display: block;
@@ -29,4 +34,32 @@ body {
     margin: auto;
     margin-top: 100px;
     width: 350px;
+}
+
+.buttons {
+    background-color: #4CAF50;
+    color: #000000;
+    margin: auto;
+    border: none;
+    text-align: center;
+    width: 200px;
+    border-radius: 10px;
+    padding: 15px 25px;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+    font-weight: bold;
+}
+.buttons:hover {
+    color: white;
+}
+
+.logout {
+    background-color: #4CAF50;
+    color: #000000;
+    border: none;
+    text-decoration: none;
+    text-align: center;
+    margin: auto;
+    border-radius: 5px;
 }
