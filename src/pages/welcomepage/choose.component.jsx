@@ -5,7 +5,6 @@ import "./choose.styles.scss"
 
 
 const Choose = () => (
-    <body>
         <div className = "main">
             <button id="log-outbtn">Log out</button>
             <button id="adminbtn">Admin</button>
@@ -18,6 +17,5 @@ const Choose = () => (
             <button id="ybookingsbtn" className = "button">Your Bookings</button>
             <button id="abookingsbtn" className = "button">All Bookings</button>
         </div>
-    </body>
 );
 export default Choose;
