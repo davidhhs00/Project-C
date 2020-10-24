@@ -8,9 +8,8 @@ const HomePage = () => (
     <body>
         <div>
             <img src={LoginLogo} className="login-image"/>
-            <input type="image"  src={GoogleSignIn} className="google-image"/> 
+            <button className="google-button">Login met Google</button>
         </div>
     </body>
 );
-
 export default HomePage;
