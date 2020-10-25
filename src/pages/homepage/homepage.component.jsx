@@ -3,7 +3,10 @@ import { connect } from 'react-redux';
 
 import { auth, signInWithGoogle } from '../../firebase/firebase.utils';
 
+import LoginLogo from "../../assets/loginlogo.png"
+import GoogleSignIn from "../../assets/google.jpg"
 import './homepage.styles.scss';
+
 
 //import SignIn from '../../components/sign-in/sign-in.component';
 
@@ -24,7 +27,7 @@ import './homepage.styles.scss';
             (<SignIn />)
         }
         </div>
-    </div>*/
+    </div>
 
 const HomePage = ({ currentUser }) => (
         <div className='homepage'>
@@ -43,8 +46,15 @@ const HomePage = ({ currentUser }) => (
                 :
                 (<input alt='google' type="image" onClick={ signInWithGoogle } src="/images/google.jpg" className="google-image"/>)
             }
-            </div>
+            </div>*/
+
+const HomePage = () => (
+    <body>
+        <div>
+            <img alt='logo' src={LoginLogo} className="login-image"/>
+            <input type="image"  src={GoogleSignIn} className="google-image"/> 
         </div>
+    </body>
 );
 
 
