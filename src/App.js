@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import Choose from './pages/welcomepage/choose.component';
+import Loginpage from './pages/loginpage/loginpage.component';
 import Homepage from './pages/homepage/homepage.component';
 import {
   BrowserRouter as Router,
@@ -15,8 +15,8 @@ class App extends React.Component {
       <Router>
       <div>
       <Switch>
-      <Route exact path='/' component={Homepage}/>
-      <Route path='/Choose' component={Choose}/>
+      <Route exact path='/' component={Loginpage}/>
+      <Route path='/Choose' component={Homepage}/>
       </Switch>
       </div>
       </Router>
