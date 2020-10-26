@@ -2,7 +2,7 @@ import React from 'react';
 
 import LoginLogo from "../../assets/loginlogo.png"
 import GoogleSignIn from "../../assets/google.jpg"
-import './homepage.styles.scss';
+import './login.styles.scss';
 import {
     Link
   } from "react-router-dom"; 

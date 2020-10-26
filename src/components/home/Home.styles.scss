@@ -1,0 +1,210 @@
+$desktop: 1200px;
+$laptop: 1200px;
+$tablet: 769px;
+$phone: 480px;
+
+body {
+  background-color: #1c1c20;
+}
+
+.main {
+  @media screen and (min-aspect-ratio: 5/20) and (max-aspect-ratio: 10/16) {
+    margin-top: 50px;
+  }
+  @media screen and (min-aspect-ratio: 10/16) and (max-aspect-ratio: 1/1) {
+    width: 100%;
+  }
+  @media screen and (min-aspect-ratio: 1/1) {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(
+      -50%,
+      -50%
+    ); //change accordingly or even not necessary to define
+    height: 100%;
+    width: 100%;
+    max-width: 1200px;
+    max-height: 1000px;
+    @media screen and (max-height: 1143px) {
+      font-size: 2vh;
+    }
+  }
+}
+
+.logo {
+  @media screen and (min-aspect-ratio: 5/20) and (max-aspect-ratio: 10/16) {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 65%;
+  }
+  @media screen and (min-aspect-ratio: 10/16) and (max-aspect-ratio: 1/1) {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 30%;
+  }
+  @media screen and (min-aspect-ratio: 1/1) {
+    position: absolute;
+    left: 25%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 40%;
+    max-width: 400px;
+  }
+}
+
+.button {
+  background-color: #cdb197;
+  border-radius: 10px;
+  border: none;
+  @media screen and (min-aspect-ratio: 5/20) and (max-aspect-ratio: 10/16) {
+    display: block;
+    margin: auto;
+    width: 55%;
+    margin-top: 10%;
+    font-size: 4vw;
+  }
+  @media screen and (min-aspect-ratio: 10/16) and (max-aspect-ratio: 1/1) {
+    display: block;
+    margin: auto;
+    margin-top: 5%;
+    width: 40%;
+    font-size: 3vw;
+  }
+}
+
+#yourselfbtn {
+  @media screen and (min-aspect-ratio: 1/1) {
+    position: absolute;
+    top: 46%;
+    left: 75%; //change accordingly or even not necessary to define
+    transform: translate(-50%, -50%);
+    width: 25%;
+    height: 5%;
+    font-size: 2vh;
+  }
+}
+
+#groupbtn {
+  @media screen and (min-aspect-ratio: 1/1) {
+    position: absolute;
+    top: 53%;
+    left: 75%; //change accordingly or even not necessary to define
+    transform: translate(-50%, -50%);
+    width: 25%;
+    height: 5%;
+    font-size: 2vh;
+  }
+}
+
+#ybookingsbtn {
+  @media screen and (min-aspect-ratio: 1/1) {
+    position: absolute;
+    top: 64%;
+    left: 75%; //change accordingly or even not necessary to define
+    transform: translate(-50%, -50%);
+    width: 25%;
+    height: 5%;
+    font-size: 2vh;
+  }
+}
+
+#abookingsbtn {
+  @media screen and (min-aspect-ratio: 1/1) {
+    position: absolute;
+    top: 71%;
+    left: 75%; //change accordingly or even not necessary to define
+    transform: translate(-50%, -50%);
+    width: 25%;
+    height: 5%;
+    font-size: 2vh;
+  }
+}
+
+#welcome-txt {
+  @media screen and (min-aspect-ratio: 5/20) and (max-aspect-ratio: 10/16) {
+    text-align: center;
+    font-size: 7vw;
+    margin-top: 15%;
+  }
+  @media screen and (min-aspect-ratio: 10/16) and (max-aspect-ratio: 1/1) {
+    text-align: center;
+    font-size: 5vw;
+    margin-top: 5%;
+  }
+  @media screen and (min-aspect-ratio: 1/1) {
+    position: absolute;
+    top: 30%;
+    left: 75%; //change accordingly or even not necessary to define
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+}
+
+.text {
+  color: white;
+}
+
+#booktxt {
+  @media screen and (min-aspect-ratio: 5/20) and (max-aspect-ratio: 10/16) {
+    text-align: center;
+    font-size: 5vw;
+    margin-top: 5%;
+  }
+  @media screen and (min-aspect-ratio: 10/16) and (max-aspect-ratio: 1/1) {
+    text-align: center;
+    font-size: 5vw;
+    margin-top: 5%;
+  }
+  @media screen and (min-aspect-ratio: 1/1) {
+    position: absolute;
+    top: 38%;
+    left: 75%; //change accordingly or even not necessary to define
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+}
+
+#bookingstxt {
+  @media screen and (min-aspect-ratio: 5/20) and (max-aspect-ratio: 10/16) {
+    text-align: center;
+    font-size: 5vw;
+    margin-top: 5%;
+  }
+  @media screen and (min-aspect-ratio: 10/16) and (max-aspect-ratio: 1/1) {
+    text-align: center;
+    font-size: 5vw;
+    margin-top: 5%;
+  }
+  @media screen and (min-aspect-ratio: 1/1) {
+    position: absolute;
+    top: 57%;
+    left: 75%; //change accordingly or even not necessary to define
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+}
+
+#log-outbtn {
+  border-radius: 10px;
+  border: none;
+  background-color: #cdb197;
+  position: absolute;
+  transform: translate(0%, -100%);
+  top: 100%;
+  left: 0px;
+  font-size: 3vh;
+}
+
+#adminbtn {
+  border-radius: 10px;
+  border: none;
+  background-color: #cdb197;
+  position: absolute;
+  transform: translate(0%, 0%);
+  top: 0%;
+  right: 0px;
+  font-size: 3vh;
+}

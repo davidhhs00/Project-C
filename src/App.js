@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import './App.css';
 
-import HomePage from './pages/homepage/homepage.component';
+import Login from './components/login/login.component';
 
 import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 import { setCurrentUser } from './redux/user/user.actions';
@@ -39,7 +39,7 @@ class App extends React.Component {
   render() {
     return (
       <Switch>
-        <Route exact path='/' component={HomePage} />
+        <Route exact path='/' component={Login} />
         <Route path='/' render={() => <Redirect to='/' />} />
       </Switch>
     );
