@@ -1,36 +1,39 @@
 body {
   background-color: #1c1c20;
+}
+
+.align-center {
   text-align: center;
 }
 
 .choose-group {
   color: #ffffff;
-  font-size: 30px;
+  font-size: 25px;
   margin: -15px 150px 0px 0px;
 }
 
 //BUTTONS-------------------------------------------------------------------------------------------
-.button {
+.chpbutton {
   background-color: #cdb197;
   border-radius: 8px;
   display: inline-block;
   cursor: pointer;
   color: #000000;
   font-family: Arial;
-  font-size: 20px;
+  font-size: 18px;
   padding: 13px 10px;
   text-decoration: none;
 }
-.button:hover {
+.chpbutton:hover {
   background-color: #ffffff;
 }
-.button:active {
+.chpbutton:active {
   position: relative;
   top: 0px;
 }
 
 #chgroup-button {
-  margin: 50px 0px 0px -190px;
+  margin: 35px 0px 0px -190px;
   display: inline-block;
 }
 
@@ -50,7 +53,7 @@ body {
 //BUTTONS-------------------------------------------------------------------------------------------
 
 //Algemene styling input
-input {
+.inputveld {
   background-color: #cdb197;
   border-radius: 8px;
   cursor: pointer;
@@ -59,11 +62,11 @@ input {
   font-size: 18px;
   padding: 10px 10px;
   text-decoration: none;
-  margin: 0px 0px 20px 0px;
+  margin: 0px 40px 20px 0px;
 }
 
 .inputvelden {
-  margin: 10px 90px 40px 0px;
+  margin: 10px 90px 50px 0px;
 }
 
 // NGTI Logo
@@ -71,4 +74,5 @@ input {
   width: 150px;
   margin: -95px -190px 0px 0px;
   display: inline-block;
+  text-align: center;
 }
