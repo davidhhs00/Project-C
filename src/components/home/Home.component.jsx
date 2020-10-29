@@ -1,12 +1,13 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-import Logo from "../../images/logo.png"
-import "./Home.styles.scss"
+import Logo from "../../assets/logo.png"
+import "./home.styles.scss"
 
 
 const Choose = () => (
         <div className = "main">
-            <button id="log-outbtn">Log out</button>
+            <button className="button" id="log-outbtn">Logout</button>
             <button id="adminbtn">Admin</button>
             <img src={Logo} className="logo"/>
             <h1 id="welcome-txt" className = "text">Welcome, User</h1>

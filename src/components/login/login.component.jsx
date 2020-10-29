@@ -10,10 +10,8 @@ import {
 const HomePage = () => (
     <body>
         <div>
-        <Link to="/Choose">
             <img src={LoginLogo} className="login-image"/>
-            <button className="google-button">Login met Google</button>
-        </Link>
+            <button onClick={event =>  window.location.href='/home'} className="google-button">Login met Google</button>
         </div>
     </body>
 );
