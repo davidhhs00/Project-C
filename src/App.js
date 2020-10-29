@@ -8,6 +8,7 @@ import Home from './components/home/home.component';
 import AllBookings from './components/all-booking/all-booking.component';
 import AllBookingsInfo from './components/all-booking-info/all-booking-info.component';
 import BookingInfo from './components/booking-info/booking-info.component';
+import ChooseGroup from './components/choose-group/choosegroup.component';
 import CustomButton from './components/custom-button/custom-button.component';
 import EndGroup from './components/end-group/end-group.component';
 import YourBookings from './components/your-bookings/your-bookings.component';
@@ -60,6 +61,7 @@ class App extends React.Component {
       <Route path='/home' component={Home}/>
       <Route path='/allbookings' component={AllBookings}/>
       <Route path='/bookinginfo' component={BookingInfo}/>
+      <Route path='/choosegroup' component={ChooseGroup}/>
       <Route path='/custombutton' component={CustomButton}/>
       <Route path='/endgroup' component={EndGroup}/>
       <Route path='/yourbookings' component={YourBookings}/>

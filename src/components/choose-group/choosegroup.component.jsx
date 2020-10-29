@@ -5,7 +5,7 @@ import './choosegroup.styles.scss';
 
 const ChooseGroup = () => (
      <div>
-        <div className="chgroup-button"><button>Choose Group</button></div>
+        <button id="chgroup-button" className="button">Choose Group</button>
         <div><img src={Logo} className="ngti-logo"/></div>
         <p className="choose-group">Current Group:</p>
         <div className="inputvelden">
@@ -17,10 +17,10 @@ const ChooseGroup = () => (
                 <input type="text" id="colleague4"/>
             </form>
         </div><br/>
-        <button className="savegroup-button">Save Group</button>
+        <button id="savegroup-button" className="button">Save Group</button>
         <div>
-            <button className="back-button">Back</button>
-            <button className="continue-button">Continue</button>
+            <button id="back-button" className="button">Back</button>
+            <button id="continue-button" className="button">Continue</button>
         </div>
     </div>
 );
