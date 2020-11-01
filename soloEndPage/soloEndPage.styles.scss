@@ -3,6 +3,18 @@
   height: 5%;
   width: auto;
   color: white;
+  @media screen and (min-aspect-ratio: 5/20) and (max-aspect-ratio: 10/16) {
+    font-size: 3vh;
+  }
+  @media screen and (min-aspect-ratio: 10/16) and (max-aspect-ratio: 1/1) {
+    font-size: 4vh;
+  }
+  @media screen and (min-aspect-ratio: 1/1) {
+    font-size: 4vh;
+  }
+  @media screen and (min-aspect-ratio: 2/4) {
+    font-size: 3vh;
+  }
 }
 
 //alle info onder "your workplace has been booked"
@@ -10,6 +22,36 @@
   text-align: center;
   padding: 1vh;
   color: white;
+  @media screen and (min-aspect-ratio: 5/20) and (max-aspect-ratio: 10/16) {
+    font-size: 2vh;
+  }
+  @media screen and (min-aspect-ratio: 10/16) and (max-aspect-ratio: 1/1) {
+    font-size: 3vh;
+  }
+  @media screen and (min-aspect-ratio: 1/1) {
+    font-size: 4vh;
+  }
+  @media screen and (min-aspect-ratio: 2/4) {
+    font-size: 2vh;
+  }
+}
+
+.backText {
+  text-align: center;
+  padding: 1vh;
+  color: white;
+  @media screen and (min-aspect-ratio: 5/20) and (max-aspect-ratio: 10/16) {
+    font-size: 1.5vh;
+  }
+  @media screen and (min-aspect-ratio: 10/16) and (max-aspect-ratio: 1/1) {
+    font-size: 2.5vh;
+  }
+  @media screen and (min-aspect-ratio: 1/1) {
+    font-size: 3.5vh;
+  }
+  @media screen and (min-aspect-ratio: 2/4) {
+    font-size: 1.5vh;
+  }
 }
 
 //"bovenste foto"
@@ -17,11 +59,14 @@
   @media screen and (min-aspect-ratio: 5/20) and (max-aspect-ratio: 10/16) {
     margin-top: 2vh;
     width: 40vh;
+    max-height: 60vh;
   }
   @media screen and (min-aspect-ratio: 10/16) and (max-aspect-ratio: 1/1) {
     margin-top: 2vh;
     width: 40vh;
+    max-height: 60vh;
   }
+
   top: 1vh;
   position: relative;
   display: block;
