@@ -2,9 +2,11 @@ body {
     background-color: #1C1C20;
 }
 
+
 .welcome {
     color: white;
     text-align: center;
+    
 }
 
 .buttons {
@@ -16,6 +18,21 @@ body {
     width: 200px;
     border-radius: 10px;
     padding: 15px 25px;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.dateButtons{
+    background-color: #cdb197;
+    color: #000000;
+    margin: auto;
+    border: none;
+    text-align: center;
+    width: 350px;
+    border-radius: 10px;
+    padding: 15px 0px;
     text-decoration: none;
     display: block;
     font-size: 16px;
@@ -58,48 +75,48 @@ body {
 .submitBtn {
     background-color: #cdb197;
     color: #000000;
-    position: absolute;
+    position: fixed;
     bottom: 25px;
-    right: 80px;
-    width: 70px;
-    height: 30px;
+    width: 5%;
+    height: 3%;
+    right: 5%;
     border-radius: 5px;
     padding: 2px 7px;
     text-decoration: none;
     display: block;
     font-size: 10px;
     font-weight: bold;
-    bottom: 0;
+
 }
 
 .backBtn {
     background-color: #cdb197;
     color: #000000;
-    position: absolute;
+    position: fixed;
     bottom: 25px;
-    left: 80px;
-    width: 70px;
-    height: 30px;
+    width: 5%;
+    height: 3%;
+    left: 5%;
     border-radius: 5px;
     padding: 2px 7px;
     text-decoration: none;
     display: block;
     font-size: 10px;
     font-weight: bold;
-    bottom: 0;
+
 }
 
-// .dateBtn {
-//     background-color: #cdb197;
-//     color: #000000;
-//     margin: auto;
-//     border: none;
-//     text-align: center;
-//     width: 300px;
-//     border-radius: 11px;
-//     padding: 5px 15px;
-//     text-decoration: none;
-//     display: block;
-//     font-size: 16px;
-//     font-weight: bold;
-// }
+.dateBtn {
+    background-color: #cdb197;
+    color: #000000;
+    margin: auto;
+    border: none;
+    text-align: center;
+    width: 300px;
+    border-radius: 11px;
+    padding: 5px 15px;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+    font-weight: bold;
+}
