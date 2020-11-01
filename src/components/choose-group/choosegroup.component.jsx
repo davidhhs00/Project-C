@@ -20,7 +20,7 @@ const ChooseGroup = () => (
         <button id="savegroup-button" className="button">Save Group</button>
         <div>
             <button id="back-button" className="button">Back</button>
-            <button id="continue-button" className="button">Continue</button>
+            <button onClick={event =>  window.location.href='/endgroup'} id="continue-button" className="button">Continue</button>
         </div>
     </div>
 );
