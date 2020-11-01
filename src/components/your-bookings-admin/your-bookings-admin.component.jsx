@@ -1,8 +1,8 @@
 import React from 'react';
 
-import './your-bookings.styles.scss';
+import './your-bookings-admin.styles.scss';
 
-const your_bookings = () => (
+const your_bookings_admin = () => (
     <div>
         <h1 className='title'>Your Bookings:</h1>
         <div className="button">#BOOKING 1</div>
@@ -14,4 +14,4 @@ const your_bookings = () => (
     </div>
 )
 
-export default your_bookings;
+export default your_bookings_admin;

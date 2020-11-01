@@ -1,0 +1,21 @@
+body {
+  background-color: #1c1c20;
+  margin: 25px;
+}
+
+.login-image {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  height: 55%; //change accordingly or even not necessary to define
+  transform: translate(-50%, -50%);
+}
+
+.google-button {
+  position: absolute;
+  top: 80%;
+  left: 50%; //change accordingly or even not necessary to define
+  transform: translate(-50%, -50%);
+  margin-top: 2%;
+  font-size: 3vh;
+}
