@@ -8,8 +8,8 @@ body {
 
 .choose-group {
   color: #ffffff;
-  font-size: 25px;
-  margin: -15px 150px 0px 0px;
+  font-size: 20px;
+  margin: -15px 170px 0px 0px;
 }
 
 //BUTTONS-------------------------------------------------------------------------------------------
@@ -38,16 +38,19 @@ body {
 }
 
 #savegroup-button {
-  margin: -30px 0px 0px 190px;
+  margin: 0px 0px 0px 160px;
+  font-size: 16px;
 }
 
-#back-button {
-  margin: 125px 0px 0px 0px;
+#back-button-group {
+  margin: 120px 120px 0px 0px;
   padding: 13px 27px;
+  display: inline-block;
 }
 
 #continue-button {
-  margin: 0px 0px 0px 130px;
+  margin: 0px 0px 0px 0px;
+  display: inline-block;
 }
 
 //BUTTONS-------------------------------------------------------------------------------------------
