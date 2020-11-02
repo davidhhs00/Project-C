@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import './App.css';
 
 import Login from './components/login/login.component';
-import Home from './components/home/home.component';
+import Home from './components/home/Home.component';
 import AllBookings from './components/all-booking/all-booking.component';
 import AllBookingsInfo from './components/all-booking-info/all-booking-info.component';
 import BookingInfo from './components/booking-info/booking-info.component';
