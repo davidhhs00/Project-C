@@ -12,18 +12,16 @@ const Choose = ({currentUser}) => (
         <img src={Logo} className="logo" alt="logo"/>
         <h1 id="welcome-txt" className = "text">Welcome, {currentUser.displayName}</h1>
         <p id="booktxt" className="text">Book a workplace for:</p>
-        <button id="yourselfbtn" className = "button">Yourself</button>
+        <button id="yourselfbtn" onClick={event => window.location.href='/choosesolo'} className = "button">Yourself</button>
         <button onClick={event =>  window.location.href='/choosegroup'} id="groupbtn" className = "button">Group</button>
         <p id="bookingstxt" className="text">See Bookings:</p>
-        <button id="ybookingsbtn" className = "button">Your Bookings</button>
-        <button id="abookingsbtn" className = "button">All Bookings</button>
-    </div>        
-);
-
+        <button onClick={event =>  window.location.href='/yourbookings'} id="ybookingsbtn" className = "button">Your Bookings</button>
+        <button onClick={event =>  window.location.href='/allbookings'} id="abookingsbtn" className = "button">All Bookings</button>
+    </div>       
+); 
 
 const mapStateToProps = ({user: {currentUser}}) => ({
     currentUser
 });
-
 
 export default connect(mapStateToProps)(Choose);

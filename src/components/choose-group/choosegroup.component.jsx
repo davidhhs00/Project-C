@@ -16,10 +16,10 @@ const ChooseGroup = () => (
                 <input className="inputveld" type="text" id="colleague3"/><br/>
                 <input className="inputveld" type="text" id="colleague4"/>
             </form>
-        </div><br/>
+        </div>
         <button id="savegroup-button" className="chpbutton">Save Group</button>
-        <div>
-            <button id="back-button" className="chpbutton">Back</button>
+        <div className="align-center">
+            <button id="back-button-group" className="chpbutton">Back</button>
             <button id="continue-button" className="chpbutton">Continue</button>
         </div>
     </div>

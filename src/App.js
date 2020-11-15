@@ -14,6 +14,7 @@ import EndGroup from './components/end-group/end-group.component';
 import YourBookingsAdmin from './components/your-bookings-admin/your-bookings-admin.component';
 import SoloEndPage from './components/solo-end/solo-end.component';
 import YourBookingsSolo from './components/your-bookings-solo/your-bookings-solo.component';
+import MainSolo from './components/choose-solo/main.component'
 
 import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 import { setCurrentUser } from './redux/user/user.actions';
@@ -59,16 +60,17 @@ class App extends React.Component {
       <Router>
       <div>
       <Switch>
-      <Route exact path='/' render={() => this.props.currentUser ? (<Redirect to='/home' />) : (<Login />)} />
-      <Route exact path='/home' render={() => this.props.currentUser ? (<Home/>) : (<Redirect to='/' />)}/>
-      <Route path='/allbookings' component={AllBookings}/>
-      <Route path='/bookinginfo' component={BookingInfo}/>
-      <Route path='/choosegroup' component={ChooseGroup}/>
-      <Route path='/custombutton' component={CustomButton}/>
-      <Route path='/endgroup' component={EndGroup}/>
-      <Route path='/yourbookingsadmin' component={YourBookingsAdmin}/>
-      <Route path= '/soloend' component={SoloEndPage}/>
-      <Route path= '/yourbookingssolo' component={YourBookingsSolo}/>
+        <Route exact path='/' render={() => this.props.currentUser ? (<Redirect to='/home' />) : (<Login />)} />
+        <Route exact path='/home' render={() => this.props.currentUser ? (<Home/>) : (<Redirect to='/' />)}/>
+        <Route path='/allbookings' component={AllBookings}/>
+        <Route path='/bookinginfo' component={BookingInfo}/>
+        <Route path='/choosesolo' component={MainSolo} />
+        <Route path='/choosegroup' component={ChooseGroup}/>
+        <Route path='/custombutton' component={CustomButton}/>
+        <Route path='/endgroup' component={EndGroup}/>
+        <Route path='/yourbookingsadmin' component={YourBookingsAdmin}/>
+        <Route path= '/soloend' component={SoloEndPage}/>
+        <Route path= '/yourbookingssolo' component={YourBookingsSolo}/>
       </Switch>
       </div>
       </Router>
