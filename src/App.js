@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import './App.css';
 
 import Login from './components/login/login.component';
-import Home from './components/home/Home.component';
+import Home from './components/home/home.component';
 import AllBookings from './components/all-booking/all-booking.component';
 import AllBookingsInfo from './components/all-booking-info/all-booking-info.component';
 import BookingInfo from './components/booking-info/booking-info.component';
@@ -14,6 +14,7 @@ import EndGroup from './components/end-group/end-group.component';
 import YourBookingsAdmin from './components/your-bookings-admin/your-bookings-admin.component';
 import SoloEndPage from './components/solo-end/solo-end.component';
 import YourBookingsSolo from './components/your-bookings-solo/your-bookings-solo.component';
+import MainSolo from './components/choose-solo/main.component'
 
 import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 import { setCurrentUser } from './redux/user/user.actions';
@@ -59,10 +60,11 @@ class App extends React.Component {
       <Router>
       <div>
       <Switch>
-      <Route exact path='/' component={Login}/>
+      {/* <Route exact path='/' component={Login}/> */}
       <Route path='/home' component={Home}/>
       <Route path='/allbookings' component={AllBookings}/>
       <Route path='/bookinginfo' component={BookingInfo}/>
+      <Route path='/choosesolo' component={MainSolo} />
       <Route path='/choosegroup' component={ChooseGroup}/>
       <Route path='/custombutton' component={CustomButton}/>
       <Route path='/endgroup' component={EndGroup}/>

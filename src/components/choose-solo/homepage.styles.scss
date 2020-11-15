@@ -9,6 +9,10 @@ body {
     
 }
 
+input:focus {
+    color: #000000;
+}
+
 .buttons {
     background-color: #cdb197;
     color: #000000;
@@ -87,6 +91,12 @@ body {
     font-size: 10px;
     font-weight: bold;
 
+}
+.submitBtn:hover {
+    color: white;
+}
+.backBtn:hover {
+    color: white;
 }
 
 .backBtn {

@@ -1,10 +1,10 @@
 import React, { Fragment} from 'react'
-import img from '../../images/image2.0.svg'
+// import img from '../../images/image2.0.svg'
 import 'react-dates/initialize';
 import { DateRangePicker } from 'react-dates';
 import 'react-dates/lib/css/_datepicker.css';
 import './homepage.styles.scss'
-
+import CallCalendar from './AddEvent'
 // Solo mainpage
 
 
@@ -26,18 +26,17 @@ class MainSolo extends React.Component {
         super(props)
         const date = new Date()
         this.state = { 
-            workplace: null,
+            workplace: "",
             startDate: null,
             endDate: null,
-            timeslot: "",
-            booked: false
+            timeslot: ""
         }
     
         // this.handleChange = this.handleChange.bind(this)
         this.buttonSelected = this.buttonSelected.bind(this)
-        this.confirm = this.confirm.bind(this)
         this.onDatesChange = this.onDatesChange.bind(this)
         this.onFocusChange = this.onFocusChange.bind(this)
+        this.onWorkplace = this.onWorkplace.bind(this)
     
     }
 
@@ -47,14 +46,12 @@ class MainSolo extends React.Component {
         
     }
 
-    confirm = bool => e => {
-        this.setState({booked: bool}, () => {
-        })
+    onWorkplace(event){
+        if(event.target.value >= 0){
+            this.setState({workplace: event.target.value})
+        }
     }
 
-    confirmBack = bool => e => {
-        //Add function to go back one page
-    }
 
     onDatesChange({ startDate,endDate }) {
         this.setState({ startDate, endDate });
@@ -62,19 +59,16 @@ class MainSolo extends React.Component {
 
     onFocusChange(focusedInput) {
         this.setState({ focusedInput });
-        console.log(this.startDate)
     }
 
-    
-    
     render() {
         return (
             <Fragment>
                 
-                <form onSubmit={this.handleSubmit}>
-                    <img src={img} className="img"></img>
+                <form>
+                    {/* <img src={img} className="img"></img> */}
                     <h2 className="welcome">Select Workplace:</h2>
-                    <input className="buttons" name="workplace" type="text" value={this.state.workplace}/>
+                    <input className="buttons" type="number" value={this.state.workplace} onChange={this.onWorkplace} />
                     <h2 className="welcome">Select dates:</h2>
                     <div className="dateButtons">
                         <DateRangePicker
@@ -96,8 +90,8 @@ class MainSolo extends React.Component {
                     {["MORNING", "AFTERNOON", "EVENING"].map(key => 
                     <button className="timeslot" type="button" key={key} onClick={this.buttonSelected(key)}>{key}</button>)}
                 </form>
-                <button className="submitBtn" type="button" onClick={this.confirm(true)}>Book</button>
-                <button className="backBtn" type="button" onClick={this.confirm(true)}>Back</button>
+                <CallCalendar />
+                <button onClick={event => window.location.href='/home'} className="backBtn" type="button">Back</button>
             </Fragment>
         )
         
