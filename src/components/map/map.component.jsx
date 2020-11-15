@@ -23,4 +23,10 @@ class ngtiMap extends React.Component {
     }
 }
 
+
+const mapStateToProps = ({user: {currentUser}}) => ({
+    currentUser
+});
+
+
 export default ngtiMap;
