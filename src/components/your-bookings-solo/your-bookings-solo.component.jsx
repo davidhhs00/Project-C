@@ -2,15 +2,26 @@ import React from "react";
 
 import './your-bookings-solo.styles.scss';
 
-const your_bookings_solo = () => (
-        <div>
-            <h1 className="topText"> Your Bookings:</h1>
 
-            <button id="backButton">Back</button>
-            <button id="bookingX">Booking #X</button>
-            <button id="bookingY">Booking #Y</button>
-            <button id="bookingZ">Booking #Z</button>
+  const yourBookingsSolo = () => 
+    <div>
+      <div    id='box1'>
+          <h1 className='title1'>Your reservation on #day #date</h1>
+          <h2 className='info1'>#time  #location</h2>
         </div>
-)
 
-export default your_bookings_solo;
+        <div    id='box1'>
+          <h1 className='title2'>Your reservation on #day #date</h1>
+          <h2 className='info2'>#time  #location</h2>
+        </div>
+
+        <div    id='box1'>
+          <h1 className='title3'>Your reservation on #day #date</h1>
+          <h2 className='info3'>#time  #location</h2>
+        </div>
+
+
+        <button onClick={event =>  window.location.href='/home'} id="backButton">Back</button>
+
+    </div>
+export default yourBookingsSolo;
