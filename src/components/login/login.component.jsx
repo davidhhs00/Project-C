@@ -13,7 +13,7 @@ const HomePage = () => (
     <body>
         <div>
             <img src={LoginLogo} className="login-image"/>
-            <CustomButton type="button" onClick={signInWithGoogle} isGoogleSignIn>Sign in with Google</CustomButton>
+            <CustomButton type="button" onClick={signInWithGoogle} isGoogleSignIn className="google-button">Sign in with Google</CustomButton>
         </div>
     </body>
 );

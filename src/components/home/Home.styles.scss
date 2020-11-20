@@ -26,9 +26,6 @@ body {
     width: 100%;
     max-width: 1200px;
     max-height: 1000px;
-    @media screen and (max-height: 1143px) {
-      font-size: 2vh;
-    }
   }
 }
 
@@ -38,6 +35,7 @@ body {
     margin-left: auto;
     margin-right: auto;
     width: 65%;
+    margin-top: -10%;
   }
   @media screen and (min-aspect-ratio: 10/16) and (max-aspect-ratio: 1/1) {
     display: block;
@@ -78,7 +76,7 @@ body {
 #yourselfbtn {
   @media screen and (min-aspect-ratio: 1/1) {
     position: absolute;
-    top: 46%;
+    top: 53%;
     left: 75%; //change accordingly or even not necessary to define
     transform: translate(-50%, -50%);
     width: 25%;
@@ -90,7 +88,7 @@ body {
 #groupbtn {
   @media screen and (min-aspect-ratio: 1/1) {
     position: absolute;
-    top: 53%;
+    top: 60%;
     left: 75%; //change accordingly or even not necessary to define
     transform: translate(-50%, -50%);
     width: 25%;
@@ -102,7 +100,7 @@ body {
 #ybookingsbtn {
   @media screen and (min-aspect-ratio: 1/1) {
     position: absolute;
-    top: 64%;
+    top: 71%;
     left: 75%; //change accordingly or even not necessary to define
     transform: translate(-50%, -50%);
     width: 25%;
@@ -114,7 +112,19 @@ body {
 #abookingsbtn {
   @media screen and (min-aspect-ratio: 1/1) {
     position: absolute;
-    top: 71%;
+    top: 78%;
+    left: 75%; //change accordingly or even not necessary to define
+    transform: translate(-50%, -50%);
+    width: 25%;
+    height: 5%;
+    font-size: 2vh;
+  }
+}
+
+#sickbtn {
+  @media screen and (min-aspect-ratio: 1/1) {
+    position: absolute;
+    top: 46%;
     left: 75%; //change accordingly or even not necessary to define
     transform: translate(-50%, -50%);
     width: 25%;
@@ -140,6 +150,7 @@ body {
     left: 75%; //change accordingly or even not necessary to define
     transform: translate(-50%, -50%);
     text-align: center;
+    font-size: 3vh;
   }
 }
 
@@ -180,7 +191,7 @@ body {
   }
   @media screen and (min-aspect-ratio: 1/1) {
     position: absolute;
-    top: 57%;
+    top: 64%;
     left: 75%; //change accordingly or even not necessary to define
     transform: translate(-50%, -50%);
     text-align: center;
@@ -191,22 +202,26 @@ body {
   border-radius: 10px;
   border: none;
   background-color: #cdb197;
-  position: absolute;
+  position: fixed;
   transform: translate(0%, -100%);
   top: 100%;
   left: 0px;
-  font-size: 3vh;
+  font-size: 2vh;
+  margin-top: 0%;
+  width: 20%;
 }
 
 #adminbtn {
   border-radius: 10px;
   border: none;
   background-color: #cdb197;
-  position: absolute;
+  position: fixed;
   transform: translate(0%, 0%);
   top: 0%;
   right: 0px;
-  font-size: 3vh;
+  font-size: 2vh;
+  width: 20%;
+  margin-top: 0%;
 }
 
 a:link {
