@@ -1,16 +1,10 @@
 import React from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
-import HomePage from './pages/homepage/homepage.component';
-import Main from './pages/homepage/main.component';
-import Login from './Login.js';
-import { SubmitButton, InputField } from './Login.js'
+import { connect } from 'react-redux';
 
 import './App.css';
 
-<<<<<<< Updated upstream
-=======
 import Login from './components/login/login.component';
-import Home from './components/Home/Home.component';
+import Home from './components/home/Home.component';
 import AllBookings from './components/all-booking/all-booking.component';
 import AllBookingsInfo from './components/all-booking-info/all-booking-info.component';
 import BookingInfo from './components/booking-info/booking-info.component';
@@ -20,6 +14,7 @@ import EndGroup from './components/end-group/end-group.component';
 import YourBookingsAdmin from './components/your-bookings-admin/your-bookings-admin.component';
 import SoloEndPage from './components/solo-end/solo-end.component';
 import YourBookingsSolo from './components/your-bookings-solo/your-bookings-solo.component';
+import MainSolo from './components/choose-solo/main.component'
 
 import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 import { setCurrentUser } from './redux/user/user.actions';
@@ -34,17 +29,61 @@ import {
 } from "react-router-dom"; 
 
 
->>>>>>> Stashed changes
 class App extends React.Component {
+  unsubscribeFromAuth = null;
+
+  componentDidMount() {
+    const { setCurrentUser } = this.props;
+
+    this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
+      if (userAuth) {
+        const userRef = await createUserProfileDocument(userAuth);
+
+        userRef.onSnapshot(snapShot => {
+          setCurrentUser({
+            id: snapShot.id,
+            ...snapShot.data()
+          });
+        });
+      } else {
+        setCurrentUser(userAuth);
+      }
+    });
+  }
+
+  componentWillUnmount() {
+    this.unsubscribeFromAuth();
+  }
+
   render() {
     return (
+      <Router>
+      <div>
       <Switch>
-        <Route exact path='/' component={HomePage, Main} />
-        <Route path='/' render={() => <Redirect to='/' />} />
+        <Route exact path='/' render={() => this.props.currentUser ? (<Redirect to='/home' />) : (<Login />)} />
+        <Route exact path='/home' render={() => this.props.currentUser ? (<Home/>) : (<Redirect to='/' />)}/>
+        <Route path='/allbookings' component={AllBookings}/>
+        <Route path='/bookinginfo' component={BookingInfo}/>
+        <Route path='/choosesolo' component={MainSolo} />
+        <Route path='/choosegroup' component={ChooseGroup}/>
+        <Route path='/custombutton' component={CustomButton}/>
+        <Route path='/endgroup' component={EndGroup}/>
+        <Route path='/yourbookingsadmin' component={YourBookingsAdmin}/>
+        <Route path= '/soloend' component={SoloEndPage}/>
+        <Route path= '/yourbookingssolo' component={YourBookingsSolo}/>
       </Switch>
+      </div>
+      </Router>
     );
   }
 }
 
+const mapStateToProps = ({ user }) => ({
+  currentUser: user.currentUser
+});
 
-export default App;
+const mapDispatchToProps = dispatch => ({
+  setCurrentUser: user => dispatch(setCurrentUser(user))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
