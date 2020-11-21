@@ -1,3 +1,4 @@
+import { app } from "firebase";
 import React from "react";
 
 import './your-bookings-solo.styles.scss';
@@ -5,21 +6,47 @@ import './your-bookings-solo.styles.scss';
 
   const yourBookingsSolo = () => 
     <div>
-      <div    id='box1'>
-          <h1 className='title1'>Your reservation on #day #date</h1>
-          <h2 className='info1'>#time  #location</h2>
-        </div>
+      
+      <table id='reservations'>  
+        <tr>
+          <th>datum</th>
+          <th>Werkplek</th>  
+          <th>Team</th>
+          <th>Met wie zit ik?</th>
+          <th>Tijdvak</th>
+        </tr>
+        
+        <tr>
+          <td>24-11-2020</td>
+          <td>Tafel 3</td>
+          <td>Team 2</td>
+          <td>David v/d Heuvel</td>
+          <td>Ochtend</td>
+        </tr>
 
-        <div    id='box1'>
-          <h1 className='title2'>Your reservation on #day #date</h1>
-          <h2 className='info2'>#time  #location</h2>
-        </div>
+        <tr>
+          <td>24-11-2020</td>
+          <td>Tafel 3</td>
+          <td>Team 2</td>
+          <td>David v/d Heuvel</td>
+          <td>Ochtend</td>
+        </tr>
+        <tr>
+          <td>24-11-2020</td>
+          <td>Tafel 3</td>
+          <td>Team 2</td>
+          <td>David v/d Heuvel</td>
+          <td>Ochtend</td>
+        </tr>
+        <tr>
+          <td>24-11-2020</td>
+          <td>Tafel 3</td>
+          <td>Team 2</td>
+          <td>David v/d Heuvel</td>
+          <td>Ochtend</td>
+        </tr>
 
-        <div    id='box1'>
-          <h1 className='title3'>Your reservation on #day #date</h1>
-          <h2 className='info3'>#time  #location</h2>
-        </div>
-
+      </table>
 
         <button onClick={event =>  window.location.href='/home'} id="backButton">Back</button>
 
