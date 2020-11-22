@@ -34,26 +34,35 @@ admin.auth().getUsers([
     console.log('Error fetching user data:', error);
   });
 */
-const UserList = () => (
-    <option id="1">Hello World</option>
+
+const UserList = (colleagueNumber) => (
+    <select className="inputveld" id={colleagueNumber}>
+      <option id="default">Select Colleague</option>
+      <option id="Patryk">Patryk</option>
+      <option id="David">David</option>
+    </select>
 );
 
-const ChooseGroup = ({currentUser}) => (
+const GroupForm = ({currentUser}) => (
+  <div className="inputvelden">
+    <form>
+      <select className="inputveld">
+        <option id="you">{currentUser.displayName}</option>
+      </select><br/>
+      {UserList(1)}<br/>
+      {UserList(2)}<br/>
+      {UserList(3)}<br/>
+      {UserList(4)}
+    </form>
+  </div>
+)
+
+const ChooseGroup = (currentUser) => (
      <div className="align-center">
         <button id="chgroup-button" className="chpbutton">Choose Group</button>
         <div><img src={Logo} className="ngti-logo"/></div>
         <p className="choose-group">Current Group:</p>
-        <div className="inputvelden">
-            <form>
-                <select className="inputveld" id="You">
-                    <option value="You">{currentUser.displayName}</option>
-                </select><br/>
-                <select className="inputveld" id="colleague1"> {UserList()} </select><br/>
-                <select className="inputveld" id="colleague2"> {UserList()} </select><br/>
-                <select className="inputveld" id="colleague3"> {UserList()} </select><br/>
-                <select className="inputveld" id="colleague4"> {UserList()} </select>
-            </form>
-        </div>
+        {GroupForm(currentUser)}
         <button id="savegroup-button" className="chpbutton">Save Group</button>
         <div className="align-center">
             <button id="back-button-group" className="chpbutton">Back</button>
@@ -61,10 +70,6 @@ const ChooseGroup = ({currentUser}) => (
         </div>
     </div>
 );
-
-//<input className="inputveld" type="text" id="You">{currentUser.displayName}</input><br/>
-//<input className="inputveld" type="text" id="colleague1"/><br/>
-
 
 const mapStateToProps = ({user: {currentUser}}) => ({
     currentUser
