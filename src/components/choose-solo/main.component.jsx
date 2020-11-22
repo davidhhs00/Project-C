@@ -5,26 +5,11 @@ import { DateRangePicker } from 'react-dates';
 import 'react-dates/lib/css/_datepicker.css';
 import './homepage.styles.scss'
 import CallCalendar from './AddEvent'
-// Solo mainpage
 
-
-// const TestCustomInputIcon = () => (
-//     <span
-//       style={{
-//         border: '',
-//         width: '200px',
-//         backgroundColor: '#cdb197',
-//         color: '#cdb197',
-//         padding: '',
-//       }}
-//     >
-//     </span>
-//   );
 
 class MainSolo extends React.Component {
     constructor(props) {
         super(props)
-        const date = new Date()
         this.state = { 
             workplace: "",
             startDate: null,
@@ -74,7 +59,6 @@ class MainSolo extends React.Component {
                         <DateRangePicker
                         daySize={40}
                         // customInputIcon={<TestCustomInputIcon />}
-                        date={this.state.startDate}
                         startDateId="startDate"
                         endDateId="endDate"
                         startDate={this.state.startDate}
@@ -90,7 +74,7 @@ class MainSolo extends React.Component {
                     {["MORNING", "AFTERNOON", "EVENING"].map(key => 
                     <button className="timeslot" type="button" key={key} onClick={this.buttonSelected(key)}>{key}</button>)}
                 </form>
-                <CallCalendar />
+                <CallCalendar userInfo={this.state} />
                 <button onClick={event => window.location.href='/home'} className="backBtn" type="button">Back</button>
             </Fragment>
         )
