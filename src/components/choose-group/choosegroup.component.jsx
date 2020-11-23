@@ -36,11 +36,11 @@ admin.auth().getUsers([
 */
 
 const UserList = (colleagueNumber) => (
-    <select className="inputveld" id={colleagueNumber}>
-      <option id="default">Select Colleague</option>
-      <option id="Patryk">Patryk</option>
-      <option id="David">David</option>
-    </select>
+  <select className="inputveld" id={colleagueNumber}>
+    <option id="default">Select Colleague {colleagueNumber}</option>
+    <option id="Patryk">Patryk</option>
+    <option id="David">David</option>
+  </select>
 );
 
 const GroupForm = ({currentUser}) => (
@@ -57,22 +57,33 @@ const GroupForm = ({currentUser}) => (
   </div>
 )
 
+//const SaveGroup = () => ();
+
+const SelectGroup = () => (
+  <select id="chgroup-button" className="chpbutton">
+    <option id="select">Select Group</option>
+    <option id="group1">Group 1</option>
+    <option id="group2">Group 2</option>
+  </select>
+);
+
 const ChooseGroup = (currentUser) => (
-     <div className="align-center">
-        <button id="chgroup-button" className="chpbutton">Choose Group</button>
-        <div><img src={Logo} className="ngti-logo"/></div>
-        <p className="choose-group">Current Group:</p>
-        {GroupForm(currentUser)}
-        <button id="savegroup-button" className="chpbutton">Save Group</button>
-        <div className="align-center">
-            <button id="back-button-group" className="chpbutton">Back</button>
-            <button id="continue-button" className="chpbutton">Continue</button>
-        </div>
+  <div className="align-center">
+    {SelectGroup()}
+    <div><img src={Logo} className="ngti-logo"/></div>
+    <p className="choose-group">Current Group:</p>
+    {GroupForm(currentUser)}
+    <button id="savegroup-button" className="chpbutton">Save Group</button>
+    <div className="align-center">
+        <button id="back-button-group" className="chpbutton">Back</button>
+        <button id="continue-button" className="chpbutton">Continue</button>
     </div>
+  </div>
 );
 
 const mapStateToProps = ({user: {currentUser}}) => ({
     currentUser
 });
 
+//<button id="chgroup-button" className="chpbutton">Choose Group</button>
 export default connect(mapStateToProps)(ChooseGroup);
