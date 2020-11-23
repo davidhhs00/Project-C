@@ -15,7 +15,7 @@ import './your-bookings-solo.styles.scss';
           <th>Met wie zit ik?</th>
           <th>Tijdvak</th>
         </tr>
-        
+
         <tr>
           <td>24-11-2020</td>
           <td>Tafel 3</td>
@@ -31,6 +31,7 @@ import './your-bookings-solo.styles.scss';
           <td>David v/d Heuvel</td>
           <td>Ochtend</td>
         </tr>
+
         <tr>
           <td>24-11-2020</td>
           <td>Tafel 3</td>
@@ -38,6 +39,7 @@ import './your-bookings-solo.styles.scss';
           <td>David v/d Heuvel</td>
           <td>Ochtend</td>
         </tr>
+
         <tr>
           <td>24-11-2020</td>
           <td>Tafel 3</td>
