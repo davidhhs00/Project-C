@@ -8,12 +8,6 @@ body {
 }
 
 .main {
-  @media screen and (min-aspect-ratio: 5/20) and (max-aspect-ratio: 10/16) {
-    margin-top: 50px;
-  }
-  @media screen and (min-aspect-ratio: 10/16) and (max-aspect-ratio: 1/1) {
-    width: 100%;
-  }
   @media screen and (min-aspect-ratio: 1/1) {
     position: absolute;
     left: 50%;
@@ -35,13 +29,14 @@ body {
     margin-left: auto;
     margin-right: auto;
     width: 65%;
-    margin-top: -10%;
+    margin-top: 10%;
   }
   @media screen and (min-aspect-ratio: 10/16) and (max-aspect-ratio: 1/1) {
     display: block;
     margin-left: auto;
     margin-right: auto;
     width: 30%;
+    margin-top: 10%;
   }
   @media screen and (min-aspect-ratio: 1/1) {
     position: absolute;
@@ -215,20 +210,11 @@ body {
   border-radius: 10px;
   border: none;
   background-color: #cdb197;
-  position: fixed;
+  position: absolute;
   transform: translate(0%, 0%);
   top: 0%;
   right: 0px;
   font-size: 2vh;
   width: 20%;
   margin-top: 0%;
-}
-
-a:link {
-  color: black;
-  text-decoration: none;
-}
-
-a:visited {
-  color: black;
 }
