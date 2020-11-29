@@ -5,6 +5,7 @@ import { DateRangePicker } from 'react-dates';
 import 'react-dates/lib/css/_datepicker.css';
 import './homepage.styles.scss'
 import CallCalendar from './AddEvent'
+import SetRangeDates from './Reservation/SetRangeDates';
 
 
 class MainSolo extends React.Component {
@@ -14,7 +15,8 @@ class MainSolo extends React.Component {
             workplace: "",
             startDate: null,
             endDate: null,
-            timeslot: ""
+            timeslot: "",
+            
         }
     
         // this.handleChange = this.handleChange.bind(this)
@@ -75,7 +77,7 @@ class MainSolo extends React.Component {
                     <button className="timeslot" type="button" key={key} onClick={this.buttonSelected(key)}>{key}</button>)}
                 </form>
                 <CallCalendar userInfo={this.state} />
-                <button onClick={event => window.location.href='/home'} className="backBtn" type="button">Back</button>
+                <button onClick={() => window.location.href='/home'} className="backBtn" type="button">Back</button>
             </Fragment>
         )
         
