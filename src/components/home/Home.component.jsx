@@ -16,7 +16,7 @@ const Choose = ({currentUser}) => (
         <button id="yourselfbtn" onClick={event => window.location.href='/choosesolo'} className = "button">Yourself</button>
         <button onClick={event =>  window.location.href='/choosegroup'} id="groupbtn" className = "button">Group</button>
         <p id="bookingstxt" className="text">See Bookings:</p>
-        <button onClick={event =>  window.location.href='/yourbookings'} id="ybookingsbtn" className = "button">Your Bookings</button>
+        <button onClick={event =>  window.location.href='/yourbookingssolo'} id="ybookingsbtn" className = "button">Your Bookings</button>
         <button onClick={event =>  window.location.href='/allbookings'} id="abookingsbtn" className = "button">All Bookings</button>
     </div>       
 ); 

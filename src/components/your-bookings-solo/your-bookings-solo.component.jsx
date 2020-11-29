@@ -1,27 +1,63 @@
+import { app } from "firebase";
 import React from "react";
-
+import { firestore, auth } from '../../firebase/firebase.utils'
 import './your-bookings-solo.styles.scss';
 
+class yourBookingsSolo extends React.Component{
+  constructor(props) {
+    
+    super(props);
+   
+    this.state = {reservations : []}
+    }
 
-  const yourBookingsSolo = () => 
+  componentDidMount(){
+      console.log('hij werkt')
+      firestore.collection('reservations')
+        .get()
+        .then( snapshot => {
+          let reservations = [];
+          snapshot.forEach( doc => {
+            const data = doc.data()
+            reservations.push(data)
+          })
+          this.setState({ reservations: reservations })
+        })
+        .catch(error => console.log(error))
+  }
+  
+  render(){
+    return(
     <div>
-      <div    id='box1'>
-          <h1 className='title1'>Your reservation on #day #date</h1>
-          <h2 className='info1'>#time  #location</h2>
-        </div>
-
-        <div    id='box1'>
-          <h1 className='title2'>Your reservation on #day #date</h1>
-          <h2 className='info2'>#time  #location</h2>
-        </div>
-
-        <div    id='box1'>
-          <h1 className='title3'>Your reservation on #day #date</h1>
-          <h2 className='info3'>#time  #location</h2>
-        </div>
-
+      
+      <table id='reservations'>  
+      <thead>
+          <tr>
+            <th>Who?</th>
+            <th>When?</th>
+            <th>Timeslot</th>
+            <th>Workplace</th>  
+          </tr>
+        </thead>
+        
+        <tbody> 
+        {this.state.reservations.map(data => {
+        return(
+        <tr>
+          <td>{data.displayName}</td>
+          <td>{data.newStartDate}</td>
+          <td>{data.timeslot}</td>
+          <td>{data.workplace}</td>          
+        </tr>
+        );
+        })}
+        </tbody>
+      </table>
 
         <button onClick={event =>  window.location.href='/home'} id="backButton">Back</button>
 
     </div>
+    )
+  }
+}
 export default yourBookingsSolo;
