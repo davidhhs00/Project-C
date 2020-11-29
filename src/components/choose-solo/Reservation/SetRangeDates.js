@@ -1,6 +1,6 @@
 import React from 'react';
 
-//"2020-12-02"
+
 const giveRangeDates = (props) => {
     const startDate = new Date(props.newStartDate),
           endDate = new Date(props.newEndDate),
