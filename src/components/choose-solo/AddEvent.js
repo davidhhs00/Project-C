@@ -3,7 +3,7 @@ import './homepage.styles.scss'
 import 'firebase/auth'
 import Reserve from './Reservation/Reserve'
 
-//Add firebase settings, different project
+//TODO: Add error handling when a field isn't specified.
 
 const CallCalendar = (props) => {
   var gapi = window.gapi
@@ -33,11 +33,11 @@ const CallCalendar = (props) => {
               'location': 'Central Post, 10de verdieping Delftseplein 30K, 3013AA Rotterdam',
               'description': '',
               'start': {
-                'dateTime': props.userInfo.startDate,
+                'dateTime': (props.userInfo.startDate) ? props.userInfo.startDate : props.userInfo.endDate,
                 'timeZone': 'Europe/Amsterdam'
               },
               'end': {
-                'dateTime': props.userInfo.endDate,
+                'dateTime': (props.userInfo.endDate) ? props.userInfo.endDate : props.userInfo.startDate,
                 'timeZone': 'Europe/Amsterdam'
               },
               'recurrence': [
