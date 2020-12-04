@@ -39,7 +39,7 @@ body {
 }
 
 #savegroup-button {
-  margin: 0px 0px 0px 160px;
+  margin: 0px 0px 0px 260px;
   font-size: 16px;
 }
 
@@ -73,6 +73,10 @@ body {
 
 .inputvelden {
   margin: 10px 90px 50px 0px;
+}
+
+.inputveld:hover {
+  background-color: #ffffff;
 }
 
 // NGTI Logo

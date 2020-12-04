@@ -41,7 +41,8 @@ const GroupForm = ({currentUser}) => (
       {UserList(1)}<br/>
       {UserList(2)}<br/>
       {UserList(3)}<br/>
-      {UserList(4)}
+      {UserList(4)}<br/>
+      <button id="savegroup-button" className="chpbutton" type="submit">Save Group</button>
     </form>
   </div>
 );
@@ -70,13 +71,6 @@ function GroupList() {
   );
 }
 
-//Group exporteren
-function SaveGroup() {
-  return(
-    <button id="savegroup-button" className="chpbutton">Save Group</button>
-  );
-}
-
 //OUTPUT -> Functie voor export
 const ChooseGroup = (currentUser) => (
   <div className="align-center">
@@ -84,7 +78,6 @@ const ChooseGroup = (currentUser) => (
     <div><img src={Logo} className="ngti-logo"/></div>
     <p className="choose-group">Current Group:</p>
     {GroupForm(currentUser)}
-    {SaveGroup()}
     <div className="align-center">
         <button id="back-button-group" className="chpbutton">Back</button>
         <button id="continue-button" className="chpbutton">Continue</button>
