@@ -1,15 +1,39 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { useState } from 'react';
 
-import firebase from '../../firebase/firebase.utils'
-import { auth } from '../../firebase/firebase.utils';
+import firebase from '../../firebase/firebase.utils';
 
 import Logo from "../../assets/logo.png"
 import './choosegroup.styles.scss';
 
-// Functies om users te importen en laten zien
-// User List importeren
-function UserList(colleagueNumber) {
+
+//Group Form maken voor import en userlist importeren
+const GroupForm = ({currentUser}) => {
+  // Group Form setup
+  const [groupName, setgroupName] = useState("");
+  const [groupOwner] = useState(currentUser.displayName);
+  const [colleague1, setColleague1] = useState("");
+  const [colleague2, setColleague2] = useState("");
+  const [colleague3, setColleague3] = useState("");
+  const [colleague4, setColleague4] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const db = firebase.firestore()
+    db.collection("groups").add({
+      groupName: groupName,
+      groupOwner: groupOwner,
+      colleague1: colleague1,
+      colleague2: colleague2,
+      colleague3: colleague3,
+      colleague4: colleague4,
+    })
+  };
+  // Group Form setup
+
+  // Userlist Importeren
   const [users, setUsers] = React.useState([])
 
   React.useEffect(() => {
@@ -20,36 +44,69 @@ function UserList(colleagueNumber) {
     }
     fetchData()
   }, [])
-
+  // Userlist Importeren
+  
   return (
-    <select className="inputveld" id="colleaguenumber">
-      <option id="default">Select Colleague {colleagueNumber}</option>
-      {users.map(user =>(
-        <option key={user.displayName}>{user.displayName}</option>
-      ))}
-    </select>
-  );
-}
-
-//Form maken voor gemaakte User Lists
-const GroupForm = ({currentUser}) => (
   <div className="inputvelden">
-    <form>
+    <form onSubmit={handleSubmit}>
+
       <select className="inputveld">
         <option id="you">{currentUser.displayName}</option>
       </select><br/>
-      {UserList(1)}<br/>
-      {UserList(2)}<br/>
-      {UserList(3)}<br/>
-      {UserList(4)}<br/>
-      <button id="savegroup-button" className="chpbutton" type="submit">Save Group</button>
+
+      {/*Collegues*/}
+      <select className="inputveld" id="colleaguenumber1" value={colleague1} onChange={(e) => setColleague1(e.target.value)}>
+        <option id="default" defaultValue>Select Colleague 1</option>
+        {users.map(user =>{
+        return user.displayName !== currentUser.displayName ?
+          <option key={user.email}>{user.displayName}</option>
+        :
+          null
+        })}
+      </select><br/>
+
+      <select className="inputveld" id="colleaguenumber2" value={colleague2} onChange={(e) => setColleague2(e.target.value)}>
+        <option id="default" defaultValue>Select Colleague 2</option>
+        {users.map(user =>{
+        return user.displayName !== currentUser.displayName ?
+          <option key={user.email}>{user.displayName}</option>
+        :
+          null
+        })}
+      </select><br/>
+
+      <select className="inputveld" id="colleaguenumber3" value={colleague3} onChange={(e) => setColleague3(e.target.value)}>
+        <option id="default" defaultValue>Select Colleague 3</option>
+        {users.map(user =>{
+        return user.displayName !== currentUser.displayName ?
+          <option key={user.email}>{user.displayName}</option>
+        :
+          null
+        })}
+      </select><br/>
+
+      <select className="inputveld" id="colleaguenumber4" value={colleague4} onChange={(e) => setColleague4(e.target.value)}>
+        <option id="default" defaultValue>Select Colleague 4</option>
+        {users.map(user =>{
+        return user.displayName !== currentUser.displayName ?
+          <option key={user.email}>{user.displayName}</option>
+        :
+          null
+        })}
+      </select><br/>
+      {/*Collegues*/}
+
+      <input className="groupname-input" placeholder="Group Name" value={groupName} onChange={(e) => setgroupName(e.target.value)}/><br />
+      
+      <button className="chpbutton" id="savegroup-button"  type="submit">Save Group</button>
+
     </form>
   </div>
-);
+  )
+};
 
-//Functies die zorgen voor het laten zien van groups en het opslaan van groups
 //Groups importeren
-function GroupList() {
+function GroupList({currentUser}) {
   const [groups, setGroups] = React.useState([])
 
   React.useEffect(() => {
@@ -62,11 +119,14 @@ function GroupList() {
   }, [])
 
   return (
-    <select id="chgroup-button" className="chpbutton">
+    <select id="chgroup-button" className="chpbutton" onChange={console.log(groups.groupName)}>
       <option id="default">Select Group</option>
-      {groups.map(group =>(
-        <option key={group.groupName}>{group.groupName}</option>
-      ))}
+      {groups.map(group =>{
+        return group.groupOwner === currentUser.displayName ?
+          <option key={group.groupName}>{group.groupName}</option>
+        :
+          null
+      })}
     </select>
   );
 }
@@ -74,14 +134,12 @@ function GroupList() {
 //OUTPUT -> Functie voor export
 const ChooseGroup = (currentUser) => (
   <div className="align-center">
-    {GroupList()}
-    <div><img src={Logo} className="ngti-logo"/></div>
+    {GroupList(currentUser)}
+    <div><img src={Logo} className="ngti-logo" alt="ngti-logo"/></div>
     <p className="choose-group">Current Group:</p>
     {GroupForm(currentUser)}
-    <div className="align-center">
-        <button id="back-button-group" className="chpbutton">Back</button>
-        <button id="continue-button" className="chpbutton">Continue</button>
-    </div>
+    <button className="chpbutton" id="chback-button" onClick={event => window.location.href='/home'} type="button">Back</button>
+    <button className="chpbutton" id="chcontinue-button" onClick={event => window.location.href='/choosesolo'} type="button">Continue</button>
   </div>
 );
 
