@@ -6,7 +6,7 @@ import './choosegroup.styles.scss';
 const ChooseGroup = () => (
      <div className="align-center">
         <button id="chgroup-button" className="chpbutton">Choose Group</button>
-        <div><img src={Logo} className="ngti-logo"/></div>
+        <div><img alt="logo" src={Logo} className="ngti-logo"/></div>
         <p className="choose-group">Current Group:</p>
         <div className="inputvelden">
             <form>

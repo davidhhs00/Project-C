@@ -1,57 +1,40 @@
-import React, { Fragment} from 'react'
-// import img from '../../images/image2.0.svg'
+import React, { Fragment, Component } from 'react'
+import Map from '../map/map.component';
 import 'react-dates/initialize';
 import { DateRangePicker } from 'react-dates';
 import 'react-dates/lib/css/_datepicker.css';
 import './homepage.styles.scss'
 import CallCalendar from './AddEvent'
-// Solo mainpage
+import { createUserProfileDocument } from '../../firebase/firebase.utils';
+import { connect } from 'react-redux';
 
 
-// const TestCustomInputIcon = () => (
-//     <span
-//       style={{
-//         border: '',
-//         width: '200px',
-//         backgroundColor: '#cdb197',
-//         color: '#cdb197',
-//         padding: '',
-//       }}
-//     >
-//     </span>
-//   );
-
-class MainSolo extends React.Component {
+class MainSolo extends Component {
     constructor(props) {
         super(props)
-        const date = new Date()
         this.state = { 
             workplace: "",
             startDate: null,
             endDate: null,
             timeslot: ""
         }
-    
-        // this.handleChange = this.handleChange.bind(this)
+
         this.buttonSelected = this.buttonSelected.bind(this)
         this.onDatesChange = this.onDatesChange.bind(this)
         this.onFocusChange = this.onFocusChange.bind(this)
         this.onWorkplace = this.onWorkplace.bind(this)
-    
     }
 
-    buttonSelected = tt => e=> {
+    buttonSelected = tt => e => {
         this.setState({ timeslot: tt}, () => {
         })
-        
     }
 
-    onWorkplace(event){
-        if(event.target.value >= 0){
-            this.setState({workplace: event.target.value})
+    onWorkplace(event) {
+        if(event >= 0){
+            this.setState({workplace: event})
         }
     }
-
 
     onDatesChange({ startDate,endDate }) {
         this.setState({ startDate, endDate });
@@ -64,17 +47,15 @@ class MainSolo extends React.Component {
     render() {
         return (
             <Fragment>
-                
                 <form>
+                    <Map className='map' workplace={this.onWorkplace}/>
                     {/* <img src={img} className="img"></img> */}
-                    <h2 className="welcome">Select Workplace:</h2>
-                    <input className="buttons" type="number" value={this.state.workplace} onChange={this.onWorkplace} />
+                    <h2 className="welcome">Select Workplace: {this.state.workplace}</h2>
                     <h2 className="welcome">Select dates:</h2>
                     <div className="dateButtons">
                         <DateRangePicker
                         daySize={40}
                         // customInputIcon={<TestCustomInputIcon />}
-                        date={this.state.startDate}
                         startDateId="startDate"
                         endDateId="endDate"
                         startDate={this.state.startDate}
@@ -99,13 +80,8 @@ class MainSolo extends React.Component {
     
 }
 
-export default MainSolo;
+const mapStateToProps = ({user: {currentUser}}) => ({
+    currentUser
+});
 
-
-
-
-{/* <div style=""> */} 
-                        {/* <button className="Morning" type="button" onClick={this.buttonSelected("Morning")}>MORNING</button>
-                        <button className="Afternoon" type="button" onClick={this.buttonSelected("Afternoon")}>AFTERNOON</button>
-                        <button className="Evening" type="button" onClick={this.buttonSelected("Evening")}>EVENING</button> */}
-                     {/* </div> */}
+export default connect(mapStateToProps)(MainSolo);

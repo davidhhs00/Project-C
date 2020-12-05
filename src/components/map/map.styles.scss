@@ -1,16 +1,54 @@
 .ngti-map {
     .mapImg {
-        position: absolute;
-        width: 80%;
+        position: relative;
+        width: 1621px;
+        height: 921px;
         margin: 0 auto;
+        background-image: url("../../assets/ngtiMap.png");
     }
 
     .zone-to-reserve {
         position: absolute;
-        margin-top: 130px;
-        margin-left: 50px;
-        width: 100px;
-        height: 100px;
+        margin-top: 711px;
+        margin-left: 175px;
+        width: 110px;
+        height: 32px;
         background-color: green;
+        opacity: 50%;
+        color: transparent;
+        text-align: center;
+        padding: 50px 0;
+        font-weight: bold;
+        cursor: pointer;
+
+        &:hover {
+            opacity: 80%;
+            color: black;
+        }
+
+        &.selected {
+            opacity: 90%;
+            color: black;
+        }
+    }
+    .reserved {
+        background-color: grey;
+        opacity: 90%;
+        color: transparent;
+        text-align: center;
+
+        &:hover {
+            color: black;
+            opacity: 90%;
+        }
+    }
+}
+
+@media screen and (min-width: 350px) {
+    .ngti-map {
+        .mapImg {
+            margin: 0 auto;
+            transform: scale(0.3);
+        }
     }
 }
