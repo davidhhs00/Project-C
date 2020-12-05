@@ -9,10 +9,12 @@ import './login.styles.scss';
 
 
 const HomePage = () => (
-    <div>
-        <img alt="logo" src={LoginLogo} className="login-image"/>
-        <CustomButton className="custom-button google-button google-sign-in" onClick={signInWithGoogle} isGoogleSignIn>Sign in with Google</CustomButton>
-    </div>
+    <body>
+        <div>
+            <img src={LoginLogo} className="login-image"/>
+            <CustomButton type="button" onClick={signInWithGoogle} isGoogleSignIn className="google-button">Sign in with Google</CustomButton>
+        </div>
+    </body>
 );
 
 
