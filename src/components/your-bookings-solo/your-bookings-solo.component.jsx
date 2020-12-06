@@ -1,16 +1,63 @@
+import { app } from "firebase";
 import React from "react";
-
+import { firestore, auth } from '../../firebase/firebase.utils'
 import './your-bookings-solo.styles.scss';
 
-const your_bookings_solo = () => (
-        <div>
-            <h1 className="topText"> Your Bookings:</h1>
+class yourBookingsSolo extends React.Component{
+  constructor(props) {
+    
+    super(props);
+   
+    this.state = {reservations : []}
+    }
 
-            <button id="backButton">Back</button>
-            <button id="bookingX">Booking #X</button>
-            <button id="bookingY">Booking #Y</button>
-            <button id="bookingZ">Booking #Z</button>
-        </div>
-)
+  componentDidMount(){
+      console.log('hij werkt')
+      firestore.collection('reservations')
+        .get()
+        .then( snapshot => {
+          let reservations = [];
+          snapshot.forEach( doc => {
+            const data = doc.data()
+            reservations.push(data)
+          })
+          this.setState({ reservations: reservations })
+        })
+        .catch(error => console.log(error))
+  }
+  
+  render(){
+    return(
+    <div>
+      
+      <table id='reservations'>  
+      <thead>
+          <tr>
+            <th>Who?</th>
+            <th>When?</th>
+            <th>Timeslot</th>
+            <th>Workplace</th>  
+          </tr>
+        </thead>
+        
+        <tbody> 
+        {this.state.reservations.map(data => {
+        return(
+        <tr>
+          <td>{data.displayName}</td>
+          <td>{data.ReservedDates}</td>
+          <td>{data.timeslot}</td>
+          <td>{data.workplace}</td>          
+        </tr>
+        );
+        })}
+        </tbody>
+      </table>
 
-export default your_bookings_solo;
+        <button onClick={event =>  window.location.href='/home'} id="backButton">Back</button>
+
+    </div>
+    )
+  }
+}
+export default yourBookingsSolo;

@@ -35,11 +35,13 @@ body {
 #chgroup-button {
   margin: 35px 0px 0px -190px;
   display: inline-block;
+  width: 150px;
 }
 
 #savegroup-button {
-  margin: 0px 0px 0px 160px;
-  font-size: 16px;
+  margin: 20px 0px 0px 90px;
+  font-size: 18px;
+  width: 150px;
 }
 
 #back-button-group {
@@ -48,9 +50,15 @@ body {
   display: inline-block;
 }
 
-#continue-button {
-  margin: 0px 0px 0px 0px;
-  display: inline-block;
+#chback-button {
+  width: 90px;
+  text-align: center;
+  margin-right: 110px;
+}
+
+#chcontinue-button {
+  width: 100px;
+  text-align: center;
 }
 
 //BUTTONS-------------------------------------------------------------------------------------------
@@ -66,10 +74,34 @@ body {
   padding: 10px 10px;
   text-decoration: none;
   margin: 0px 40px 20px 0px;
+  width: 200px;
+  text-align: left;
 }
 
 .inputvelden {
-  margin: 10px 90px 50px 0px;
+  margin: 10px 90px 90px 0px;
+}
+
+.inputveld:hover {
+  background-color: #ffffff;
+}
+
+.groupname-input {
+  background-color: #cdb197;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #000000;
+  font-family: Arial;
+  font-size: 18px;
+  padding: 10px 10px;
+  text-decoration: none;
+  margin: 20px 40px 20px 0px;
+  width: 180px;
+  text-align: left;
+}
+
+.groupname-input:hover {
+  background-color: #ffffff;
 }
 
 // NGTI Logo
