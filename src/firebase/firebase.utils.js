@@ -40,6 +40,22 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
     return userRef;
 };
 
+export const placeReservation = async (data) => {
+    const { email, time, workplace } = data;
+
+    try {
+        var newReservationRef = firestore.collection("reservations").doc();
+
+        newReservationRef.set({
+            email,
+            time,
+            workplace
+        });
+    } catch (error) {
+        console.log('error creating reservation', error.message);
+    }
+}
+
 firebase.initializeApp(config);
 
 export const auth = firebase.auth();

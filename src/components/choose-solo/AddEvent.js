@@ -26,8 +26,7 @@ const CallCalendar = (props) => {
          
           gapi.client.load('calendar', 'v3', () => console.log('loaded calendar!'))
 
-          var auth2 = gapi.auth2.getAuthInstance().signIn()
-          .then(() => {
+          var auth2 = gapi.auth2.getAuthInstance().signIn().then(() => {
             var event = {
               'summary': 'Reservation',
               'location': 'Central Post, 10de verdieping Delftseplein 30K, 3013AA Rotterdam',
@@ -68,7 +67,7 @@ const CallCalendar = (props) => {
 
   return (
       <div className="App">
-          <script src="https://apis.google.com/js/api.js"></script>
+          
           <button className="submitBtn"onClick={handleClick}>Submit</button>
       </div>
   )

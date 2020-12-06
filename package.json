@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^7.2.1",
     "date-fns": "^2.16.1",
     "firebase": "^7.22.1",
+    "googleapis": "^65.0.0",
     "node-sass": "^4.14.1",
     "react": "^16.14.0",
     "react-date-range": "^1.1.3",

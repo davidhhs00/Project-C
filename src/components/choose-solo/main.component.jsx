@@ -1,4 +1,5 @@
-import React from "react";
+import React, { Fragment } from "react";
+import Map from '../map/map.component';
 // import img from '../../images/image2.0.svg'
 import "react-dates/initialize";
 import { DateRangePicker } from "react-dates";
@@ -34,8 +35,8 @@ class MainSolo extends React.Component {
   };
 
   onWorkplace(event) {
-    if (event.target.value >= 0) {
-      this.setState({ workplace: event.target.value });
+    if (event >= 0) {
+      this.setState({ workplace: event });
     }
   }
 
