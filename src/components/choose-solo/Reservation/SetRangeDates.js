@@ -2,8 +2,8 @@ import React from 'react';
 
 
 const giveRangeDates = (props) => {
-    const startDate = new Date(props.newStartDate),
-          endDate = new Date(props.newEndDate),
+    const startDate = new Date(props.startdate),
+          endDate = new Date(props.enddate),
           difference = (endDate-startDate)/864e5, // represents the number of milliseconds
           dateFormat = {weekday: 'short', day:'numeric', month: 'short', year:'numeric'}, //Dateformate
           dates = Array.from( //shallow-copied Array instance from an array-like or iterable object
@@ -15,8 +15,12 @@ const giveRangeDates = (props) => {
               return `${dateStr} ${weekdayStr}`
             }
           )
+          const datesDict = {}
+          dates.forEach((key) => (
+            datesDict[key] = "09:00-13:00"
+          ))
     return (
-        dates
+      datesDict
     )
 
 }

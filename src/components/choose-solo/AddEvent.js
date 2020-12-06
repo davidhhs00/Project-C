@@ -33,7 +33,7 @@ const CallCalendar = (props) => {
               'location': 'Central Post, 10de verdieping Delftseplein 30K, 3013AA Rotterdam',
               'description': '',
               'start': {
-                'dateTime': (props.userInfo.startDate) ? props.userInfo.startDate : props.userInfo.endDate,
+                'dateTime': (props.userInfo.startDate) ? props.userInfo.startDate: props.userInfo.endDate,
                 'timeZone': 'Europe/Amsterdam'
               },
               'end': {

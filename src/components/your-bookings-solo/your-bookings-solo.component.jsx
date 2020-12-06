@@ -45,7 +45,7 @@ class yourBookingsSolo extends React.Component{
         return(
         <tr>
           <td>{data.displayName}</td>
-          <td>{data.newStartDate}</td>
+          <td>{data.ReservedDates}</td>
           <td>{data.timeslot}</td>
           <td>{data.workplace}</td>          
         </tr>

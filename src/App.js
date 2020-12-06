@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import './App.css';
+import './components/choose-solo/_react-dates.css'
 
 import Login from './components/login/login.component';
 import Home from './components/home/Home.component';

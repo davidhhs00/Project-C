@@ -10,29 +10,15 @@ const sendReservation = async (props) => {
 
         if(snapShot.exists){
             const {displayName, email} = auth.currentUser
-            const {workplace, startDate, endDate, timeslot} = props
+            const {workplace, dates} = props
 
-            //Maybe add file for error handling?
-            const newStartDate = (startDate) ? startDate.format('YYYY-MM-DD') : ""
-            const newEndDate = (endDate) ? endDate.format('YYYY-MM-DD') : ""
 
-            let ReservedDates = ""
-            
-            if(newStartDate !== "" && newEndDate !== "" ) {
-                ReservedDates = SetRangeDates({newStartDate, newEndDate})
-            } else if(newStartDate === "" || newEndDate === ""){
-                ReservedDates = (newStartDate) ? newStartDate : newEndDate
-            } else {
-                return;
-            }
-        
             try {
                 await userRef.set({
                         displayName,
                         email,
                         workplace,
-                        timeslot,
-                        ReservedDates  
+                        dates  
                 })
             } catch (error) {
                 console.log('error sending user reservation', error.message);

@@ -1,30 +1,36 @@
-import React, { Fragment } from "react";
+import React from "react";
 // import img from '../../images/image2.0.svg'
 import "react-dates/initialize";
 import { DateRangePicker } from "react-dates";
-import "react-dates/lib/css/_datepicker.css";
+import 'rsuite/dist/styles/rsuite-default.css'
 import "./homepage.styles.scss";
+import "react-dates/lib/css/_datepicker.css";
+
 import CallCalendar from "./AddEvent";
+import setRangeDates from './Reservation/SetRangeDates';
 
 class MainSolo extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       workplace: "",
+      timeslot: "",
       startDate: null,
       endDate: null,
-      timeslot: "",
+      focused: null,
+      dates: []
     };
-
-    // this.handleChange = this.handleChange.bind(this)
+    
     this.buttonSelected = this.buttonSelected.bind(this);
     this.onDatesChange = this.onDatesChange.bind(this);
     this.onFocusChange = this.onFocusChange.bind(this);
     this.onWorkplace = this.onWorkplace.bind(this);
+    this.onSetTime = this.onSetTime.bind(this);
   }
 
-  buttonSelected = (tt) => (e) => {
-    this.setState({ timeslot: tt }, () => {});
+
+  buttonSelected = (tt) => {
+    this.setState({ timeslot: tt });
   };
 
   onWorkplace(event) {
@@ -34,20 +40,39 @@ class MainSolo extends React.Component {
   }
 
   onDatesChange({ startDate, endDate }) {
-    this.setState({ startDate, endDate });
+    this.setState({ startDate, endDate }, () => {
+        const startdate = (this.state.startDate) ? this.state.startDate.format('YYYY-MM-DD') : this.state.endDate.format('YYYY-MM-DD')
+        const enddate =  (this.state.endDate) ? this.state.endDate.format('YYYY-MM-DD') : this.state.startDate.format('YYYY-MM-DD')
+        this.setState({dates: setRangeDates({startdate, enddate})})
+    })
   }
+
+  onSetTime = (event) =>  {
+    const name = event.target.name;
+    const val = event.target.value;
+    this.setState(prevState => {
+      const {dates} = prevState;
+        dates[name] = val;
+        return {dates};
+      }
+    );
+  };
+
 
   onFocusChange(focusedInput) {
     this.setState({ focusedInput });
   }
 
   render() {
+    console.log(this.state.dates)
+    Object.entries(this.state.dates).map((key, value) => (
+      console.log(key[1])
+    ))
     return (
-      <Fragment>
-        <div className="main">
-          <form>
+        <div className="">
+          {/* <form>
             {/* <img src={img} className="img"></img> */}
-            <ul>
+            {/* <ul>
               <li>
                 <a href="/home">Home</a>
               </li>
@@ -60,7 +85,7 @@ class MainSolo extends React.Component {
               <li>
                 <a href="/choosegroup">Choose group</a>
               </li>
-            </ul>
+            </ul> */} 
             <h2 className="welcome">Select Workplace:</h2>
             <input
               className="buttons"
@@ -68,7 +93,8 @@ class MainSolo extends React.Component {
               value={this.state.workplace}
               onChange={this.onWorkplace}
             />
-            <h2 className="welcome">Select dates:</h2>
+            <br />
+            <h2 className="welcome">Select Dates:</h2>
             <div className="dateButtons">
               <DateRangePicker
                 daySize={40}
@@ -78,48 +104,40 @@ class MainSolo extends React.Component {
                 startDate={this.state.startDate}
                 endDate={this.state.endDate}
                 onDatesChange={this.onDatesChange}
-                focusedInput={this.state.focusedInput}
-                onFocusChange={this.onFocusChange}
-                showClearDates
+                focusedInput={this.state.focused}
+                onFocusChange={focusedInput => this.setState({ focused: focusedInput})}
+                numberOfMonths={1}
               />
+  {
+                Object.entries(this.state.dates).map((key) => (
+                  <div>
+                  <h3 className="welcome">{key[0]}</h3>
+                  <select
+                    className="timeslot"
+                    type="select"
+                    key={key}
+                    name={key[0]}
+                    value={key[1]}
+                    onChange={this.onSetTime}
+                  >
+                    <option value="09:00-13:00">09:00-13:00</option>
+                    <option value="09:00-17:00">09:00-17:00</option>
+                    <option value="13:00-17:00">13:00-17:00</option>
+                  </select>
+                  </div>
+              ))}
             </div>
             <br />
-            <h2 className="welcome">Choose Timeslot:</h2>
-            {["MORNING", "AFTERNOON", "EVENING"].map((key) => (
-              <button
-                className="timeslot"
-                type="button"
-                key={key}
-                onClick={this.buttonSelected(key)}
-              >
-                {key}
-              </button>
-            ))}
-          </form>
           <CallCalendar userInfo={this.state} />
           <button
             onClick={(event) => (window.location.href = "/home")}
             className="backBtn"
-            type="button"
-          >
+            type="button">
             Back
           </button>
         </div>
-      </Fragment>
     );
   }
 }
 
 export default MainSolo;
-
-{
-  /* <div style=""> */
-}
-{
-  /* <button className="Morning" type="button" onClick={this.buttonSelected("Morning")}>MORNING</button>
-                        <button className="Afternoon" type="button" onClick={this.buttonSelected("Afternoon")}>AFTERNOON</button>
-                        <button className="Evening" type="button" onClick={this.buttonSelected("Evening")}>EVENING</button> */
-}
-{
-  /* </div> */
-}
