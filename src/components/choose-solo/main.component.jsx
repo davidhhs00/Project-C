@@ -65,10 +65,6 @@ class MainSolo extends React.Component {
   }
 
   render() {
-    console.log(this.state.dates)
-    Object.entries(this.state.dates).map((key, value) => (
-      console.log(key[1])
-    ))
     return (
         <div className="">
           {/* <form>

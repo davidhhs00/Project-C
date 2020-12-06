@@ -5,6 +5,11 @@ import Reserve from './Reservation/Reserve'
 
 //TODO: Add error handling when a field isn't specified.
 
+//"startTime": "2018-12-01T10:00:00", <- specify this timestamp for the calendar so that is can show the time correctly
+//"endTime": "2018-12-01T13:00:00"
+
+//"899935600703-gqi84kbl6j9lqme8u2m3hh1e97j54h4o.apps.googleusercontent.com" 
+
 const CallCalendar = (props) => {
   var gapi = window.gapi
   var CLIENT_ID = "899935600703-gqi84kbl6j9lqme8u2m3hh1e97j54h4o.apps.googleusercontent.com" //add firebase au
@@ -23,7 +28,7 @@ const CallCalendar = (props) => {
               discoveryDocs: DISCOVERY_DOCS,
               scope: SCOPES,
           })
-         
+          console.log(props.userInfo.startDate)
           gapi.client.load('calendar', 'v3', () => console.log('loaded calendar!'))
 
           var auth2 = gapi.auth2.getAuthInstance().signIn().then(() => {
@@ -40,7 +45,7 @@ const CallCalendar = (props) => {
                 'timeZone': 'Europe/Amsterdam'
               },
               'recurrence': [
-                'RRULE:FREQ=DAILY;COUNT=2'
+                'RRULE:FREQ=DAILY;COUNT=1'
               ],
               'reminders': {
                 'useDefault': false,

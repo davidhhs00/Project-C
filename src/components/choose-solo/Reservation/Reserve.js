@@ -1,18 +1,17 @@
 import React from 'react'
 import '../../../firebase/firebase.utils'
 import { firestore, auth} from '../../../firebase/firebase.utils'
-import SetRangeDates from './SetRangeDates'
+
+//Add unique id so every reservation is unique and it will not be overriden.
 
 const sendReservation = async (props) => {
-        const userRef = firestore.doc(`reservations/` + auth.currentUser.displayName)
+        const userRef = firestore.doc(`reservations/${auth.currentUser.displayName}`)
 
         const snapShot = await userRef.get()
+        const {displayName, email} = auth.currentUser
+        const {workplace, dates} = props
 
-        if(snapShot.exists){
-            const {displayName, email} = auth.currentUser
-            const {workplace, dates} = props
-
-
+        if(!snapShot.exists){
             try {
                 await userRef.set({
                         displayName,
@@ -24,6 +23,17 @@ const sendReservation = async (props) => {
                 console.log('error sending user reservation', error.message);
             }
             return userRef
+        } else if (snapShot.exists){
+            try {
+                await userRef.set({
+                        displayName,
+                        email,
+                        workplace,
+                        dates  
+                })
+            } catch (error) {
+                console.log('error sending user reservation', error.message);
+            }
         }
         
     }
