@@ -64,7 +64,7 @@ class App extends React.Component {
         <Route path='/allbookings' component={AllBookings}/>
         <Route path='/bookinginfo' component={BookingInfo}/>
         <Route path='/choosesolo' component={MainSolo} />
-        <Route path='/choosegroup' component={ChooseGroup}/>
+        <Route exact path='/choosegroup' render={() => this.props.currentUser ? (<ChooseGroup/>) : (<Redirect to='/choosegroup'/>)}/>
         <Route path='/custombutton' component={CustomButton}/>
         <Route path='/endgroup' component={EndGroup}/>
         <Route path='/yourbookingsadmin' component={YourBookingsAdmin}/>
