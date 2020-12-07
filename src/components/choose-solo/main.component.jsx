@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import Map from '../map/map.component';
-// import img from '../../images/image2.0.svg'
+// import img from '../../images/image2.0.svg';
 import "react-dates/initialize";
 import { DateRangePicker } from "react-dates";
 import 'rsuite/dist/styles/rsuite-default.css'
@@ -46,6 +46,7 @@ class MainSolo extends React.Component {
         const enddate =  (this.state.endDate) ? this.state.endDate.format('YYYY-MM-DD') : this.state.startDate.format('YYYY-MM-DD')
         this.setState({dates: setRangeDates({startdate, enddate})})
     })
+    console.log(this.state.dates)
   }
 
   onSetTime = (event) =>  {
@@ -117,9 +118,10 @@ class MainSolo extends React.Component {
                     value={key[1]}
                     onChange={this.onSetTime}
                   >
-                    <option value="09:00-13:00">09:00-13:00</option>
-                    <option value="09:00-17:00">09:00-17:00</option>
-                    <option value="13:00-17:00">13:00-17:00</option>
+                    <option value="8:30-11:00">MORNING</option>
+                    <option value="11:15-14:00">AFTERNOON</option>
+                    <option value="14:15-17:00">EVENING</option>
+                    <option value="8:30-17:00">ALL DAY</option>
                   </select>
                   </div>
               ))}

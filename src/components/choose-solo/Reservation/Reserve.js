@@ -1,6 +1,6 @@
 import React from 'react'
 import '../../../firebase/firebase.utils'
-import { firestore, auth} from '../../../firebase/firebase.utils'
+import { firestore, auth} from '../../../firebase/firebase.utils';
 
 //Add unique id so every reservation is unique and it will not be overriden.
 
