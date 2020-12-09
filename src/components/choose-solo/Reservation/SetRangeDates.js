@@ -5,7 +5,7 @@ const giveRangeDates = (props) => {
     const startDate = new Date(props.startdate),
           endDate = new Date(props.enddate),
           difference = (endDate-startDate)/864e5, // represents the number of milliseconds
-          dateFormat = { year:'numeric', month: 'numeric', day:'numeric'}, //Dateformate
+          dateFormat = { weekday: 'short', year:'numeric', month: 'numeric', day:'numeric'}, //Dateformate
           dates = Array.from( //shallow-copied Array instance from an array-like or iterable object
             {length: difference+1},
             (_,i) => {

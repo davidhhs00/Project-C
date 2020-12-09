@@ -109,7 +109,7 @@ class MainSolo extends React.Component {
   {
                 Object.entries(this.state.dates).map((key) => (
                   <div>
-                  <h3 className="welcome">{key[0]}</h3>
+                  <h3 className="welcome">{key[0].split(' ')[1]}</h3>
                   <select
                     className="timeslot"
                     type="select"

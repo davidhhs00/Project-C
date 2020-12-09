@@ -29,8 +29,8 @@ const CallCalendar = (props) => {
           const dates = props.userInfo.dates;
           gapi.auth2.getAuthInstance().signIn().then(() => {
             Object.entries(dates).map((key) => {
-              let startDate = new Date(key[0])
-              let endDate = new Date(key[0])
+              let startDate = new Date(key[0].split(' ')[0])
+              let endDate = new Date(key[0].split(' ')[0])
               startDate.setHours(key[1].split('-')[0].split(':')[0],key[1].split('-')[0].split(':')[1])
               endDate.setHours(key[1].split('-')[1].split(':')[0],key[1].split('-')[0].split(':')[1])
               var event = {
@@ -64,7 +64,7 @@ const CallCalendar = (props) => {
               console.log("done")
             ))
           })
-          // Reserve(props.userInfo)
+          Reserve(props.userInfo)
       })
     }
       )}
