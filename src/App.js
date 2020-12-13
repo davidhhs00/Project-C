@@ -70,7 +70,7 @@ class App extends React.Component {
         <Route path='/endgroup' component={EndGroup}/>
         <Route path='/yourbookingsadmin' component={YourBookingsAdmin}/>
         <Route path= '/soloend' component={SoloEndPage}/>
-        <Route path= '/yourbookingssolo' component={YourBookingsSolo}/>
+        <Route path= '/yourbookings' component={YourBookingsSolo}/>
         <Route path= '/map' component={map}/>
       </Switch>
       </div>

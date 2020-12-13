@@ -10,21 +10,32 @@
   height: 5%;
   font-size: 3vh;
 }
+#deleteButton {
+  background-color: #cdb197;
+  border-radius: 10px;
+  border: none;
+  width: auto;
+  height: auto;
+  font-size: 3vh;
+}
 
-#reservations{
+#reservations {
   width: 75%;
   margin-left: auto;
   margin-right: auto;
-  border-collapse: collapse;;
+  border-collapse: collapse;
   border: 1px solid black;
   padding: 1vw;
   background-color: #35353b;
   color: #c4c4c4;
 }
 
-td, th{
-  border-collapse: collapse;;
+td,
+th {
+  border-collapse: collapse;
   border: 1px solid black;
   padding: 1vw;
 }
-#reservations tr:nth-child(even){background-color: #4a4a50;}
+#reservations tr:nth-child(even) {
+  background-color: #4a4a50;
+}
