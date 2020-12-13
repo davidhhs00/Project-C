@@ -8,7 +8,10 @@ class yourBookingsSolo extends React.Component{
     
     super(props);
    
-    this.state = {reservations : []}
+    this.state = {
+      reservations : [],
+      dates: []
+    }
     }
 
   componentDidMount(){
@@ -17,11 +20,14 @@ class yourBookingsSolo extends React.Component{
         .get()
         .then( snapshot => {
           let reservations = [];
+          let dates = []
           snapshot.forEach( doc => {
             const data = doc.data()
+            const check = data.dates ? data.dates : ""
             reservations.push(data)
+            dates.push(check)
           })
-          this.setState({ reservations: reservations })
+          this.setState({ reservations: reservations, dates: dates })
         })
         .catch(error => console.log(error))
   }
@@ -41,16 +47,19 @@ class yourBookingsSolo extends React.Component{
         </thead>
         
         <tbody> 
-        {this.state.reservations.map(data => {
+        {
+        
+        this.state.reservations.map((data, i) => {
         return(
         <tr>
           <td>{data.displayName}</td>
-          <td>{data.ReservedDates}</td>
+          <td>{data.dates}</td>
           <td>{data.timeslot}</td>
           <td>{data.workplace}</td>          
         </tr>
         );
-        })}
+        })
+      }
         </tbody>
       </table>
 

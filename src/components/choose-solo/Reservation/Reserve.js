@@ -10,6 +10,13 @@ const sendReservation = async (props) => {
         const snapShot = await userRef.get()
         const {displayName, email} = auth.currentUser
         const {workplace, dates} = props
+        
+        const firebaseDates = []
+        Object.keys(dates).map((key) => {
+            let eu = key.split("/")
+            console.log(eu)
+            firebaseDates.push(eu[1] + "-" + eu[0] + "-" + eu[2]+ " "+dates[key]);
+        })
 
         if(!snapShot.exists){
             try {
@@ -17,7 +24,7 @@ const sendReservation = async (props) => {
                         displayName,
                         email,
                         workplace,
-                        dates  
+                        firebaseDates  
                 })
             } catch (error) {
                 console.log('error sending user reservation', error.message);
@@ -29,7 +36,7 @@ const sendReservation = async (props) => {
                         displayName,
                         email,
                         workplace,
-                        dates  
+                        firebaseDates  
                 })
             } catch (error) {
                 console.log('error sending user reservation', error.message);

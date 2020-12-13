@@ -19,7 +19,7 @@ class MainSolo extends React.Component {
       startDate: null,
       endDate: null,
       focused: null,
-      dates: []
+      dates: {}
     };
     
     this.buttonSelected = this.buttonSelected.bind(this);
@@ -46,7 +46,6 @@ class MainSolo extends React.Component {
         const enddate =  (this.state.endDate) ? this.state.endDate.format('YYYY-MM-DD') : this.state.startDate.format('YYYY-MM-DD')
         this.setState({dates: setRangeDates({startdate, enddate})})
     })
-    console.log(this.state.dates)
   }
 
   onSetTime = (event) =>  {
@@ -99,8 +98,8 @@ class MainSolo extends React.Component {
                 // customInputIcon={<TestCustomInputIcon />}
                 startDateId="startDate"
                 endDateId="endDate"
-                startDate={this.state.startDate}
-                endDate={this.state.endDate}
+                startDate={this.state.startDate ? this.state.startDate : this.state.endDate}
+                endDate={this.state.endDate ? this.state.endDate: this.state.startDate}
                 onDatesChange={this.onDatesChange}
                 focusedInput={this.state.focused}
                 onFocusChange={focusedInput => this.setState({ focused: focusedInput})}

@@ -14,6 +14,7 @@ const CallCalendar = (props) => {
   var SCOPES = "https://www.googleapis.com/auth/calendar";
 
 
+  //Should convert the date to American timezone so the calendar can set it to the correct date.
   const handleClick = () => {
       gapi.load('client:auth2', () => {
           console.log('loaded client')
@@ -38,7 +39,7 @@ const CallCalendar = (props) => {
                 'location': 'Central Post, 10de verdieping Delftseplein 30K, 3013AA Rotterdam',
                 'description': '',
                 'start': {
-                  'dateTime': (startDate.toISOString()),
+                  'dateTime': (startDate.toISOString()), //Needs to be ISO
                   'timeZone': 'Europe/Amsterdam'
                 },
                 'end': {
@@ -63,6 +64,7 @@ const CallCalendar = (props) => {
             request.execute(event => (
               console.log("done")
             ))
+           
           })
           Reserve(props.userInfo)
       })
@@ -70,7 +72,6 @@ const CallCalendar = (props) => {
       )}
   return (
       <div className="App">
-          
           <button className="submitBtn"onClick={handleClick}>Submit</button>
       </div>
   )
