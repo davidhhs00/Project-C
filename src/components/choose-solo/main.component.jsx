@@ -63,7 +63,7 @@ class MainSolo extends React.Component {
 
   render() {
     return (
-        <div className="">
+        <div className="main">
           {/* <form>
             {/* <img src={img} className="img"></img> */}
             {/* <ul>
@@ -91,8 +91,6 @@ class MainSolo extends React.Component {
             <h2 className="welcome">Select Dates:</h2>
             <div className="dateButtons">
             <DateRangePicker
-              daySize={40}
-              // customInputIcon={<TestCustomInputIcon />}
               startDateId="startDate"
               endDateId="endDate"
               startDate={this.state.startDate ? this.state.startDate : this.state.endDate}
@@ -101,11 +99,11 @@ class MainSolo extends React.Component {
               focusedInput={this.state.focused}
               onFocusChange={focusedInput => this.setState({ focused: focusedInput})}
               numberOfMonths={1}
-              preventScroll
+              withPortal={window.matchMedia("(max-width: 400px").matches}
               enableOutsideDays
               noBorder
               autoFocus
-              daySize={50}
+              daySize={56}
             />
             </div>
   {
