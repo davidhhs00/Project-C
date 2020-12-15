@@ -1,6 +1,7 @@
 import { app } from "firebase";
 import React from "react";
 import { firestore, auth } from '../../firebase/firebase.utils'
+import * as firebase from 'firebase';
 import './your-bookings-solo.styles.scss';
 
 class yourBookingsSolo extends React.Component{
@@ -26,6 +27,13 @@ class yourBookingsSolo extends React.Component{
         .catch(error => console.log(error))
   }
   
+  removeToCollection(e) {
+    const userUid = firebase.auth().currentUser.uid
+    let key = "    kjWanJnzRHGWN6Gh2avm    "
+    firebase.database().ref(`users/${userUid}/collection/${key}`).remove()
+
+  }
+
   render(){
     return(
     <div>
@@ -35,19 +43,19 @@ class yourBookingsSolo extends React.Component{
           <tr>
             <th>Who?</th>
             <th>When?</th>
-            <th>Timeslot</th>
             <th>Workplace</th>  
+            <th></th>
           </tr>
         </thead>
         
         <tbody> 
-        {this.state.reservations.map(data => {
+        {this.state.reservations.map((data, i) => {
         return(
         <tr>
           <td>{data.displayName}</td>
-          <td>{data.ReservedDates}</td>
-          <td>{data.timeslot}</td>
+          <td>{data.dates}</td>
           <td>{data.workplace}</td>          
+          <td> <button onClick={this.removeToCollection.bind(this, i)} id="deleteButton">Delete</button> </td>
         </tr>
         );
         })}

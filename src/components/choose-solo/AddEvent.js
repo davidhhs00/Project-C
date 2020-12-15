@@ -1,9 +1,10 @@
 import React from 'react'
 import './homepage.styles.scss'
-import 'firebase/auth'
+import {auth} from '../../firebase/firebase.utils';
 import Reserve from './Reservation/Reserve'
 
 //TODO: Add error handling when a field isn't specified.
+
 
 const CallCalendar = (props) => {
   var gapi = window.gapi
@@ -23,48 +24,50 @@ const CallCalendar = (props) => {
               discoveryDocs: DISCOVERY_DOCS,
               scope: SCOPES,
           })
-         
           gapi.client.load('calendar', 'v3', () => console.log('loaded calendar!'))
 
-          var auth2 = gapi.auth2.getAuthInstance().signIn().then(() => {
-            var event = {
-              'summary': 'Reservation',
-              'location': 'Central Post, 10de verdieping Delftseplein 30K, 3013AA Rotterdam',
-              'description': '',
-              'start': {
-                'dateTime': (props.userInfo.startDate) ? props.userInfo.startDate: props.userInfo.endDate,
-                'timeZone': 'Europe/Amsterdam'
-              },
-              'end': {
-                'dateTime': (props.userInfo.endDate) ? props.userInfo.endDate : props.userInfo.startDate,
-                'timeZone': 'Europe/Amsterdam'
-              },
-              'recurrence': [
-                'RRULE:FREQ=DAILY;COUNT=2'
-              ],
-              'reminders': {
-                'useDefault': false,
-                'overrides': [
-                  {'method': 'email', 'minutes': 24 * 60},
-                  {'method': 'popup', 'minutes': 10}
-                ]
-              }
-            };
-          
-          var request = gapi.client.calendar.events.insert({
-              'calendarId': 'primary',
-              'resource': event,
+          const dates = props.userInfo.dates;
+          gapi.auth2.getAuthInstance().signIn().then(() => {
+            Object.entries(dates).map((key) => {
+              let startDate = new Date(key[0])
+              let endDate = new Date(key[0])
+              startDate.setHours(key[1].split('-')[0].split(':')[0],key[1].split('-')[0].split(':')[1])
+              endDate.setHours(key[1].split('-')[1].split(':')[0],key[1].split('-')[0].split(':')[1])
+              var event = {
+                'summary': `reservations ${auth.currentUser.displayName}`,
+                'location': 'Central Post, 10de verdieping Delftseplein 30K, 3013AA Rotterdam',
+                'description': '',
+                'start': {
+                  'dateTime': (startDate.toISOString()),
+                  'timeZone': 'Europe/Amsterdam'
+                },
+                'end': {
+                  'dateTime': (endDate.toISOString()),
+                  'timeZone': 'Europe/Amsterdam'
+                },
+                'recurrence': [
+                  'RRULE:FREQ=DAILY;COUNT=1'
+                ],
+                'reminders': {
+                  'useDefault': false,
+                  'overrides': [
+                    {'method': 'email', 'minutes': 24 * 60},
+                    {'method': 'popup', 'minutes': 10}
+                  ]
+                }
+              };
+            var request = gapi.client.calendar.events.insert({
+                'calendarId': 'primary',
+                'resource': event,
+            })
+            request.execute(event => (
+              console.log("done")
+            ))
           })
-
-          Reserve(props.userInfo)
-
-          request.execute(event => {
-              window.open(event.htmlLink)
-          })
-          })
+          // Reserve(props.userInfo)
       })
-  }
-
+    }
+      )}
   return (
       <div className="App">
           
