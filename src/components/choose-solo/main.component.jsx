@@ -87,6 +87,7 @@ class MainSolo extends React.Component {
                 <a href="/choosegroup">Choose group</a>
               </li>
             </ul> */} 
+            <Map />
             <h2 className="welcome">Select Workplace:</h2>
             <input
               className="buttons"
