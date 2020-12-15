@@ -1,11 +1,8 @@
 import React, { Fragment } from "react";
-import Map from '../map/map.component';
-// import img from '../../images/image2.0.svg';
-import "react-dates/initialize";
 import { DateRangePicker } from "react-dates";
-import 'rsuite/dist/styles/rsuite-default.css'
-import "./homepage.styles.scss";
+import "react-dates/initialize";
 import "react-dates/lib/css/_datepicker.css";
+import "./homepage.styles.scss";
 
 import CallCalendar from "./AddEvent";
 import setRangeDates from './Reservation/SetRangeDates';
@@ -18,7 +15,7 @@ class MainSolo extends React.Component {
       timeslot: "",
       startDate: null,
       endDate: null,
-      focused: null,
+      focused: false,
       dates: {}
     };
     
@@ -93,18 +90,24 @@ class MainSolo extends React.Component {
             <br />
             <h2 className="welcome">Select Dates:</h2>
             <div className="dateButtons">
-              <DateRangePicker
-                daySize={40}
-                // customInputIcon={<TestCustomInputIcon />}
-                startDateId="startDate"
-                endDateId="endDate"
-                startDate={this.state.startDate ? this.state.startDate : this.state.endDate}
-                endDate={this.state.endDate ? this.state.endDate: this.state.startDate}
-                onDatesChange={this.onDatesChange}
-                focusedInput={this.state.focused}
-                onFocusChange={focusedInput => this.setState({ focused: focusedInput})}
-                numberOfMonths={1}
-              />
+            <DateRangePicker
+              daySize={40}
+              // customInputIcon={<TestCustomInputIcon />}
+              startDateId="startDate"
+              endDateId="endDate"
+              startDate={this.state.startDate ? this.state.startDate : this.state.endDate}
+              endDate={this.state.endDate ? this.state.endDate: this.state.startDate}
+              onDatesChange={this.onDatesChange}
+              focusedInput={this.state.focused}
+              onFocusChange={focusedInput => this.setState({ focused: focusedInput})}
+              numberOfMonths={1}
+              preventScroll
+              enableOutsideDays
+              noBorder
+              autoFocus
+              daySize={50}
+            />
+            </div>
   {
                 Object.entries(this.state.dates).map((key) => (
                   <div>
@@ -124,7 +127,6 @@ class MainSolo extends React.Component {
                   </select>
                   </div>
               ))}
-            </div>
             <br />
           <CallCalendar userInfo={this.state} />
           <button
