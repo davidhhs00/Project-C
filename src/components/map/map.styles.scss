@@ -87,7 +87,6 @@
 }
 
 .ngti-map {
-    margin: 0 auto;
     .mapImg {
         position: relative;
         width: 100%;
@@ -104,7 +103,7 @@
         width: 6.8%;
         height: 0.01%;
         background-color: green;
-        opacity: 0.5;
+        opacity: 50%;
         color: transparent;
         text-align: center;
         padding: 4.1% 0;
@@ -112,26 +111,24 @@
         cursor: pointer;
 
         &:hover {
-            opacity: 0.8;
+            opacity: 80%;
             color: black;
         }
 
         &.selected {
-            opacity: 0.9;
+            opacity: 90%;
             color: black;
         }
     }
     .reserved {
         background-color: grey;
-        opacity: 0.9;
+        opacity: 90%;
         color: transparent;
         text-align: center;
 
         &:hover {
             color: black;
-            opacity: 0.9;
+            opacity: 90%;
         }
     }
 }
-
-

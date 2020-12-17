@@ -3,7 +3,7 @@ import Map from '../map/map.component';
 // import img from '../../images/image2.0.svg';
 import "react-dates/initialize";
 import { DateRangePicker } from "react-dates";
-import 'rsuite/dist/styles/rsuite-default.css'
+//import 'rsuite/dist/styles/rsuite-default.css' <--- Als deze library gebruikt wordt, begint de plattegrond margin bugs te krijgen
 import "./homepage.styles.scss";
 import "react-dates/lib/css/_datepicker.css";
 
@@ -67,7 +67,8 @@ class MainSolo extends React.Component {
 
   render() {
     return (
-        <div className="">
+      <Fragment>
+        <div className="main">
           {/* <form>
             {/* <img src={img} className="img"></img> */}
             {/* <ul>
@@ -84,7 +85,7 @@ class MainSolo extends React.Component {
                 <a href="/choosegroup">Choose group</a>
               </li>
             </ul> */} 
-            <Map />
+            <Map className='map' workplace={this.onWorkplace}/>
             <h2 className="welcome">Select Workplace:</h2>
             <input
               className="buttons"
@@ -107,7 +108,7 @@ class MainSolo extends React.Component {
                 onFocusChange={focusedInput => this.setState({ focused: focusedInput})}
                 numberOfMonths={1}
               />
-  {
+              {   
                 Object.entries(this.state.dates).map((key) => (
                   <div>
                   <h3 className="welcome">{key[0]}</h3>
@@ -136,6 +137,7 @@ class MainSolo extends React.Component {
             Back
           </button>
         </div>
+        </Fragment>
     );
   }
 }
