@@ -1,11 +1,9 @@
-import React, { Fragment } from "react";
-import Map from '../map/map.component';
-// import img from '../../images/image2.0.svg';
-import "react-dates/initialize";
+import React from "react";
 import { DateRangePicker } from "react-dates";
-//import 'rsuite/dist/styles/rsuite-default.css' <--- Als deze library gebruikt wordt, begint de plattegrond margin bugs te krijgen
-import "./homepage.styles.scss";
+import Map from '../map/map.component';
+import "react-dates/initialize";
 import "react-dates/lib/css/_datepicker.css";
+import "./homepage.styles.scss";
 
 import CallCalendar from "./AddEvent";
 import setRangeDates from './Reservation/SetRangeDates';
@@ -18,8 +16,8 @@ class MainSolo extends React.Component {
       timeslot: "",
       startDate: null,
       endDate: null,
-      focused: null,
-      dates: []
+      focused: false,
+      dates: {}
     };
     
     this.buttonSelected = this.buttonSelected.bind(this);
@@ -46,7 +44,6 @@ class MainSolo extends React.Component {
         const enddate =  (this.state.endDate) ? this.state.endDate.format('YYYY-MM-DD') : this.state.startDate.format('YYYY-MM-DD')
         this.setState({dates: setRangeDates({startdate, enddate})})
     })
-    console.log(this.state.dates)
   }
 
   onSetTime = (event) =>  {
@@ -67,7 +64,6 @@ class MainSolo extends React.Component {
 
   render() {
     return (
-      <Fragment>
         <div className="main">
           {/* <form>
             {/* <img src={img} className="img"></img> */}
@@ -96,22 +92,26 @@ class MainSolo extends React.Component {
             <br />
             <h2 className="welcome">Select Dates:</h2>
             <div className="dateButtons">
-              <DateRangePicker
-                daySize={40}
-                // customInputIcon={<TestCustomInputIcon />}
-                startDateId="startDate"
-                endDateId="endDate"
-                startDate={this.state.startDate}
-                endDate={this.state.endDate}
-                onDatesChange={this.onDatesChange}
-                focusedInput={this.state.focused}
-                onFocusChange={focusedInput => this.setState({ focused: focusedInput})}
-                numberOfMonths={1}
-              />
-              {   
+            <DateRangePicker
+              startDateId="startDate"
+              endDateId="endDate"
+              startDate={this.state.startDate ? this.state.startDate : this.state.endDate}
+              endDate={this.state.endDate ? this.state.endDate: this.state.startDate}
+              onDatesChange={this.onDatesChange}
+              focusedInput={this.state.focused}
+              onFocusChange={focusedInput => this.setState({ focused: focusedInput})}
+              numberOfMonths={1}
+              withPortal={window.matchMedia("(max-width: 400px").matches}
+              enableOutsideDays
+              noBorder
+              autoFocus
+              daySize={56}
+            />
+            </div>
+  {
                 Object.entries(this.state.dates).map((key) => (
                   <div>
-                  <h3 className="welcome">{key[0]}</h3>
+                  <h3 className="welcome">{key[0].split(' ')[1]}</h3>
                   <select
                     className="timeslot"
                     type="select"
@@ -127,7 +127,6 @@ class MainSolo extends React.Component {
                   </select>
                   </div>
               ))}
-            </div>
             <br />
           <CallCalendar userInfo={this.state} />
           <button
@@ -137,7 +136,6 @@ class MainSolo extends React.Component {
             Back
           </button>
         </div>
-        </Fragment>
     );
   }
 }

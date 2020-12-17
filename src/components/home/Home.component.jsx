@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 import { connect } from "react-redux";
 import { auth } from "../../firebase/firebase.utils";
 
@@ -10,9 +11,15 @@ const Choose = ({ currentUser }) => (
     <button onClick={() => auth.signOut()} className="button" id="log-outbtn">
       Logout
     </button>
-    <button id="adminbtn" className="button">
-      Admin
-    </button>
+    {
+      currentUser.admin ? 
+      <Link to='/admin'>
+        <button id="adminbtn" className="button">
+          Admin
+        </button>
+      </Link>  :
+      null
+    }
     <img src={Logo} className="logo" alt="logo" />
     <h1 id="welcome-txt" className="text">
       Welcome, {currentUser.displayName}

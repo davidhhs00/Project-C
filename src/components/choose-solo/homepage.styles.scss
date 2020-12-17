@@ -27,6 +27,7 @@ input:focus {
   color: #000000;
 }
 
+
 .buttons {
   background-color: #cdb197;
   color: #000000;
@@ -42,27 +43,28 @@ input:focus {
   font-weight: bold;
 }
 
-.dateButtons {
-  // background-color: #cdb197;
+.DateRangePickerInput {
   color: #000000;
-  margin: auto;
   border: none;
   text-align: center;
-  width: 350px;
+  width: 305px;
   border-radius: 10px;
-  padding: 15px 0px;
+  padding: 2px 8px;
+  overflow: hidden; 
   text-decoration: none;
   display: block;
-  font-size: 16px;
   font-weight: bold;
 }
 
-// .img {
-//   display: block;
-//   margin-left: auto;
-//   margin-right: auto;
-//   width: 25%;
-// }
+.dateButtons {
+  color: #000000;
+  // margin: auto;
+  text-align: center;
+  // width: 350px;
+  // padding: 15px 0px;
+  display: block;
+}
+
 
 .timeslot {
   background-color: #cdb197;

@@ -16,6 +16,7 @@ import SoloEndPage from './components/solo-end/solo-end.component';
 import YourBookingsSolo from './components/your-bookings-solo/your-bookings-solo.component';
 import MainSolo from './components/choose-solo/main.component';
 import map from './components/map/map.component';
+import admin from './pages/admin/admin-page.component';
 
 import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 import { setCurrentUser } from './redux/user/user.actions';
@@ -72,6 +73,7 @@ class App extends React.Component {
         <Route path= '/soloend' component={SoloEndPage}/>
         <Route path= '/yourbookings' component={YourBookingsSolo}/>
         <Route path= '/map' component={map}/>
+        <Route exact path='/admin' component={admin}/>
       </Switch>
       </div>
       </Router>

@@ -124,7 +124,7 @@ export default class NgtiMap extends React.Component {
                         onClick={() => this.state.reserved[12].reservedSeats >= this.state.reserved[12].amountOfSeats ? null : this.state.selected === 13 ? this.setStateAndWorkplace(0) : this.setStateAndWorkplace(13)} 
                         alt="13" 
                         className={`zone-to-reserve ${this.state.reserved[12].reservedSeats < this.state.reserved[12].amountOfSeats ? '' : 'reserved'} ${this.state.reserved[12].reservedSeats >= this.state.reserved[12].amountOfSeats ? null : this.state.selected === 13 ? 'selected' : ''}`} style={{top: '45%', left: '83.1%', width: '6.85%', height: '4%', padding: '1.75% 0'}}
-                        >{this.state. reserved[12].reservedSeats < this.state.reserved[12].amountOfSeats ? `${this.state.reserved[12].reservedSeats}/${this.state.reserved[12].amountOfSeats} places reserved` : 'Fully Reserved'}
+                        >{this.state.reserved[12].reservedSeats < this.state.reserved[12].amountOfSeats ? `${this.state.reserved[12].reservedSeats}/${this.state.reserved[12].amountOfSeats} places reserved` : 'Fully Reserved'}
                     </div>
 
                 </div>
