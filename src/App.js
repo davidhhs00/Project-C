@@ -18,7 +18,9 @@ import MainSolo from './components/choose-solo/main.component';
 import map from './components/map/map.component';
 import admin from './pages/admin/admin-page.component';
 
-import { auth, createUserProfileDocument } from './firebase/firebase.utils';
+import Notification from './components/notification/notification.component';
+
+import { auth, createUserProfileDocument, findNotification } from './firebase/firebase.utils';
 import { setCurrentUser } from './redux/user/user.actions';
 
 
@@ -50,32 +52,50 @@ class App extends React.Component {
         setCurrentUser(userAuth);
       }
     });
+
+    
   }
+
+  async checkNotification(userID) {
+    console.log(userID);
+    const foundNotifications = await findNotification(userID);
+
+    if (foundNotifications.length >= 1) {
+      console.log("Found Notifications!");
+      // Show the Notification
+      // Fill the data in the component
+    } else {
+      console.log("Nothing!!!!!");
+    }
+  };
 
   componentWillUnmount() {
     this.unsubscribeFromAuth();
   }
 
   render() {
+    console.log(this.props.currentUser);
+    this.checkNotification(this.props.currentUser);
     return (
       <Router>
-      <div>
-      <Switch>
-        <Route exact path='/' render={() => this.props.currentUser ? (<Redirect to='/home' />) : (<Login />)} />
-        <Route exact path='/home' render={() => this.props.currentUser ? (<Home/>) : (<Redirect to='/' />)}/>
-        <Route path='/allbookings' component={AllBookings}/>
-        <Route path='/bookinginfo' component={BookingInfo}/>
-        <Route path='/choosesolo' component={MainSolo} />
-        <Route exact path='/choosegroup' render={() => this.props.currentUser ? (<ChooseGroup/>) : (<Redirect to='/choosegroup'/>)}/>
-        <Route path='/custombutton' component={CustomButton}/>
-        <Route path='/endgroup' component={EndGroup}/>
-        <Route path='/yourbookingsadmin' component={YourBookingsAdmin}/>
-        <Route path= '/soloend' component={SoloEndPage}/>
-        <Route path= '/yourbookings' component={YourBookingsSolo}/>
-        <Route path= '/map' component={map}/>
-        <Route exact path='/admin' component={admin}/>
-      </Switch>
-      </div>
+        <div>
+          <Notification title="Hello" msg="world" accept="Yes" deny="Fuck no" />
+          <Switch>
+            <Route exact path='/' render={() => this.props.currentUser ? (<Redirect to='/home' />) : (<Login />)} />
+            <Route exact path='/home' render={() => this.props.currentUser ? (<Home/>) : (<Redirect to='/' />)}/>
+            <Route path='/allbookings' component={AllBookings}/>
+            <Route path='/bookinginfo' component={BookingInfo}/>
+            <Route path='/choosesolo' component={MainSolo} />
+            <Route exact path='/choosegroup' render={() => this.props.currentUser ? (<ChooseGroup/>) : (<Redirect to='/choosegroup'/>)}/>
+            <Route path='/custombutton' component={CustomButton}/>
+            <Route path='/endgroup' component={EndGroup}/>
+            <Route path='/yourbookingsadmin' component={YourBookingsAdmin}/>
+            <Route path= '/soloend' component={SoloEndPage}/>
+            <Route path= '/yourbookings' component={YourBookingsSolo}/>
+            <Route path= '/map' component={map}/>
+            <Route exact path='/admin' component={admin}/>
+          </Switch>
+        </div>
       </Router>
     );
   }

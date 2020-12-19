@@ -57,6 +57,26 @@ export const placeReservation = async (data) => {
     }
 }
 
+export const findNotification = async (receiverID) => {
+    try {
+        var notification = await firestore.collection("notifications");
+        var filteredNotifications = await notification.get().then((querySnapshot) => {
+            const tempDoc = querySnapshot.docs.map((doc) => {
+                if (doc.data().receiverID === receiverID && doc.data().answer === "") return { id: doc.id, ...doc.data() }
+                return null;
+            })
+            var filteredDoc = tempDoc.filter((e) => {
+                return e != null;
+            });
+            return filteredDoc;
+        })
+        console.log(filteredNotifications)
+        return filteredNotifications;
+    } catch (error) {
+        console.log('error while getting notifications', error.message);
+    }
+}
+
 firebase.initializeApp(config);
 
 export const auth = firebase.auth();
