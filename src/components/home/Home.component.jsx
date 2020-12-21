@@ -6,9 +6,10 @@ import { auth } from "../../firebase/firebase.utils";
 import Logo from "../../assets/logo.png";
 import "./Home.styles.scss";
 
-const Choose = ({ currentUser }) => (
-  <div className="main">
-    <button onClick={() => auth.signOut()} className="button" id="log-outbtn">
+
+const Choose = ({ currentUser, action }) => (
+  <div className="main">    
+    <button onClick={() => {auth.signOut(); action()}} className="button" id="log-outbtn">
       Logout
     </button>
     {

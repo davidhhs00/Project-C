@@ -23,7 +23,6 @@ import Notification from './components/notification/notification.component';
 import { auth, createUserProfileDocument, findNotification } from './firebase/firebase.utils';
 import { setCurrentUser } from './redux/user/user.actions';
 
-
 import {
   BrowserRouter as Router,
   Switch,
@@ -31,8 +30,18 @@ import {
   Redirect
 } from "react-router-dom"; 
 
-
 class App extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      notification: null,
+    }
+
+    this.checkNotification = this.checkNotification.bind(this);
+    this.setNotificationToNull = this.setNotificationToNull.bind(this);
+    this.updateNotificationState = this.updateNotificationState.bind(this);
+  }
   unsubscribeFromAuth = null;
 
   componentDidMount() {
@@ -48,41 +57,49 @@ class App extends React.Component {
             ...snapShot.data()
           });
         });
+        this.updateNotificationState(userRef.id);
       } else {
         setCurrentUser(userAuth);
       }
     });
-
-    
   }
 
-  async checkNotification(userID) {
-    console.log(userID);
-    const foundNotifications = await findNotification(userID);
+  updateNotificationState(id) {
+    this.checkNotification(id).then(res => this.setState({ notification: res }))
+  }
 
-    if (foundNotifications.length >= 1) {
-      console.log("Found Notifications!");
-      // Show the Notification
-      // Fill the data in the component
-    } else {
-      console.log("Nothing!!!!!");
-    }
-  };
+  checkNotification(userID) {
+      console.log(userID);
+      return findNotification(userID).then(function(result) {
+        console.log(result);
+        if (result.length >= 1) {
+          console.log("Found Notifications!");
+          console.log(result)
+          return result
+        } else {
+          console.log("Nothing!!!!!");
+          return null;
+        }
+      })
+  }
 
   componentWillUnmount() {
     this.unsubscribeFromAuth();
   }
 
+  setNotificationToNull() {
+    this.setState({
+      notification: null
+    });
+  }
+
   render() {
-    console.log(this.props.currentUser);
-    this.checkNotification(this.props.currentUser);
     return (
       <Router>
-        <div>
-          <Notification title="Hello" msg="world" accept="Yes" deny="Fuck no" />
+          { this.state.notification !== null ? <Notification notification={this.state.notification} action={this.updateNotificationState} /> : null }
           <Switch>
             <Route exact path='/' render={() => this.props.currentUser ? (<Redirect to='/home' />) : (<Login />)} />
-            <Route exact path='/home' render={() => this.props.currentUser ? (<Home/>) : (<Redirect to='/' />)}/>
+            <Route exact path='/home' render={() => this.props.currentUser ? (<Home action={this.setNotificationToNull} />) : (<Redirect to='/' />) }/>
             <Route path='/allbookings' component={AllBookings}/>
             <Route path='/bookinginfo' component={BookingInfo}/>
             <Route path='/choosesolo' component={MainSolo} />
@@ -95,7 +112,6 @@ class App extends React.Component {
             <Route path= '/map' component={map}/>
             <Route exact path='/admin' component={admin}/>
           </Switch>
-        </div>
       </Router>
     );
   }
