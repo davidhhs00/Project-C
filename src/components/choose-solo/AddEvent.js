@@ -5,6 +5,9 @@ import Reserve from './Reservation/Reserve'
 
 //TODO: Add error handling when a field isn't specified.
 
+const sleep = (ms) => {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
 
 const CallCalendar = (props) => {
   var gapi = window.gapi
@@ -14,7 +17,6 @@ const CallCalendar = (props) => {
   var SCOPES = "https://www.googleapis.com/auth/calendar";
 
 
-  //Should convert the date to American timezone so the calendar can set it to the correct date.
   const handleClick = () => {
       gapi.load('client:auth2', () => {
           console.log('loaded client')
@@ -27,9 +29,11 @@ const CallCalendar = (props) => {
           })
           gapi.client.load('calendar', 'v3', () => console.log('loaded calendar!'))
 
+          var batch = gapi.client.newBatch();
+          var l = [];
           const dates = props.userInfo.dates;
           gapi.auth2.getAuthInstance().signIn().then(() => {
-            Object.entries(dates).map((key) => {
+            Object.entries(dates).map(async (key, i) => {
               let startDate = new Date(key[0].split(' ')[0])
               let endDate = new Date(key[0].split(' ')[0])
               startDate.setHours(key[1].split('-')[0].split(':')[0],key[1].split('-')[0].split(':')[1])
@@ -57,17 +61,20 @@ const CallCalendar = (props) => {
                   ]
                 }
               };
-            var request = gapi.client.calendar.events.insert({
-                'calendarId': 'primary',
-                'resource': event,
+              l.push(event);
             })
-            request.execute(event => (
-              console.log("done")
-            ))
-           
+            
+            l.map((r, j) => {
+              batch.add(gapi.client.calendar.events.insert({
+                'calendarId': 'primary',
+                'resource': l[j],
+              }))
+            })
+          batch.then(function() {
+            console.log("Done");
           })
           Reserve(props.userInfo)
-      })
+        })
     }
       )}
   return (
