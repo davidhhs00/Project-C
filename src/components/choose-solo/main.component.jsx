@@ -64,7 +64,7 @@ class MainSolo extends React.Component {
 
   render() {
     return (
-        <div className="main">
+        <div>
           {/* <form>
             {/* <img src={img} className="img"></img> */}
             {/* <ul>
@@ -81,6 +81,7 @@ class MainSolo extends React.Component {
                 <a href="/choosegroup">Choose group</a>
               </li>
             </ul> */} 
+            <div className='main'>
             <Map className='map' workplace={this.onWorkplace}/>
             <h2 className="welcome">Select Workplace:</h2>
             <input
@@ -89,9 +90,9 @@ class MainSolo extends React.Component {
               value={this.state.workplace}
               onChange={this.onWorkplace}
             />
-            <br />
-            <h2 className="welcome">Select Dates:</h2>
+            </div>
             <div className="dateButtons">
+            <h2 className="welcome">Select Dates:</h2>
             <DateRangePicker
               startDateId="startDate"
               endDateId="endDate"
@@ -127,14 +128,16 @@ class MainSolo extends React.Component {
                   </select>
                   </div>
               ))}
-            <br />
-          <CallCalendar userInfo={this.state} />
-          <button
-            onClick={(event) => (window.location.href = "/home")}
-            className="backBtn"
-            type="button">
-            Back
-          </button>
+              <br />
+            <div className="lowerBtn">
+                <CallCalendar userInfo={this.state} />
+                <button
+                  onClick={(event) => (window.location.href = "/home")}
+                  className="backBtn"
+                  type="button">
+                  Back
+                </button>
+            </div>
         </div>
     );
   }

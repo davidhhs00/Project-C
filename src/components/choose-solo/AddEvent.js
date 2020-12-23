@@ -5,10 +5,6 @@ import Reserve from './Reservation/Reserve'
 
 //TODO: Add error handling when a field isn't specified.
 
-const sleep = (ms) => {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
-
 const CallCalendar = (props) => {
   var gapi = window.gapi
   var CLIENT_ID = "899935600703-gqi84kbl6j9lqme8u2m3hh1e97j54h4o.apps.googleusercontent.com" //add firebase au
@@ -78,9 +74,7 @@ const CallCalendar = (props) => {
     }
       )}
   return (
-      <div className="App">
-          <button className="submitBtn"onClick={handleClick}>Submit</button>
-      </div>
+        <button className="submitBtn"onClick={handleClick}>Submit</button>
   )
 }
 

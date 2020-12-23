@@ -1,22 +1,15 @@
-body {
-  background-color: #1c1c20;
-}
 
-.main {
-  @media screen and (min-aspect-ratio: 1/1) {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(
-      -50%,
-      -50%
-    ); //change accordingly or even not necessary to define
-    height: 100%;
-    width: 100%;
-    max-width: 1200px;
-    max-height: 1000px;
+@media screen and (min-aspect-ratio: 5/2) {
+  .main {
+    position: relative;
+        width: 100%;
+        margin: 0 auto;
+        background-size: contain;
+        background-repeat: no-repeat;
   }
 }
+
+// // @media screen and 
 
 .welcome {
   color: white;
@@ -34,9 +27,9 @@ input:focus {
   margin: auto;
   border: none;
   text-align: center;
-  width: 200px;
-  border-radius: 10px;
-  padding: 15px 25px;
+  width: 9%;
+  border-radius: 8px;
+  padding: 0.7% 2%;
   text-decoration: none;
   display: block;
   font-size: 16px;
@@ -47,7 +40,8 @@ input:focus {
   color: #000000;
   border: none;
   text-align: center;
-  width: 305px;
+  height: 100%;
+  width: 100%;
   border-radius: 10px;
   padding: 2px 8px;
   overflow: hidden; 
@@ -58,23 +52,20 @@ input:focus {
 
 .dateButtons {
   color: #000000;
-  // margin: auto;
   text-align: center;
-  // width: 350px;
-  // padding: 15px 0px;
-  display: block;
+  padding-top: 55%;
 }
 
 
 .timeslot {
   background-color: #cdb197;
   color: #000000;
-  margin: 8px auto;
+  margin: 0.01% auto;
   border: none;
   text-align: center;
-  width: 175px;
+  width: 11%;
   border-radius: 10px;
-  padding: 15px 25px;
+  padding: 10px 20px;
   text-decoration: none;
   display: block;
   font-size: 16px;
@@ -85,98 +76,80 @@ input:focus {
   color: white;
 }
 
-.buttons:hover {
-  color: white;
-}
+// .buttons:hover {
+//   color: white;
+// }
 
+.lowerBtn {
+  width: 100%;
+  position: fixed;
+  bottom: 1%;
+}
 .submitBtn {
   background-color: #cdb197;
   color: #000000;
-  position: fixed;
-  bottom: 25px;
+  float: right;
   width: 5%;
-  height: 3%;
-  right: 5%;
+  margin-right: 3%;
   border-radius: 5px;
-  padding: 2px 7px;
-  text-decoration: none;
-  display: block;
-  font-size: 10px;
+  padding: 0.20% 1%;
+  font-size: 80%;
   font-weight: bold;
 }
 .submitBtn:hover {
   color: white;
 }
+.backBtn {
+  background-color: #cdb197;
+  color: #000000;
+  float: left;
+  width: 5%;
+  margin-left: 3%;
+  border-radius: 5px;
+  padding: 0.20% 1%;
+  font-size: 80%;
+  font-weight: bold;
+}
 .backBtn:hover {
   color: white;
 }
 
-.backBtn {
-  background-color: #cdb197;
-  color: #000000;
-  position: fixed;
-  bottom: 25px;
-  width: 5%;
-  height: 3%;
-  left: 5%;
-  border-radius: 5px;
-  padding: 2px 7px;
-  text-decoration: none;
-  display: block;
-  font-size: 10px;
-  font-weight: bold;
-}
 
-.dateBtn {
-  background-color: #cdb197;
-  color: #000000;
-  margin: auto;
-  border: none;
-  text-align: center;
-  width: 300px;
-  border-radius: 11px;
-  padding: 5px 15px;
-  text-decoration: none;
-  display: block;
-  font-size: 16px;
-  font-weight: bold;
-}
+// // ul {
+// //   @media screen and (min-aspect-ratio: 5/20) and (max-aspect-ratio: 1/1) {
+// //     text-align: center;
+// //     font-size: 5vw;
+// //     margin-top: 5%;
+// //     font-size: 2.5vw;
+// //   }
+// //   list-style-type: none;
+// //   margin: 0px;
+// //   padding: 0px;
+// //   overflow: hidden;
+// //   background-color: #cdb197;
+// // }
 
-// ul {
-//   @media screen and (min-aspect-ratio: 5/20) and (max-aspect-ratio: 1/1) {
-//     text-align: center;
-//     font-size: 5vw;
-//     margin-top: 5%;
-//     font-size: 2.5vw;
-//   }
-//   list-style-type: none;
-//   margin: 0px;
-//   padding: 0px;
-//   overflow: hidden;
-//   background-color: #cdb197;
-// }
+// // li {
+// //   float: left;
+// //   border-right: 1px solid #bbb;
+// // }
 
-// li {
-//   float: left;
-//   border-right: 1px solid #bbb;
-// }
+// // li:last-child {
+// //   border-right: none;
+// // }
 
-// li:last-child {
-//   border-right: none;
-// }
+// // li a {
+// //   display: block;
+// //   color: black;
+// //   text-align: center;
+// //   padding: 14px 10px;
+// //   text-decoration: none;
+// // }
 
-// li a {
-//   display: block;
-//   color: black;
-//   text-align: center;
-//   padding: 14px 10px;
-//   text-decoration: none;
-// }
+// // li a:hover:not(.active) {
+// //   background-color: #785739;
+// // }
 
-// li a:hover:not(.active) {
-//   background-color: #785739;
-// }
-
-// .active {
-//   background-color: #4caf50;
-// }
+// // .active {
+// //   background-color: #4caf50;
+// // }
