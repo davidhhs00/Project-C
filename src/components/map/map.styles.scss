@@ -1,16 +1,134 @@
+// Iphone 5/SE
+@media only screen and (max-width: 320px) {
+    .mapImg {
+        height: 154px;
+    }
+
+    .zone-to-reserve {
+        font-size: 3px;
+    }
+}
+
+// Galaxy S5
+@media only screen and (max-width: 360px) and (min-width: 321px) {
+    .mapImg {
+        height: 176px;
+    }
+
+    .zone-to-reserve {
+        font-size: 3px;
+    }
+}
+
+// All Iphones
+@media only screen and (max-width: 380px) and (min-width: 361px) {
+    .mapImg {
+        height: 185px;
+    }
+
+    .zone-to-reserve {
+        font-size: 3px;
+    }
+}
+
+// Iphone 6/7/8 PLUS
+@media only screen and (max-width: 414px) and (min-width: 381px) {
+    .mapImg {
+        height: 207px;
+    }
+
+    .zone-to-reserve {
+        font-size: 3px;
+    }
+}
+
+// Ipad
+@media only screen and (max-width: 768px) and (min-width: 415px) {
+    .mapImg {
+        height: 408px;
+    }
+
+    .zone-to-reserve {
+        font-size: 3px;
+    }
+}
+
+// Ipad Pro
+@media only screen and (max-width: 1024px) and (min-width: 769px) {
+    .mapImg {
+        height: 554px;
+    }
+
+    .zone-to-reserve {
+        font-size: 3px;
+    }
+}
+
+// Aspect Ratio change
+@media only screen and (max-width: 1318px) and (min-width: 1025px) {
+    .mapImg {
+        height: 711px;
+    }
+
+    .zone-to-reserve {
+        font-size: small;
+    }
+}
+
+// Standard
+@media only screen and (min-width: 1319px) {
+    .mapImg {
+        height: 682px;
+    }
+
+    .zone-to-reserve {
+        font-size: x-small;
+    }
+}
+
 .ngti-map {
     .mapImg {
-        position: absolute;
-        width: 80%;
+        position: relative;
+        width: 100%;
         margin: 0 auto;
+        background-image: url("../../assets/ngtiMap.png");
+        background-size: contain;
+        background-repeat: no-repeat;
     }
 
     .zone-to-reserve {
         position: absolute;
-        margin-top: 130px;
-        margin-left: 50px;
-        width: 100px;
-        height: 100px;
+        top: 77.2%;
+        left: 10.82%;
+        width: 6.8%;
+        height: 0.01%;
         background-color: green;
+        opacity: 50%;
+        color: transparent;
+        text-align: center;
+        padding: 4.1% 0;
+        font-weight: bold;
+        cursor: pointer;
+
+        &:hover {
+            opacity: 80%;
+            color: black;
+        }
+
+        &.selected {
+            opacity: 90%;
+            color: black;
+        }
+    }
+    .reserved {
+        background-color: grey;
+        opacity: 90%;
+        color: transparent;
+        text-align: center;
+
+        &:hover {
+            color: black;
+            opacity: 90%;
+        }
     }
 }

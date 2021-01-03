@@ -1,111 +1,146 @@
-import React, { Fragment} from 'react'
-// import img from '../../images/image2.0.svg'
-import 'react-dates/initialize';
-import { DateRangePicker } from 'react-dates';
-import 'react-dates/lib/css/_datepicker.css';
-import './homepage.styles.scss'
-import CallCalendar from './AddEvent'
-// Solo mainpage
+import React from "react";
+import { DateRangePicker } from "react-dates";
+import Map from '../map/map.component';
+import "react-dates/initialize";
+import "react-dates/lib/css/_datepicker.css";
+import "./homepage.styles.scss";
 
-
-// const TestCustomInputIcon = () => (
-//     <span
-//       style={{
-//         border: '',
-//         width: '200px',
-//         backgroundColor: '#cdb197',
-//         color: '#cdb197',
-//         padding: '',
-//       }}
-//     >
-//     </span>
-//   );
+import CallCalendar from "./AddEvent";
+import setRangeDates from './Reservation/SetRangeDates';
 
 class MainSolo extends React.Component {
-    constructor(props) {
-        super(props)
-        const date = new Date()
-        this.state = { 
-            workplace: "",
-            startDate: null,
-            endDate: null,
-            timeslot: ""
-        }
+  constructor(props) {
+    super(props);
+    this.state = {
+      workplace: "",
+      timeslot: "",
+      startDate: null,
+      endDate: null,
+      focused: false,
+      dates: {}
+    };
     
-        // this.handleChange = this.handleChange.bind(this)
-        this.buttonSelected = this.buttonSelected.bind(this)
-        this.onDatesChange = this.onDatesChange.bind(this)
-        this.onFocusChange = this.onFocusChange.bind(this)
-        this.onWorkplace = this.onWorkplace.bind(this)
-    
+    this.buttonSelected = this.buttonSelected.bind(this);
+    this.onDatesChange = this.onDatesChange.bind(this);
+    this.onFocusChange = this.onFocusChange.bind(this);
+    this.onWorkplace = this.onWorkplace.bind(this);
+    this.onSetTime = this.onSetTime.bind(this);
+  }
+
+
+  buttonSelected = (tt) => {
+    this.setState({ timeslot: tt });
+  };
+
+  onWorkplace(event) {
+    if (event >= 0) {
+      this.setState({ workplace: event });
     }
+  }
 
-    buttonSelected = tt => e=> {
-        this.setState({ timeslot: tt}, () => {
-        })
-        
-    }
+  onDatesChange({ startDate, endDate }) {
+    this.setState({ startDate, endDate }, () => {
+        const startdate = (this.state.startDate) ? this.state.startDate.format('YYYY-MM-DD') : this.state.endDate.format('YYYY-MM-DD')
+        const enddate =  (this.state.endDate) ? this.state.endDate.format('YYYY-MM-DD') : this.state.startDate.format('YYYY-MM-DD')
+        this.setState({dates: setRangeDates({startdate, enddate})})
+    })
+  }
 
-    onWorkplace(event){
-        if(event.target.value >= 0){
-            this.setState({workplace: event.target.value})
-        }
-    }
-
-
-    onDatesChange({ startDate,endDate }) {
-        this.setState({ startDate, endDate });
+  onSetTime = (event) =>  {
+    const name = event.target.name;
+    const val = event.target.value;
+    this.setState(prevState => {
+      const {dates} = prevState;
+        dates[name] = val;
+        return {dates};
       }
+    );
+  };
 
-    onFocusChange(focusedInput) {
-        this.setState({ focusedInput });
-    }
 
-    render() {
-        return (
-            <Fragment>
-                
-                <form>
-                    {/* <img src={img} className="img"></img> */}
-                    <h2 className="welcome">Select Workplace:</h2>
-                    <input className="buttons" type="number" value={this.state.workplace} onChange={this.onWorkplace} />
-                    <h2 className="welcome">Select dates:</h2>
-                    <div className="dateButtons">
-                        <DateRangePicker
-                        daySize={40}
-                        // customInputIcon={<TestCustomInputIcon />}
-                        date={this.state.startDate}
-                        startDateId="startDate"
-                        endDateId="endDate"
-                        startDate={this.state.startDate}
-                        endDate={this.state.endDate}
-                        onDatesChange={this.onDatesChange}
-                        focusedInput={this.state.focusedInput}
-                        onFocusChange={this.onFocusChange}
-                        showClearDates
-                        />
-                    </div>
-                    <br />
-                    <h2 className="welcome">Choose Timeslot:</h2>
-                    {["MORNING", "AFTERNOON", "EVENING"].map(key => 
-                    <button className="timeslot" type="button" key={key} onClick={this.buttonSelected(key)}>{key}</button>)}
-                </form>
-                <CallCalendar />
-                <button onClick={event => window.location.href='/home'} className="backBtn" type="button">Back</button>
-            </Fragment>
-        )
-        
-    }
-    
+  onFocusChange(focusedInput) {
+    this.setState({ focusedInput });
+  }
+
+  render() {
+    return (
+        <div>
+          {/* <form>
+            {/* <img src={img} className="img"></img> */}
+            {/* <ul>
+              <li>
+                <a href="/home">Home</a>
+              </li>
+              <li>
+                <a href="/yourbookings">Your bookings</a>
+              </li>
+              <li>
+                <a href="/allbookings">All bookings</a>
+              </li>
+              <li>
+                <a href="/choosegroup">Choose group</a>
+              </li>
+            </ul> */} 
+            <div className='main'>
+            <Map className='map' workplace={this.onWorkplace}/>
+            <h2 className="welcome">Select Workplace:</h2>
+            <input
+              className="buttons"
+              type="number"
+              value={this.state.workplace}
+              onChange={this.onWorkplace}
+            />
+            </div>
+            <div className="dateButtons">
+            <h2 className="welcome">Select Dates:</h2>
+            <DateRangePicker
+              startDateId="startDate"
+              endDateId="endDate"
+              startDate={this.state.startDate ? this.state.startDate : this.state.endDate}
+              endDate={this.state.endDate ? this.state.endDate: this.state.startDate}
+              onDatesChange={this.onDatesChange}
+              focusedInput={this.state.focused}
+              onFocusChange={focusedInput => this.setState({ focused: focusedInput})}
+              numberOfMonths={1}
+              withPortal={window.matchMedia("(max-width: 400px").matches}
+              enableOutsideDays
+              noBorder
+              autoFocus
+              daySize={56}
+            />
+            </div>
+  {
+                Object.entries(this.state.dates).map((key) => (
+                  <div>
+                  <h3 className="welcome">{key[0].split(' ')[1]}</h3>
+                  <select
+                    className="timeslot"
+                    type="select"
+                    key={key}
+                    name={key[0]}
+                    value={key[1]}
+                    onChange={this.onSetTime}
+                  >
+                    <option value="8:30-11:00">MORNING</option>
+                    <option value="11:15-14:00">AFTERNOON</option>
+                    <option value="14:15-17:00">EVENING</option>
+                    <option value="8:30-17:00">ALL DAY</option>
+                  </select>
+                  </div>
+              ))}
+              <br />
+            <div className="lowerBtn">
+                <CallCalendar userInfo={this.state} />
+                <button
+                  onClick={(event) => (window.location.href = "/home")}
+                  className="backBtn"
+                  type="button">
+                  Back
+                </button>
+            </div>
+        </div>
+    );
+  }
 }
 
 export default MainSolo;
-
-
-
-
-{/* <div style=""> */} 
-                        {/* <button className="Morning" type="button" onClick={this.buttonSelected("Morning")}>MORNING</button>
-                        <button className="Afternoon" type="button" onClick={this.buttonSelected("Afternoon")}>AFTERNOON</button>
-                        <button className="Evening" type="button" onClick={this.buttonSelected("Evening")}>EVENING</button> */}
-                     {/* </div> */}

@@ -15,7 +15,6 @@ const config = {
 
 export const createUserProfileDocument = async (userAuth, additionalData) => {
     if (!userAuth) return;
-    console.log(userAuth);
     const userRef = firestore.doc(`users/${userAuth.uid}`);
 
     const snapShot = await userRef.get();
@@ -26,6 +25,7 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
 
         try {
             await userRef.set({
+                admin: false,
                 displayName,
                 email,
                 photoURL,
@@ -39,6 +39,92 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
 
     return userRef;
 };
+
+export const placeReservation = async (data) => {
+    const { email, time, workplace } = data;
+
+    try {
+        var newReservationRef = firestore.collection("reservations").doc();
+
+        newReservationRef.set({
+            email,
+            time,
+            workplace
+        });
+    } catch (error) {
+        console.log('error creating reservation', error.message);
+    }
+}
+
+// Get notification with users ID
+export const findNotification = async (receiverID) => {
+    try {
+        var notification = await firestore.collection("notifications");
+        var filteredNotifications = await notification.get().then((querySnapshot) => {
+            const tempDoc = querySnapshot.docs.map((doc) => {
+                if (doc.data().receiverID === receiverID && doc.data().answer === "") return { id: doc.id, ...doc.data() }
+                return null;
+            })
+            var filteredDoc = tempDoc.filter((e) => {
+                return e != null;
+            });
+            console.log(filteredDoc);
+            return filteredDoc;
+        })
+        console.log(filteredNotifications)
+        return filteredNotifications;
+    } catch (error) {
+        console.log('error while getting notifications', error.message);
+    }
+}
+
+// Update the answer for the notification using notificationID and the chosen answer
+export const sendNotificationReply = async (notificationID, reply) => {
+    if (!notificationID) return;
+
+    const notificationRef = firestore.doc(`notifications/${notificationID}`);
+
+    return notificationRef.update({
+        answer: reply
+    })
+    .then(function() {
+        console.log("Document successfully updated!");
+    })
+    .catch(function(error) {
+        console.error("Error updating document: ", error);
+    })
+}
+
+// Create notification
+export const createNotification = async (senderID, receiverID, notification) => {
+    if (!notification) return;
+
+    const notificationRef =  firestore.collection("notifications").doc();
+    try {
+        notificationRef.set({
+            answer: "",
+            notification: notification,
+            receiverID: receiverID,
+            senderID: senderID
+        });
+        console.log("Succesfully created a notification");
+    } catch (error) {
+        console.log('Something went wrong when trying to create a notification', error.message);
+    }
+}
+
+export const getAllUsers = async () => {
+    try {
+        const userRef = await firestore.collection("users");
+        var userArray = await userRef.get().then((querySnapshot) => {
+            const tempDoc = querySnapshot.docs.map((doc) => { return { id: doc.id, ...doc.data() } })
+            return tempDoc;
+        })
+        return userArray;
+    } catch (error) {
+        console.log("Error while fetching all users", error.message);
+    }
+}
 
 firebase.initializeApp(config);
 

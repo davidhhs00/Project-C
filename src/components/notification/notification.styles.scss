@@ -1,0 +1,59 @@
+.box {
+    width: 25%;
+    height: 20%;
+    position: absolute;
+    background-color: #cdb197;
+    border: solid 3px black;
+    border-radius: 5%;
+    top: 37.5%;
+    left: 40%;
+    z-index: 1;
+
+    .title {
+        text-align: center;
+        width: 85%;
+    }
+
+    .break {
+        width: 90%;
+        height: 3px;
+        background-color: black;
+        margin: 5px auto 0;
+    }
+
+    .message {
+        font-size: small;
+        padding-left: 5%;
+    }
+
+    .btn {
+        border: none;
+        width: 30%;
+        height: 20%;
+        display: inline;
+        margin-left: 15%;
+        border: solid 2px black;
+        cursor: pointer;
+    }
+
+    
+
+    .accept {
+        background-color: green;
+        color: white;
+
+        &:hover {
+            background-color: lightgreen;
+        }
+    }
+
+    .deny {
+        background-color: red;
+        color: white;
+
+        &:hover {
+            background-color: orange;
+        }
+    }
+    
+}
