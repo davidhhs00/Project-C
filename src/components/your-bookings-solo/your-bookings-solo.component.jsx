@@ -13,28 +13,48 @@ class yourBookingsSolo extends React.Component{
     }
 
   componentDidMount(){
-      console.log('hij werkt')
+      console.log('hij mount je weet toch')
       firestore.collection('reservations')
         .get()
         .then( snapshot => {
           let reservations = [];
+          let documentid = [];
           snapshot.forEach( doc => {
             const data = doc.data()
+            const docID = doc.id
             reservations.push(data)
+            documentid.push(docID)
+            console.log(documentid)
+            console.log(data.firebaseDates)
           })
           this.setState({ reservations: reservations })
+          this.setState({ documentid: documentid })
         })
         .catch(error => console.log(error))
   }
   
-  removeToCollection(e) {
-    const userUid = firebase.auth().currentUser.uid
-    let key = "    kjWanJnzRHGWN6Gh2avm    "
-    firebase.database().ref(`users/${userUid}/collection/${key}`).remove()
+  removeToCollection(i) {
+    let key = this.state.documentid[i]
+    console.log(key)
+    firebase.firestore().collection("reservations").doc(key).delete()
+    setTimeout(function(){window.location.reload(true);}, 500)
+  }
 
+  Dates(x){
+    var text = ""
+      for(let i = 0; i < x.length; i++){
+        if(i < x.length-1){
+          text += x[i] + ", "
+        }
+        else{
+          text += x[i]
+        }
+      }
+      return(text)
   }
 
   render(){
+
     return(
     <div>
       
@@ -53,9 +73,9 @@ class yourBookingsSolo extends React.Component{
         return(
         <tr>
           <td>{data.displayName}</td>
-          <td>{data.dates}</td>
+          <td>{this.Dates(data.firebaseDates)}</td>
           <td>{data.workplace}</td>          
-          <td> <button onClick={this.removeToCollection.bind(this, i)} id="deleteButton">Delete</button> </td>
+          <td> <button onClick={event => this.removeToCollection(i)} id="deleteButton">Delete</button> </td>
         </tr>
         );
         })}
