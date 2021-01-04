@@ -13,7 +13,7 @@ class yourBookingsSolo extends React.Component{
     }
 
   componentDidMount(){
-      console.log('hij werkt')
+      console.log('hij mount je weet toch')
       firestore.collection('reservations')
         .get()
         .then( snapshot => {
@@ -25,6 +25,7 @@ class yourBookingsSolo extends React.Component{
             reservations.push(data)
             documentid.push(docID)
             console.log(documentid)
+            console.log(data.firebaseDates)
           })
           this.setState({ reservations: reservations })
           this.setState({ documentid: documentid })
@@ -39,8 +40,21 @@ class yourBookingsSolo extends React.Component{
     setTimeout(function(){window.location.reload(true);}, 500)
   }
 
+  Dates(x){
+    var text = ""
+      for(let i = 0; i < x.length; i++){
+        if(i < x.length-1){
+          text += x[i] + ", "
+        }
+        else{
+          text += x[i]
+        }
+      }
+      return(text)
+  }
 
   render(){
+
     return(
     <div>
       
@@ -59,7 +73,7 @@ class yourBookingsSolo extends React.Component{
         return(
         <tr>
           <td>{data.displayName}</td>
-          <td>{data.firebaseDates}</td>
+          <td>{this.Dates(data.firebaseDates)}</td>
           <td>{data.workplace}</td>          
           <td> <button onClick={event => this.removeToCollection(i)} id="deleteButton">Delete</button> </td>
         </tr>
