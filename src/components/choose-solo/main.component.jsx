@@ -128,15 +128,15 @@ class MainSolo extends React.Component {
                   </div>
               ))}
               <br />
-            <div className="lowerBtn">
-                <CallCalendar userInfo={this.state} />
-                <button
+              <p className="align-center">Ordering for:</p>
+              <CallCalendar userInfo={this.state} />
+              <button
                   onClick={(event) => (window.location.href = "/home")}
                   className="backBtn"
                   type="button">
                   Back
                 </button>
-            </div>
+                <div className="lowerBtn"></div>
         </div>
     );
   }

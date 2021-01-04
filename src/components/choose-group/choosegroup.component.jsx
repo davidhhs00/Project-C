@@ -7,7 +7,6 @@ import firebase from '../../firebase/firebase.utils';
 import Logo from "../../assets/logo.png";
 import "./choosegroup.styles.scss";
 
-
 //Group Form maken voor import en userlist importeren
 const ChooseGroup = ({currentUser}) => {
   // Groups importeren
@@ -46,6 +45,8 @@ const ChooseGroup = ({currentUser}) => {
 
     if (groupName === "") {
       alert("Please Give your group a name");
+    } if (ifExists()){
+      alert("Groupname already used by a user")
     } else {
       db.collection("groups").add({
         groupName: groupName,
@@ -58,6 +59,15 @@ const ChooseGroup = ({currentUser}) => {
     }
   };
   // Group Form setup
+
+  const ifExists = () => {
+    for (var i = 0; i < groups.length; i++){
+      if (groupName === groups[i].groupName){
+        return true
+      }
+    }
+    return false
+  }
 
   // Userlist Importeren
   const [users, setUsers] = React.useState([])
@@ -72,6 +82,7 @@ const ChooseGroup = ({currentUser}) => {
   }, [])
   // Userlist Importeren
 
+  console.log(groups)
   return (
   <div className="align-center">
 
@@ -144,21 +155,10 @@ const ChooseGroup = ({currentUser}) => {
       </form>
     </div>
     <button className="chpbutton" id="chback-button" onClick={event => window.location.href='/home'} type="button">Back</button>
-    <button className="chpbutton" id="chcontinue-button" onClick={event => window.location.href='/choosesolo'} type="button">Continue</button>
+    <button className="chpbutton" id="chcontinue-button" onClick={event => window.location.href='/choosesolo'} type="button">Go Book!</button>
   </div>
   )
 };
-
-//OUTPUT -> Functie voor export
-/*
-const ChooseGroup = (currentUser) => (
-  <div className="align-center">
-    {GroupForm(currentUser)}
-    <button className="chpbutton" id="chback-button" onClick={event => window.location.href='/home'} type="button">Back</button>
-    <button className="chpbutton" id="chcontinue-button" onClick={event => changeScreen()} type="button">Continue</button>
-  </div>
-);
-*/
 
 const mapStateToProps = ({user: {currentUser}}) => ({
     currentUser
