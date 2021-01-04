@@ -11,7 +11,7 @@ const giveRangeDates = (props) => {
               const date = new Date() 
               date.setDate(startDate.getDate()+i)
               const [weekdayStr, dateStr] = date.toLocaleDateString('en-US',dateFormat).split(', ')
-              return `${dateStr} ${weekdayStr}`
+              return `${weekdayStr} ${dateStr}`
             }
           )
           const calDates = {};

@@ -14,8 +14,7 @@ const sendReservation = async (props) => {
         const firebaseDates = []
         Object.keys(dates).map((key) => {
             let eu = key.split("/")
-            console.log(eu)
-            firebaseDates.push(eu[1] + "-" + eu[0] + "-" + eu[2]+ " "+dates[key]);
+            firebaseDates.push(eu[0] + "-" + eu[1] + "-" + eu[2]+ " "+dates[key]);
         })
 
         if(!snapShot.exists){
@@ -26,18 +25,32 @@ const sendReservation = async (props) => {
                         workplace,
                         firebaseDates  
                 })
+                return true
             } catch (error) {
                 console.log('error sending user reservation', error.message);
             }
-            return userRef
+            
         } else if (snapShot.exists){
+            let oldDates = snapShot.data().firebaseDates
+            for(var j = 0; j < firebaseDates.length; j++){
+                for(var i = 0; i < oldDates.length; i++){
+                    if(firebaseDates.length !== 0 && oldDates[i].split(' ')[1] === firebaseDates[j].split(' ')[1])
+                    {
+                        oldDates[i] = firebaseDates[j]
+                        firebaseDates.splice(j, 1)
+                    }
+                }
+            }
+            for(var i = oldDates.length-1; i >= 0; i--){
+                firebaseDates.unshift(oldDates[i])
+            }
+            let newWorkplace = workplace
             try {
                 await userRef.set({
-                        displayName,
-                        email,
-                        workplace,
-                        firebaseDates  
-                })
+                        firebaseDates,
+                        newWorkplace
+                }, {merge: true})
+                return true
             } catch (error) {
                 console.log('error sending user reservation', error.message);
             }

@@ -12,12 +12,12 @@ class MainSolo extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      workplace: "",
-      timeslot: "",
-      startDate: null,
-      endDate: null,
-      focused: false,
-      dates: {}
+        workplace: "",
+        startDate: null,
+        endDate: null,
+        focused: false,
+        dates: {},
+        filled: true
     };
     
     this.buttonSelected = this.buttonSelected.bind(this);
@@ -26,7 +26,6 @@ class MainSolo extends React.Component {
     this.onWorkplace = this.onWorkplace.bind(this);
     this.onSetTime = this.onSetTime.bind(this);
   }
-
 
   buttonSelected = (tt) => {
     this.setState({ timeslot: tt });
@@ -110,9 +109,9 @@ class MainSolo extends React.Component {
             />
             </div>
   {
-                Object.entries(this.state.dates).map((key) => (
-                  <div>
-                  <h3 className="welcome">{key[0].split(' ')[1]}</h3>
+                Object.entries(this.state.dates).map((key, i) => (
+                  <div key={i}>
+                  <h3 className="welcome">{key[0].split(' ')[0]}</h3>
                   <select
                     className="timeslot"
                     type="select"
