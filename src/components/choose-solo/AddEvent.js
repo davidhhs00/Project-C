@@ -1,22 +1,26 @@
-import React from 'react'
-import './homepage.styles.scss'
+import React from 'react';
+import './homepage.styles.scss';
 import {auth} from '../../firebase/firebase.utils';
-import Reserve from './Reservation/Reserve'
+import Reserve from './Reservation/Reserve';
+import checkState from './checkState';
 
-//TODO: Add error handling when a field isn't specified.
 
 const CallCalendar = (props) => {
+
   var gapi = window.gapi
   var CLIENT_ID = "899935600703-gqi84kbl6j9lqme8u2m3hh1e97j54h4o.apps.googleusercontent.com" //add firebase au
   var API_KEY = "AIzaSyDpfFHATPm9yV3eTwP5iOGfpy4bb1swoOw"
   var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"];
   var SCOPES = "https://www.googleapis.com/auth/calendar";
 
-
   const handleClick = () => {
+      props.userInfo.filled = checkState(props.userInfo)
+      if(!props.userInfo.filled)
+      {
+        return;
+      }
       gapi.load('client:auth2', () => {
           console.log('loaded client')
-      
           window.gapi.client.init({
               apiKey: API_KEY,
               clientId: CLIENT_ID,
@@ -30,8 +34,8 @@ const CallCalendar = (props) => {
           const dates = props.userInfo.dates;
           gapi.auth2.getAuthInstance().signIn().then(() => {
             Object.entries(dates).map(async (key, i) => {
-              let startDate = new Date(key[0].split(' ')[0])
-              let endDate = new Date(key[0].split(' ')[0])
+              let startDate = new Date(key[0].split(' ')[1])
+              let endDate = new Date(key[0].split(' ')[1])
               startDate.setHours(key[1].split('-')[0].split(':')[0],key[1].split('-')[0].split(':')[1])
               endDate.setHours(key[1].split('-')[1].split(':')[0],key[1].split('-')[0].split(':')[1])
               var event = {
@@ -69,9 +73,15 @@ const CallCalendar = (props) => {
           batch.then(function() {
             console.log("Done");
           })
-          Reserve(props.userInfo)
+          Reserve(props.userInfo).then(v => {
+            if(v){
+              window.location.href = "/home"
+            } else {
+              console.log("error")
+            }
+          })
         })
-    }
+      }
       )}
   return (
         <button className="submitBtn"onClick={handleClick}>Submit</button>
