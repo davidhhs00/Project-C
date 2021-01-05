@@ -123,8 +123,8 @@ const CallCalendar = (props) => {
 
   return (
     <div>
-      <div className="align-center">
-        <select id="chgroup-button" className="chpbutton" onChange={(e) => handleChange(e.target.value)}>
+      <div >
+        <select onChange={(e) => handleChange(e.target.value)}>
           <option id="default" defaultValue value={["","","",""]}>{props.currentUser.displayName}</option>
           {groups.map((group, index) =>{
             return group.groupOwner === props.currentUser.email ?

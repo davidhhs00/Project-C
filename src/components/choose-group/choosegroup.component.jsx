@@ -45,7 +45,7 @@ const ChooseGroup = ({currentUser}) => {
 
     if (groupName === "") {
       alert("Please Give your group a name");
-    } if (ifExists()){
+    } else if (ifExists()){
       alert("Groupname already used by a user")
     } else {
       db.collection("groups").add({
@@ -85,18 +85,17 @@ const ChooseGroup = ({currentUser}) => {
   console.log(groups)
   return (
   <div className="align-center">
-
     <select id="chgroup-button" className="chpbutton" onChange={(e) => handleChange(e.target.value)}>
-      <option id="default" defaultValue value={["","","",""]}>Select Group</option>
+      <option id="default" defaultValue value={["","","",""]} className="option-opmaak">Select Group</option>
       {groups.map((group, index) =>{
         return group.groupOwner === currentUser.email ?
-          <option key={group.groupName} value={[group.colleague1, group.colleague2, group.colleague3, group.colleague4]}>{group.groupName}</option>
+          <option key={group.groupName} value={[group.colleague1, group.colleague2, group.colleague3, group.colleague4]} className="option-opmaak">{group.groupName}</option>
         :
           null
       })}
     </select>
+    <img src={Logo} className="ngti-logo" alt="ngti-logo"/>
 
-    <div><img src={Logo} className="ngti-logo" alt="ngti-logo"/></div>
     <p className="choose-group">Current Group:</p>
 
     <div className="inputvelden">
@@ -150,7 +149,10 @@ const ChooseGroup = ({currentUser}) => {
 
         <input className="groupname-input" placeholder="Group Name" value={groupName} onChange={(e) => setgroupName(e.target.value)}/><br />
         
-        <button className="chpbutton" id="savegroup-button"  type="submit">Save Group</button>
+        <div id="savegroup-div">
+          <button className="chpbutton" id="savegroup-button"  type="submit">Save Group</button>
+        </div>
+        
 
       </form>
     </div>
