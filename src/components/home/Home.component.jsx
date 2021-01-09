@@ -17,8 +17,8 @@ const Choose = ({ currentUser, action }) => (
 
       <button className="home-button" > I'm sick </button>
       <button className="home-button"                     onClick={(event) => (window.location.href = "/choosesolo")}> Book a workplace </button>
-      <button className="home-button"                     onClick={(event) => (window.location.href = "/choosegroup")}> Create Groups </button>
-      <button className="home-button"                     onClick={(event) => (window.location.href = "/yourbookings")}> Bookings </button>
+      <button className="home-button"                     onClick={(event) => (window.location.href = "/choosegroup")}> Group Creator </button>
+      <button className="home-button"                     onClick={(event) => (window.location.href = "/yourbookings")}> See Bookings </button>
 
       <div className="home-center-buttons">
         <button className="home-button" id="home-logoutbtn" onClick={() => {auth.signOut(); action()}}> Logout </button>
