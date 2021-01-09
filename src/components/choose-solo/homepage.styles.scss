@@ -1,23 +1,25 @@
-
-@media screen and (min-aspect-ratio: 5/2) {
-  .main {
-    position: relative;
-        width: 100%;
-        margin: 0 auto;
-        background-size: contain;
-        background-repeat: no-repeat;
-  }
-}
-
-// // @media screen and 
-
-.welcome {
-  color: white;
+///////////////////////////////////////////
+// Algemeen
+///////////////////////////////////////////
+.choose-solo-text {
+  color: #ffffff;
   text-align: center;
 }
 
-input:focus {
+.choose-solo-button {
+  background-color: #cdb197;
   color: #000000;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Arial;
+  text-decoration: none;
+}
+.choose-solo-button:hover {
+  background-color: #ffffff;
+}
+.choose-solo-button:active {
+  position: relative;
+  top: 0px;
 }
 
 .main {
@@ -36,135 +38,240 @@ input:focus {
   }
 }
 
-.buttons {
-  background-color: #cdb197;
-  color: #000000;
-  margin: auto;
-  border: none;
-  text-align: center;
-  width: 9%;
-  border-radius: 8px;
-  padding: 0.7% 2%;
-  text-decoration: none;
-  display: block;
-  font-size: 16px;
-  font-weight: bold;
+
+///////////////////////////////////////////
+// Iphone 5/SE
+///////////////////////////////////////////
+@media only screen and (min-width: 0px){
+  //Buttons
+  .choose-solo-button {
+    border-radius: 7px;
+    display: block;
+    font-size: 15px;
+    margin: 0 auto;
+    margin-bottom: 10px;
+    padding: 8px 8px;
+    text-align: center;
+    width: 140px;
+  }
+
+  .choose-solo-center-buttons{
+    text-align: center;
+  }
+
+  #choose-solo-back-btn{
+    margin-right: 30%;
+    margin-top: 10px;
+    display: inline;
+    width: 70px;
+  }
+
+  #choose-solo-submit-btn{
+    display: inline;
+    width: 70px;
+  }
+
+  .DateRangePickerInput{
+    border-radius: 10px;
+    overflow: hidden; 
+    text-decoration: none;
+
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 60%;
+  }
 }
 
-.DateRangePickerInput {
-  color: #000000;
-  border: none;
-  text-align: center;
-  height: 100%;
-  width: 100%;
-  border-radius: 10px;
-  padding: 2px 8px;
-  overflow: hidden; 
-  text-decoration: none;
-  display: block;
-  font-weight: bold;
+///////////////////////////////////////////
+// Iphone 6/7/8
+///////////////////////////////////////////
+@media only screen and (min-width: 374px){
+  .choose-solo-button {
+    border-radius: 7px;
+    display: block;
+    font-size: 15px;
+    margin: 0 auto;
+    margin-bottom: 10px;
+    padding: 8px 8px;
+    text-align: center;
+    width: 140px;
+  }
+
+  .choose-solo-text {
+    font-size: 18px;
+  }
+
+  .choose-solo-center-buttons{
+    text-align: center;
+  }
+
+  #choose-solo-back-btn{
+    font-size: 16px;
+    margin-right: 45%;
+    margin-top: 10px;
+    display: inline;
+    width: 80px;
+  }
+
+  #choose-solo-submit-btn{
+    font-size: 16px;
+    display: inline;
+    width: 80px;
+  }
+
+  .DateRangePickerInput{
+    border-radius: 10px;
+    overflow: hidden; 
+    text-decoration: none;
+    display: block;
+    margin-left: 10%;
+    margin-right: auto;
+    width: 100%;
+  }
 }
 
-.dateButtons {
-  color: #000000;
-  text-align: center;
-  padding-top: 55%;
+///////////////////////////////////////////
+// Mobile 600px
+///////////////////////////////////////////
+@media only screen and (min-width: 600px){
+  .choose-solo-text {
+    font-size: 22px;
+  }
+
+  .choose-solo-center-buttons{
+    text-align: center;
+  }
+
+  #choose-solo-back-btn{
+    font-size: 16px;
+    margin-right: 50%;
+    margin-top: 10px;
+    display: inline;
+    width: 90px;
+  }
+
+  #choose-solo-submit-btn{
+    font-size: 16px;
+    display: inline;
+    width: 90px;
+  }
+
+  .DateRangePickerInput{
+    border-radius: 10px;
+    overflow: hidden; 
+    text-decoration: none;
+    display: block;
+    margin-left: 45%;
+    margin-right: auto;
+    width: 100%;
+  }
 }
 
+///////////////////////////////////////////
+// Ipad
+///////////////////////////////////////////
+@media only screen and (min-width: 768px){
+  .choose-solo-button {
+    border-radius: 7px;
+    display: block;
+    font-size: 20px;
+    margin: 0 auto;
+    margin-bottom: 10px;
+    padding: 8px 8px;
+    text-align: center;
+    width: 200px;
+  }
 
-.timeslot {
-  background-color: #cdb197;
-  color: #000000;
-  margin: 0.01% auto;
-  border: none;
-  text-align: center;
-  width: 11%;
-  border-radius: 10px;
-  padding: 10px 20px;
-  text-decoration: none;
-  display: block;
-  font-size: 16px;
-  font-weight: bold;
+  .choose-solo-text {
+    font-size: 25px;
+  }
+
+  .choose-solo-center-buttons{
+    text-align: center;
+  }
+
+  #choose-solo-back-btn{
+    font-size: 20px;
+    margin-right: 55%;
+    margin-top: 10px;
+    display: inline;
+    width: 100px;
+  }
+
+  #choose-solo-submit-btn{
+    font-size: 16px;
+    display: inline;
+    width: 100px;
+  }
+
+  .DateRangePickerInput{
+    border-radius: 10px;
+    overflow: hidden; 
+    text-decoration: none;
+    display: block;
+    margin-left: 75%;
+    margin-right: auto;
+    width: 100%;
+  }
 }
 
-.timeslot:hover {
-  color: white;
+///////////////////////////////////////////
+// Desktop 1200px
+///////////////////////////////////////////
+@media only screen and (min-width: 1100px){
+  .choose-solo-button {
+    border-radius: 7px;
+    display: block;
+    font-size: 20px;
+    margin: 0 auto;
+    margin-bottom: 10px;
+    padding: 8px 8px;
+    text-align: center;
+    width: 200px;
+  }
+
+  .choose-solo-text {
+    font-size: 25px;
+  }
+
+  .choose-solo-center-buttons{
+    text-align: center;
+  }
+
+  #choose-solo-back-btn{
+    font-size: 20px;
+    margin-right: 55%;
+    margin-top: 10px;
+    display: inline;
+    width: 100px;
+  }
+
+  #choose-solo-submit-btn{
+    font-size: 16px;
+    display: inline;
+    width: 100px;
+  }
+
+  .DateRangePickerInput{
+    border-radius: 10px;
+    overflow: hidden; 
+    text-decoration: none;
+    display: block;
+    margin-left: 160%;
+    margin-right: auto;
+    width: 100%;
+  }
 }
 
-// .buttons:hover {
-//   color: white;
-// }
-
-.lowerBtn {
-  width: 100%;
-  position: fixed;
-  bottom: 1%;
+/*
+@media screen and (min-aspect-ratio: 5/2) {
+  .main {
+    position: relative;
+        width: 100%;
+        margin: 0 auto;
+        background-size: contain;
+        background-repeat: no-repeat;
+  }
 }
-.submitBtn {
-  background-color: #cdb197;
-  color: #000000;
-  float: right;
-  width: 5%;
-  margin-right: 3%;
-  border-radius: 5px;
-  padding: 0.20% 1%;
-  font-size: 80%;
-  font-weight: bold;
-}
-.submitBtn:hover {
-  color: white;
-}
-.backBtn {
-  background-color: #cdb197;
-  color: #000000;
-  float: left;
-  width: 5%;
-  margin-left: 3%;
-  border-radius: 5px;
-  padding: 0.20% 1%;
-  font-size: 80%;
-  font-weight: bold;
-}
-.backBtn:hover {
-  color: white;
-}
-
-
-// // ul {
-// //   @media screen and (min-aspect-ratio: 5/20) and (max-aspect-ratio: 1/1) {
-// //     text-align: center;
-// //     font-size: 5vw;
-// //     margin-top: 5%;
-// //     font-size: 2.5vw;
-// //   }
-// //   list-style-type: none;
-// //   margin: 0px;
-// //   padding: 0px;
-// //   overflow: hidden;
-// //   background-color: #cdb197;
-// // }
-
-// // li {
-// //   float: left;
-// //   border-right: 1px solid #bbb;
-// // }
-
-// // li:last-child {
-// //   border-right: none;
-// // }
-
-// // li a {
-// //   display: block;
-// //   color: black;
-// //   text-align: center;
-// //   padding: 14px 10px;
-// //   text-decoration: none;
-// // }
-
-// // li a:hover:not(.active) {
-// //   background-color: #785739;
-// // }
-
-// // .active {
-// //   background-color: #4caf50;
-// // }
+*/

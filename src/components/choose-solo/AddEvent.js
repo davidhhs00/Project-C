@@ -124,7 +124,7 @@ const CallCalendar = (props) => {
   return (
     <div>
       <div >
-        <select onChange={(e) => handleChange(e.target.value)}>
+        <select className="choose-solo-button" onChange={(e) => handleChange(e.target.value)}>
           <option id="default" defaultValue value={["","","",""]}>{props.currentUser.displayName}</option>
           {groups.map((group, index) =>{
             return group.groupOwner === props.currentUser.email ?
@@ -135,7 +135,10 @@ const CallCalendar = (props) => {
           
         </select>
       </div>
-        <button className="submitBtn"onClick={handleClick}>Submit</button>
+      <div className="choose-solo-center-buttons">
+        <button className="choose-solo-button" id="choose-solo-back-btn" onClick={(event) => (window.location.href = "/home")}type="button">Back</button>
+        <button className="choose-solo-button" id="choose-solo-submit-btn" onClick={handleClick}>Submit</button>
+      </div>
     </div>
   )
 }
