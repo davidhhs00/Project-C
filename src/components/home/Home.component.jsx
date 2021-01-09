@@ -8,60 +8,30 @@ import "./Home.styles.scss";
 
 
 const Choose = ({ currentUser, action }) => (
-  <div className="main">    
-    <button onClick={() => {auth.signOut(); action()}} className="button" id="log-outbtn">
-      Logout
-    </button>
-    {
-      currentUser.admin ? 
-      <Link to='/admin'>
-        <button id="adminbtn" className="button">
-          Admin
-        </button>
-      </Link>  :
-      null
-    }
-    <img src={Logo} className="logo" alt="logo" />
-    <h1 id="welcome-txt" className="text">
-      Welcome, {currentUser.displayName}
-    </h1>
-    <p id="booktxt" className="text">
-      Choose an option:
-    </p>
-    <button id="sickbtn" className="button">
-      I'm sick
-    </button>
-    <button
-      id="yourselfbtn"
-      onClick={(event) => (window.location.href = "/choosesolo")}
-      className="button"
-    >
-      Book a workplace
-    </button>
-    <button
-      onClick={(event) => (window.location.href = "/choosegroup")}
-      id="groupbtn"
-      className="button"
-    >
-      Create Groups
-    </button>
-    <p id="bookingstxt" className="text">
-      See Bookings:
-    </p>
-    <button
-      onClick={(event) => (window.location.href = "/yourbookings")}
-      id="ybookingsbtn"
-      className="button"
-    >
-      Your Bookings
-    </button>
-    <button
-      onClick={(event) => (window.location.href = "/allbookings")}
-      id="abookingsbtn"
-      className="button"
-    >
-      All Bookings
-    </button>
+  <div>    
+    <img className="home-logo" src={Logo} alt="logo" />
+
+    <div className="home-absolute">
+      <h2  className="home-text" id="home-h2"> Welcome, {currentUser.displayName} </h2>
+      <p   className="home-text" id="home-p"> Choose an option:</p>
+
+      <button className="home-button" > I'm sick </button>
+      <button className="home-button"                     onClick={(event) => (window.location.href = "/choosesolo")}> Book a workplace </button>
+      <button className="home-button"                     onClick={(event) => (window.location.href = "/choosegroup")}> Create Groups </button>
+      <button className="home-button"                     onClick={(event) => (window.location.href = "/yourbookings")}> Bookings </button>
+
+      <div className="home-center-buttons">
+        <button className="home-button" id="home-logoutbtn" onClick={() => {auth.signOut(); action()}}> Logout </button>
+
+        {
+          currentUser.admin ? 
+          <Link to='/admin'>
+            <button className="home-button" id="home-adminbtn"> Admin </button>
+          </Link>  :
+          null
+        }
+      </div>
+    </div>
   </div>
 );
 

@@ -1,221 +1,302 @@
-$desktop: 1200px;
-$laptop: 1200px;
-$tablet: 769px;
-$phone: 480px;
-
+///////////////////////////////////////////
+// Algemeen
+///////////////////////////////////////////
 body {
   background-color: #1c1c20;
 }
 
-.main {
-  @media screen and (min-aspect-ratio: 1/1) {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(
-      -50%,
-      -50%
-    ); //change accordingly or even not necessary to define
-    height: 100%;
-    width: 100%;
-    max-width: 1200px;
-    max-height: 1000px;
-  }
+.home-text {
+  color: #ffffff;
+  text-align: center;
 }
 
-.logo {
-  @media screen and (min-aspect-ratio: 5/20) and (max-aspect-ratio: 10/16) {
+// Algemeen Buttons
+.home-button {
+  background-color: #cdb197;
+  color: #000000;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Arial;
+  text-decoration: none;
+}
+.home-button:hover {
+  background-color: #ffffff;
+}
+.home-button:active {
+  position: relative;
+  top: 0px;
+}
+
+
+///////////////////////////////////////////
+// Iphone 5/SE
+///////////////////////////////////////////
+@media only screen and (min-width: 0px){
+  .home-logo {
     display: block;
     margin-left: auto;
     margin-right: auto;
     width: 65%;
-    margin-top: 10%;
+    margin-top: 6%;
   }
-  @media screen and (min-aspect-ratio: 10/16) and (max-aspect-ratio: 1/1) {
+
+  //Buttons
+  .home-button {
+    border-radius: 7px;
+    display: block;
+    font-size: 15px;
+    margin: 0 auto;
+    margin-bottom: 10px;
+    padding: 8px 8px;
+    text-align: center;
+    width: 140px;
+  }
+
+  .home-center-buttons{
+    text-align: center;
+  }
+
+  #home-logoutbtn{
+    margin-right: 30%;
+    margin-top: 10px;
+    display: inline;
+    width: 70px;
+  }
+
+  #home-adminbtn{
+    display: inline;
+    width: 70px;
+  }
+}
+
+///////////////////////////////////////////
+// Iphone 6/7/8
+///////////////////////////////////////////
+@media only screen and (min-width: 374px){
+  .home-logo {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    width: 30%;
-    margin-top: 10%;
+    width: 65%;
+    margin-top: 3%;
+    max-width: 350px;
   }
-  @media screen and (min-aspect-ratio: 1/1) {
+  // Text
+  #home-h2{
+    font-size: 25px;
+  }
+
+  #home-p{
+    font-size: 20px;
+  }
+
+  //Buttons
+  .home-button {
+    border-radius: 7px;
+    display: block;
+    font-size: 18px;
+    margin: 0 auto;
+    margin-bottom: 15px;
+    padding: 9px 10px;
+    text-align: center;
+    width: 180px;
+  }
+
+  .home-center-buttons{
+    text-align: center;
+  }
+
+  #home-logoutbtn{
+    font-size: 16px;
+    margin-right: 45%;
+    margin-top: 30px;
+    display: inline;
+    width: 70px;
+  }
+
+  #home-adminbtn{
+    font-size: 16px;
+    display: inline;
+    width: 70px;
+  }
+}
+
+///////////////////////////////////////////
+// Iphone X
+///////////////////////////////////////////
+@media only screen and (max-width: 375px) and (min-width: 374px) and (max-height: 812px) and (min-height: 811px){
+  .home-logo {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 65%;
+    margin-top: 6%;
+  }
+  // Text
+  #home-h2{
+    font-size: 25px;
+  }
+
+  #home-p{
+    font-size: 20px;
+  }
+
+  //Buttons
+  .home-button {
+    border-radius: 7px;
+    display: block;
+    font-size: 20px;
+    margin: 0 auto;
+    margin-bottom: 25px;
+    padding: 10px 10px;
+    text-align: center;
+    width: 190px;
+  }
+
+  .home-center-buttons{
+    text-align: center;
+  }
+
+  #home-logoutbtn{
+    font-size: 18px;
+    margin-right: 35%;
+    margin-top: 30px;
+    display: inline;
+    width: 100px;
+  }
+
+  #home-adminbtn{
+    font-size: 18px;
+    display: inline;
+    width: 100px;
+  }
+}
+
+///////////////////////////////////////////
+// Mobile 600px
+///////////////////////////////////////////
+@media only screen and (min-width: 600px){
+  #home-logoutbtn{
+    font-size: 18px;
+    margin-right: 35%;
+    margin-top: 30px;
+    display: inline;
+    width: 110px;
+  }
+
+  #home-adminbtn{
+    font-size: 18px;
+    display: inline;
+    width: 110px;
+  }
+}
+
+///////////////////////////////////////////
+// Ipad
+///////////////////////////////////////////
+@media only screen and (min-width: 768px){
+  .home-logo {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 65%;
+    margin-top: 3%;
+    max-width: 400px;
+  }
+  // Text
+  #home-h2{
+    font-size: 35px;
+  }
+
+  #home-p{
+    font-size: 30px;
+  }
+
+  //Buttons
+  .home-button {
+    border-radius: 7px;
+    display: block;
+    font-size: 22px;
+    margin: 0 auto;
+    margin-bottom: 17px;
+    padding: 12px 10px;
+    text-align: center;
+    width: 220px;
+  }
+
+  .home-center-buttons{
+    text-align: center;
+  }
+
+  #home-logoutbtn{
+    font-size: 20px;
+    margin-right: 45%;
+    margin-top: 60px;
+    display: inline;
+    width: 150px;
+  }
+
+  #home-adminbtn{
+    font-size: 20px;
+    display: inline;
+    width: 150px;
+  }
+}
+
+///////////////////////////////////////////
+// Desktop 1200px
+///////////////////////////////////////////
+@media only screen and (min-width: 1200px){
+  .home-logo {
     position: absolute;
-    left: 25%;
-    top: 50%;
+    left: 35%;
+    top: 35%;
     transform: translate(-50%, -50%);
     width: 40%;
     max-width: 400px;
   }
-}
 
-.button {
-  background-color: #cdb197;
-  border-radius: 10px;
-  border: none;
-  color: black;
-  @media screen and (min-aspect-ratio: 5/20) and (max-aspect-ratio: 10/16) {
+  .home-absolute{
+    position: absolute;
+    top: 20%;
+    left: 50%;
+  }
+  // Text
+  #home-h2{
+    top: 50%;
+    font-size: 35px;
+  }
+
+  #home-p{
+    font-size: 30px;
+  }
+
+  //Buttons
+  .home-button {
+    border-radius: 7px;
     display: block;
-    margin: auto;
-    width: 55%;
-    margin-top: 10%;
-    font-size: 4vw;
-  }
-  @media screen and (min-aspect-ratio: 10/16) and (max-aspect-ratio: 1/1) {
-    display: block;
-    margin: auto;
-    margin-top: 5%;
-    width: 40%;
-    font-size: 3vw;
-  }
-}
-
-#yourselfbtn {
-  @media screen and (min-aspect-ratio: 1/1) {
-    position: absolute;
-    top: 53%;
-    left: 75%; //change accordingly or even not necessary to define
-    transform: translate(-50%, -50%);
-    width: 25%;
-    height: 5%;
-    font-size: 2vh;
-  }
-}
-
-#groupbtn {
-  @media screen and (min-aspect-ratio: 1/1) {
-    position: absolute;
-    top: 60%;
-    left: 75%; //change accordingly or even not necessary to define
-    transform: translate(-50%, -50%);
-    width: 25%;
-    height: 5%;
-    font-size: 2vh;
-  }
-}
-
-#ybookingsbtn {
-  @media screen and (min-aspect-ratio: 1/1) {
-    position: absolute;
-    top: 71%;
-    left: 75%; //change accordingly or even not necessary to define
-    transform: translate(-50%, -50%);
-    width: 25%;
-    height: 5%;
-    font-size: 2vh;
-  }
-}
-
-#abookingsbtn {
-  @media screen and (min-aspect-ratio: 1/1) {
-    position: absolute;
-    top: 78%;
-    left: 75%; //change accordingly or even not necessary to define
-    transform: translate(-50%, -50%);
-    width: 25%;
-    height: 5%;
-    font-size: 2vh;
-  }
-}
-
-#sickbtn {
-  @media screen and (min-aspect-ratio: 1/1) {
-    position: absolute;
-    top: 46%;
-    left: 75%; //change accordingly or even not necessary to define
-    transform: translate(-50%, -50%);
-    width: 25%;
-    height: 5%;
-    font-size: 2vh;
-  }
-}
-
-#welcome-txt {
-  @media screen and (min-aspect-ratio: 5/20) and (max-aspect-ratio: 10/16) {
+    font-size: 22px;
+    margin: 0 auto;
+    margin-bottom: 17px;
+    padding: 12px 10px;
     text-align: center;
-    font-size: 7vw;
-    margin-top: 15%;
+    width: 220px;
   }
-  @media screen and (min-aspect-ratio: 10/16) and (max-aspect-ratio: 1/1) {
-    text-align: center;
-    font-size: 5vw;
-    margin-top: 5%;
-  }
-  @media screen and (min-aspect-ratio: 1/1) {
-    position: absolute;
-    top: 30%;
-    left: 75%; //change accordingly or even not necessary to define
-    transform: translate(-50%, -50%);
-    text-align: center;
-    font-size: 3vh;
-  }
-}
 
-.text {
-  color: white;
-}
-
-#booktxt {
-  @media screen and (min-aspect-ratio: 5/20) and (max-aspect-ratio: 10/16) {
-    text-align: center;
-    font-size: 5vw;
-    margin-top: 5%;
-  }
-  @media screen and (min-aspect-ratio: 10/16) and (max-aspect-ratio: 1/1) {
-    text-align: center;
-    font-size: 5vw;
-    margin-top: 5%;
-  }
-  @media screen and (min-aspect-ratio: 1/1) {
-    position: absolute;
-    top: 38%;
-    left: 75%; //change accordingly or even not necessary to define
-    transform: translate(-50%, -50%);
+  .home-center-buttons{
     text-align: center;
   }
-}
 
-#bookingstxt {
-  @media screen and (min-aspect-ratio: 5/20) and (max-aspect-ratio: 10/16) {
-    text-align: center;
-    font-size: 5vw;
-    margin-top: 5%;
+  #home-logoutbtn{
+    font-size: 20px;
+    margin-top: 60px;
+    display: inline;
+    width: 100px;
   }
-  @media screen and (min-aspect-ratio: 10/16) and (max-aspect-ratio: 1/1) {
-    text-align: center;
-    font-size: 5vw;
-    margin-top: 5%;
-  }
-  @media screen and (min-aspect-ratio: 1/1) {
-    position: absolute;
-    top: 64%;
-    left: 75%; //change accordingly or even not necessary to define
-    transform: translate(-50%, -50%);
-    text-align: center;
-  }
-}
 
-#log-outbtn {
-  border-radius: 10px;
-  border: none;
-  background-color: #cdb197;
-  position: fixed;
-  transform: translate(0%, -100%);
-  top: 100%;
-  left: 0px;
-  font-size: 2vh;
-  margin-top: 0%;
-  width: 20%;
-}
-
-#adminbtn {
-  border-radius: 10px;
-  border: none;
-  background-color: #cdb197;
-  position: absolute;
-  transform: translate(0%, 0%);
-  top: 0%;
-  right: 0px;
-  font-size: 2vh;
-  width: 20%;
-  margin-top: 0%;
+  #home-adminbtn{
+    font-size: 20px;
+    display: inline;
+    width: 100px;
+  }
 }
