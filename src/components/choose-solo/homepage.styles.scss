@@ -20,6 +20,21 @@ input:focus {
   color: #000000;
 }
 
+.main {
+  @media screen and (min-aspect-ratio: 1/1) {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(
+      -50%,
+      -50%
+    ); //change accordingly or even not necessary to define
+    height: 100%;
+    width: 100%;
+    max-width: 1200px;
+    max-height: 1000px;
+  }
+}
 
 .buttons {
   background-color: #cdb197;
