@@ -4,6 +4,8 @@ import { sendNotificationReply } from '../../firebase/firebase.utils';
 
 import './notification.styles.scss';
 
+// Check for notifications status code then output the correct notification layout
+
 const notification = ({ notification, action }) => (
     <div className="box">
         <h1 className="title">{notification[0].notification.title}</h1>

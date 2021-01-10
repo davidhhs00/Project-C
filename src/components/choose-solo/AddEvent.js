@@ -88,7 +88,8 @@ const CallCalendar = (props) => {
           })
         })
       }
-      )}
+    )
+  }
 
   //Patryk
   const [groups, setGroups] = React.useState([])

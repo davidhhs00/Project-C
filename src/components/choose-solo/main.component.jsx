@@ -11,6 +11,7 @@ import SetReservation from "./AddEvent";
 import setRangeDates from './Reservation/SetRangeDates';
 import SetTimeslot from './TimeSlot/timeslot.component';
 
+import { createNotification } from '../../firebase/firebase.utils';
 
 class MainSolo extends React.Component {
   constructor(props) {
@@ -29,6 +30,7 @@ class MainSolo extends React.Component {
     this.onFocusChange = this.onFocusChange.bind(this);
     this.onWorkplace = this.onWorkplace.bind(this);
     this.onSetTime = this.onSetTime.bind(this);
+    this.createNotification = this.createNotification.bind(this);
   }
 
   buttonSelected = (tt) => {
@@ -60,6 +62,27 @@ class MainSolo extends React.Component {
     );
   };
 
+  createNotification(e) {
+        e.preventDefault();
+       
+        let notification = {
+            title: "Work Invitation",
+            message: `You have been invited to work on ${this.state.dates} in workplace number ${this.state.workplace}`,
+            code: 200,
+            body: {
+              workplace: this.state.workplace,
+              startDate: this.state.startDate,
+              endDate: this.state.endDate,
+              focused: this.state.focused,
+              dates: this.state.dates
+            },
+            answer1: "Accept",
+            answer2: "Deny"
+        }
+        
+        console.log(this.props.currentUser.id, this.state.receiverID, notification)
+        createNotification(this.props.currentUser.id, this.state.receiverID, notification)
+    }
 
   onFocusChange(focusedInput) {
     this.setState({ focusedInput });
@@ -95,7 +118,7 @@ class MainSolo extends React.Component {
 
           <p className="choose-solo-text">Booking for:</p>
           
-          <SetReservation userInfo={this.state} />
+          <SetReservation userInfo={this.state} action={this.createNotification} />
         </div>
       </div>  
     );
