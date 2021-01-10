@@ -3,10 +3,14 @@ import { DateRangePicker } from "react-dates";
 import Map from '../map/map.component';
 import "react-dates/initialize";
 import "react-dates/lib/css/_datepicker.css";
-import "./homepage.styles.scss";
 
-import CallCalendar from "./AddEvent";
+import "./homepage.styles.scss";
+import Message from './DisplayMessage/displayMessage.component';
+
+import SetReservation from "./AddEvent";
 import setRangeDates from './Reservation/SetRangeDates';
+import SetTimeslot from './TimeSlot/timeslot.component';
+
 
 class MainSolo extends React.Component {
   constructor(props) {
@@ -63,48 +67,62 @@ class MainSolo extends React.Component {
 
   render() {
     return (
-        <div className="main">
+        <div>
+          {/* <form>
+            {/* <img src={img} className="img"></img> */}
+            {/* <ul>
+              <li>
+                <a href="/home">Home</a>
+              </li>
+              <li>
+                <a href="/yourbookings">Your bookings</a>
+              </li>
+              <li>
+                <a href="/allbookings">All bookings</a>
+              </li>
+              <li>
+                <a href="/choosegroup">Choose group</a>
+              </li>
+            </ul> */} 
+            <div className='main'>
             <Map className='map' workplace={this.onWorkplace}/>
-            <div>
-              <p className="choose-solo-text">Selected Workplace:</p>
-              <input className="choose-solo-button" type="number" value={this.state.workplace} onChange={this.onWorkplace}/>
-              <div>
-                <p className="choose-solo-text">Select Dates:</p>
-                <DateRangePicker
-                  startDateId="startDate"
-                  endDateId="endDate"
-                  startDate={this.state.startDate ? this.state.startDate : this.state.endDate}
-                  endDate={this.state.endDate ? this.state.endDate: this.state.startDate}
-                  onDatesChange={this.onDatesChange}
-                  focusedInput={this.state.focused}
-                  onFocusChange={focusedInput => this.setState({ focused: focusedInput})}
-                  numberOfMonths={1}
-                  withPortal={window.matchMedia("(max-width: 400px").matches}
-                  enableOutsideDays
-                  noBorder
-                  autoFocus
-                  daySize={56}
-                />
-              </div>
-
-              {Object.entries(this.state.dates).map((key, i) => (
-                <div key={i}>
-                  <p className="choose-solo-text">{key[0].split(' ')[0]}</p>
-                  
-                  <select className="choose-solo-button" type="select" key={key} name={key[0]} value={key[1]} onChange={this.onSetTime}>
-                    <option value="8:30-11:00">MORNING</option>
-                    <option value="11:15-14:00">AFTERNOON</option>
-                    <option value="14:15-17:00">EVENING</option>
-                    <option value="8:30-17:00">ALL DAY</option>
-                  </select>
-                </div>
-              ))}
-
-              <p className="choose-solo-text">Booking for:</p>
-              
-              <CallCalendar userInfo={this.state} />
-  
-          </div>
+            <h2 className="welcome">Select Workplace:</h2>
+            <input
+              className="buttons"
+              type="number"
+              value={this.state.workplace}
+              onChange={this.onWorkplace}
+            />
+            </div>
+            <div className="dateButtons">
+            <h2 className="welcome">Select Dates:</h2>
+            <DateRangePicker
+              startDateId="startDate"
+              endDateId="endDate"
+              startDate={this.state.startDate ? this.state.startDate : this.state.endDate}
+              endDate={this.state.endDate ? this.state.endDate: this.state.startDate}
+              onDatesChange={this.onDatesChange}
+              focusedInput={this.state.focused}
+              onFocusChange={focusedInput => this.setState({ focused: focusedInput})}
+              numberOfMonths={1}
+              withPortal={window.matchMedia("(max-width: 400px").matches}
+              enableOutsideDays
+              noBorder
+              autoFocus
+              daySize={56}
+            />
+            </div>
+            <SetTimeslot onSetTime={this.onSetTime} dates={this.state.dates}/>
+              <br />
+            <div className="lowerBtn">
+                <SetReservation userInfo={this.state} />
+                <button
+                  onClick={(event) => (window.location.href = "/home")}
+                  className="backBtn"
+                  type="button">
+                  Back
+                </button>
+            </div>
         </div>
     );
   }
