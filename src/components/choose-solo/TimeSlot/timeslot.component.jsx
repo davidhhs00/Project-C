@@ -11,9 +11,9 @@ export default class TimeSlot extends React.Component {
         return(
             Object.entries(this.props.dates ? this.props.dates : "").map((key, i) => (
                 <div key={i}>
-                <h3 className="welcome">{key[0].split(' ')[0]}</h3>
+                <h3 className="choose-solo-text">{key[0].split(' ')[0]}</h3>
                 <select
-                  className="timeslot"
+                  className="choose-solo-button"
                   type="select"
                   key={key}
                   name={key[0]}

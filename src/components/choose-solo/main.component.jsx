@@ -5,7 +5,7 @@ import "react-dates/initialize";
 import "react-dates/lib/css/_datepicker.css";
 
 import "./homepage.styles.scss";
-import Message from './DisplayMessage/displayMessage.component';
+//import Message from './DisplayMessage/displayMessage.component';
 
 import SetReservation from "./AddEvent";
 import setRangeDates from './Reservation/SetRangeDates';
@@ -67,35 +67,13 @@ class MainSolo extends React.Component {
 
   render() {
     return (
+      <div className="main">
+        <Map className='map' workplace={this.onWorkplace}/>
         <div>
-          {/* <form>
-            {/* <img src={img} className="img"></img> */}
-            {/* <ul>
-              <li>
-                <a href="/home">Home</a>
-              </li>
-              <li>
-                <a href="/yourbookings">Your bookings</a>
-              </li>
-              <li>
-                <a href="/allbookings">All bookings</a>
-              </li>
-              <li>
-                <a href="/choosegroup">Choose group</a>
-              </li>
-            </ul> */} 
-            <div className='main'>
-            <Map className='map' workplace={this.onWorkplace}/>
-            <h2 className="welcome">Select Workplace:</h2>
-            <input
-              className="buttons"
-              type="number"
-              value={this.state.workplace}
-              onChange={this.onWorkplace}
-            />
-            </div>
-            <div className="dateButtons">
-            <h2 className="welcome">Select Dates:</h2>
+          <p className="choose-solo-text">Selected Workplace:</p>
+          <input className="choose-solo-button" type="number" value={this.state.workplace} onChange={this.onWorkplace}/>
+          <div>
+            <p className="choose-solo-text">Select Dates:</p>
             <DateRangePicker
               startDateId="startDate"
               endDateId="endDate"
@@ -111,21 +89,29 @@ class MainSolo extends React.Component {
               autoFocus
               daySize={56}
             />
-            </div>
-            <SetTimeslot onSetTime={this.onSetTime} dates={this.state.dates}/>
-              <br />
-            <div className="lowerBtn">
-                <SetReservation userInfo={this.state} />
-                <button
-                  onClick={(event) => (window.location.href = "/home")}
-                  className="backBtn"
-                  type="button">
-                  Back
-                </button>
-            </div>
+          </div>
+
+          <SetTimeslot onSetTime={this.onSetTime} dates={this.state.dates}/>
+
+          <p className="choose-solo-text">Booking for:</p>
+          
+          <SetReservation userInfo={this.state} />
         </div>
+      </div>  
     );
   }
 }
+
+/*
+<br />
+<div className="lowerBtn">
+    <SetReservation userInfo={this.state} />
+    <button
+      onClick={(event) => (window.location.href = "/home")}
+      className="backBtn"
+      type="button">
+      Back
+    </button>
+*/
 
 export default MainSolo;
