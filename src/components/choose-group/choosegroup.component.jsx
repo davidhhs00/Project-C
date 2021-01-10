@@ -7,8 +7,9 @@ import firebase from '../../firebase/firebase.utils';
 import Logo from "../../assets/logo.png";
 import "./choosegroup.styles.scss";
 
+
 //Group Form maken voor import en userlist importeren
-const GroupForm = ({currentUser}) => {
+const ChooseGroup = ({currentUser}) => {
   // Groups importeren
   const [groups, setGroups] = React.useState([])
 
@@ -72,7 +73,7 @@ const GroupForm = ({currentUser}) => {
   // Userlist Importeren
 
   return (
-  <div>
+  <div className="align-center">
 
     <select id="chgroup-button" className="chpbutton" onChange={(e) => handleChange(e.target.value)}>
       <option id="default" defaultValue value={["","","",""]}>Select Group</option>
@@ -142,19 +143,22 @@ const GroupForm = ({currentUser}) => {
 
       </form>
     </div>
-
+    <button className="chpbutton" id="chback-button" onClick={event => window.location.href='/home'} type="button">Back</button>
+    <button className="chpbutton" id="chcontinue-button" onClick={event => window.location.href='/choosesolo'} type="button">Continue</button>
   </div>
   )
 };
 
 //OUTPUT -> Functie voor export
+/*
 const ChooseGroup = (currentUser) => (
   <div className="align-center">
     {GroupForm(currentUser)}
     <button className="chpbutton" id="chback-button" onClick={event => window.location.href='/home'} type="button">Back</button>
-    <button className="chpbutton" id="chcontinue-button" onClick={event => window.location.href='/choosesolo'} type="button">Continue</button>
+    <button className="chpbutton" id="chcontinue-button" onClick={event => changeScreen()} type="button">Continue</button>
   </div>
 );
+*/
 
 const mapStateToProps = ({user: {currentUser}}) => ({
     currentUser

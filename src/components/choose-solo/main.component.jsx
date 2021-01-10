@@ -3,10 +3,14 @@ import { DateRangePicker } from "react-dates";
 import Map from '../map/map.component';
 import "react-dates/initialize";
 import "react-dates/lib/css/_datepicker.css";
-import "./homepage.styles.scss";
 
-import CallCalendar from "./AddEvent";
+import "./homepage.styles.scss";
+import Message from './DisplayMessage/displayMessage.component';
+
+import SetReservation from "./AddEvent";
 import setRangeDates from './Reservation/SetRangeDates';
+import SetTimeslot from './TimeSlot/timeslot.component';
+
 
 class MainSolo extends React.Component {
   constructor(props) {
@@ -108,28 +112,10 @@ class MainSolo extends React.Component {
               daySize={56}
             />
             </div>
-  {
-                Object.entries(this.state.dates).map((key, i) => (
-                  <div key={i}>
-                  <h3 className="welcome">{key[0].split(' ')[0]}</h3>
-                  <select
-                    className="timeslot"
-                    type="select"
-                    key={key}
-                    name={key[0]}
-                    value={key[1]}
-                    onChange={this.onSetTime}
-                  >
-                    <option value="8:30-11:00">MORNING</option>
-                    <option value="11:15-14:00">AFTERNOON</option>
-                    <option value="14:15-17:00">EVENING</option>
-                    <option value="8:30-17:00">ALL DAY</option>
-                  </select>
-                  </div>
-              ))}
+            <SetTimeslot onSetTime={this.onSetTime} dates={this.state.dates}/>
               <br />
             <div className="lowerBtn">
-                <CallCalendar userInfo={this.state} />
+                <SetReservation userInfo={this.state} />
                 <button
                   onClick={(event) => (window.location.href = "/home")}
                   className="backBtn"
