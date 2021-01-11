@@ -14,7 +14,7 @@ const sendReservation = async (props, groupName, colleague1, colleague2, colleag
         const firebaseDates = []
         Object.keys(dates).map((key) => {
             let eu = key.split("/")
-            firebaseDates.push(eu[0] + "-" + eu[1] + "-" + eu[2]+ " "+dates[key]);
+            firebaseDates.push({Date: eu[0] + "-" + eu[1] + "-" + eu[2]+ " "+dates[key], Workplace: workplace});
         })
         console.log(groupName)
         console.log(colleague1)
