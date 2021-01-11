@@ -1,19 +1,23 @@
-import { app } from "firebase";
+import { connect } from 'react-redux';
 import React from "react";
-import { firestore, auth } from '../../firebase/firebase.utils'
+import { firestore } from '../../firebase/firebase.utils'
 import * as firebase from 'firebase';
 import './your-bookings-solo.styles.scss';
+
 
 class yourBookingsSolo extends React.Component{
   constructor(props) {
     
     super(props);
-   
+
     this.state = {reservations : []}
     }
 
   componentDidMount(){
       console.log('hij mount je weet toch')
+     
+
+      
       firestore.collection('reservations')
         .get()
         .then( snapshot => {
@@ -38,6 +42,33 @@ class yourBookingsSolo extends React.Component{
     console.log(key)
     firebase.firestore().collection("reservations").doc(key).delete()
     setTimeout(function(){window.location.reload(true);}, 500)
+  }
+
+
+  // onderstaande functie is nutteloos en kut
+  renderDelete(x, y){
+    if (x===y){
+      return(true)
+    }
+    //if (a){
+      //return(true)
+    //}
+    //else{
+      //return(console.log(x,y,z,a))
+    //}
+  }
+
+  isAuth(x, y, z, a){
+    if (x === y){
+      this.removeToCollection(z)
+    }
+    if (a){
+      this.removeToCollection(z)
+      //console.log('admin detected')
+    }
+    else{
+      console.log(x, y, z, a)
+    }
   }
 
   Dates(x){
@@ -65,6 +96,7 @@ class yourBookingsSolo extends React.Component{
             <th>When?</th>
             <th>Workplace</th>  
             <th></th>
+            <th>test</th>
           </tr>
         </thead>
         
@@ -75,17 +107,24 @@ class yourBookingsSolo extends React.Component{
           <td>{data.displayName}</td>
           <td>{this.Dates(data.firebaseDates)}</td>
           <td>{data.workplace}</td>          
-          <td> <button onClick={event => this.removeToCollection(i)} id="deleteButton">Delete</button> </td>
+          <td> <button onClick={event => this.isAuth(data.displayName, this.props.currentUser.displayName, i, this.props.currentUser.admin)} id="deleteButton">Delete</button>  </td>
+          <td> </td>
         </tr>
         );
         })}
         </tbody>
       </table>
 
-        <button onClick={event =>  window.location.href='/home'} id="backButton">Back</button>
+        <button onClick={event =>   window.location.href = '/home'} id="backButton">Back</button>
 
     </div>
     )
   }
 }
-export default yourBookingsSolo;
+const mapStateToProps = ({ user: { currentUser } }) => ({
+  currentUser,
+});
+
+export default connect(mapStateToProps)(yourBookingsSolo);
+
+//<button onClick={event => this.isAuth(data.displayName, this.props.currentUser.displayName, i, this.props.currentUser.admin)} id="deleteButton">Delete</button>  delete `button 
