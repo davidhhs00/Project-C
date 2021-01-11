@@ -75,10 +75,10 @@ class yourBookingsSolo extends React.Component{
     var text = ""
       for(let i = 0; i < x.length; i++){
         if(i < x.length-1){
-          text += x[i] + ", "
+          text += x[i].Date + ", "
         }
         else{
-          text += x[i]
+          text += x[i].Date
         }
       }
       return(text)
