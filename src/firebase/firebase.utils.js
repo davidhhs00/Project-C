@@ -111,8 +111,9 @@ export const createNotification = async (senderID, receiverID, notification) => 
     } catch (error) {
         console.log('Something went wrong when trying to create a notification', error.message);
     }
-}
+    }
 
+// Get all registered user from the database
 export const getAllUsers = async () => {
     try {
         const userRef = await firestore.collection("users");

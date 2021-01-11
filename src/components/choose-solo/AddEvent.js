@@ -1,8 +1,14 @@
 import React from 'react';
 import './homepage.styles.scss';
 import {auth} from '../../firebase/firebase.utils';
+
 import Reserve from './Reservation/Reserve';
 import checkState from './checkState';
+
+import { connect } from 'react-redux';
+import { useState } from 'react';
+
+import firebase from '../../firebase/firebase.utils';
 
 
 const CallCalendar = (props) => {
@@ -82,10 +88,64 @@ const CallCalendar = (props) => {
           })
         })
       }
-      )}
+    )
+  }
+
+  //Patryk
+  const [groups, setGroups] = React.useState([])
+
+  React.useEffect(() => {
+    const fetchData = async () => {
+      const db = firebase.firestore()
+      const data = await db.collection("groups").get()
+      setGroups(data.docs.map(doc => doc.data()))
+    }
+    fetchData()
+  }, [])
+
+  const handleChange = (e) => {
+    var eArray = e.split(",")
+    console.log(eArray)
+    setColleague1(eArray[0])
+    setColleague2(eArray[1])
+    setColleague3(eArray[2])
+    setColleague4(eArray[3])
+  }
+  // Groups importeren
+
+  // Group Form setup
+  const [groupName, setgroupName] = useState("");
+  const [groupOwner] = useState(props.currentUser);
+  const [colleague1, setColleague1] = useState("");
+  const [colleague2, setColleague2] = useState("");
+  const [colleague3, setColleague3] = useState("");
+  const [colleague4, setColleague4] = useState("");
+  // Group Form setup
+
   return (
-        <button className="submitBtn"onClick={handleClick}>Submit</button>
+    <div>
+      <div >
+        <select className="choose-solo-button" onChange={(e) => handleChange(e.target.value)}>
+          <option id="default" defaultValue value={["","","",""]}>{props.currentUser.displayName}</option>
+          {groups.map((group, index) =>{
+            return group.groupOwner === props.currentUser.email ?
+              <option key={group.groupName} value={[group.colleague1, group.colleague2, group.colleague3, group.colleague4]}>{group.groupName}</option>
+            :
+              null
+          })}
+          
+        </select>
+      </div>
+      <div className="choose-solo-center-buttons">
+        <button className="choose-solo-button" id="choose-solo-back-btn" onClick={(event) => (window.location.href = "/home")}type="button">Back</button>
+        <button className="choose-solo-button" id="choose-solo-submit-btn" onClick={handleClick}>Submit</button>
+      </div>
+    </div>
   )
 }
 
-export default CallCalendar;
+const mapStateToProps = ({ user }) => ({
+  currentUser: user.currentUser
+});
+
+export default connect(mapStateToProps)(CallCalendar);

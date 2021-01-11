@@ -7,7 +7,6 @@ import firebase from '../../firebase/firebase.utils';
 import Logo from "../../assets/logo.png";
 import "./choosegroup.styles.scss";
 
-
 //Group Form maken voor import en userlist importeren
 const ChooseGroup = ({currentUser}) => {
   // Groups importeren
@@ -46,6 +45,8 @@ const ChooseGroup = ({currentUser}) => {
 
     if (groupName === "") {
       alert("Please Give your group a name");
+    } else if (ifExists()){
+      alert("Groupname already used by a user")
     } else {
       db.collection("groups").add({
         groupName: groupName,
@@ -58,6 +59,15 @@ const ChooseGroup = ({currentUser}) => {
     }
   };
   // Group Form setup
+
+  const ifExists = () => {
+    for (var i = 0; i < groups.length; i++){
+      if (groupName === groups[i].groupName){
+        return true
+      }
+    }
+    return false
+  }
 
   // Userlist Importeren
   const [users, setUsers] = React.useState([])
@@ -72,20 +82,20 @@ const ChooseGroup = ({currentUser}) => {
   }, [])
   // Userlist Importeren
 
+  console.log(groups)
   return (
   <div className="align-center">
-
     <select id="chgroup-button" className="chpbutton" onChange={(e) => handleChange(e.target.value)}>
-      <option id="default" defaultValue value={["","","",""]}>Select Group</option>
+      <option id="default" defaultValue value={["","","",""]} className="option-opmaak">Select Group</option>
       {groups.map((group, index) =>{
         return group.groupOwner === currentUser.email ?
-          <option key={group.groupName} value={[group.colleague1, group.colleague2, group.colleague3, group.colleague4]}>{group.groupName}</option>
+          <option key={group.groupName} value={[group.colleague1, group.colleague2, group.colleague3, group.colleague4]} className="option-opmaak">{group.groupName}</option>
         :
           null
       })}
     </select>
+    <img src={Logo} className="ngti-logo" alt="ngti-logo"/>
 
-    <div><img src={Logo} className="ngti-logo" alt="ngti-logo"/></div>
     <p className="choose-group">Current Group:</p>
 
     <div className="inputvelden">
@@ -139,26 +149,18 @@ const ChooseGroup = ({currentUser}) => {
 
         <input className="groupname-input" placeholder="Group Name" value={groupName} onChange={(e) => setgroupName(e.target.value)}/><br />
         
-        <button className="chpbutton" id="savegroup-button"  type="submit">Save Group</button>
+        <div id="savegroup-div">
+          <button className="chpbutton" id="savegroup-button"  type="submit">Save Group</button>
+        </div>
+        
 
       </form>
     </div>
     <button className="chpbutton" id="chback-button" onClick={event => window.location.href='/home'} type="button">Back</button>
-    <button className="chpbutton" id="chcontinue-button" onClick={event => window.location.href='/choosesolo'} type="button">Continue</button>
+    <button className="chpbutton" id="chcontinue-button" onClick={event => window.location.href='/choosesolo'} type="button">Go Book!</button>
   </div>
   )
 };
-
-//OUTPUT -> Functie voor export
-/*
-const ChooseGroup = (currentUser) => (
-  <div className="align-center">
-    {GroupForm(currentUser)}
-    <button className="chpbutton" id="chback-button" onClick={event => window.location.href='/home'} type="button">Back</button>
-    <button className="chpbutton" id="chcontinue-button" onClick={event => changeScreen()} type="button">Continue</button>
-  </div>
-);
-*/
 
 const mapStateToProps = ({user: {currentUser}}) => ({
     currentUser

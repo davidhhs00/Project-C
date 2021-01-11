@@ -1,27 +1,17 @@
-body {
-  background-color: #1c1c20;
-}
-
-.align-center {
-  text-align: center;
-}
-
+///////////////////////////////////////////
+// Algemeen
+///////////////////////////////////////////
 .choose-group {
   color: #ffffff;
-  font-size: 20px;
-  margin: -15px 170px 0px 0px;
 }
 
-//BUTTONS-------------------------------------------------------------------------------------------
+// Algemeen Buttons
 .chpbutton {
   background-color: #cdb197;
-  border-radius: 8px;
-  display: inline-block;
-  cursor: pointer;
   color: #000000;
+  cursor: pointer;
+  display: inline-block;
   font-family: Arial;
-  font-size: 18px;
-  padding: 13px 10px;
   text-decoration: none;
 }
 .chpbutton:hover {
@@ -32,54 +22,14 @@ body {
   top: 0px;
 }
 
-#chgroup-button {
-  margin: 35px 0px 0px -190px;
-  display: inline-block;
-  width: 150px;
-}
-
-#savegroup-button {
-  margin: 20px 0px 0px 90px;
-  font-size: 18px;
-  width: 150px;
-}
-
-#back-button-group {
-  margin: 120px 120px 0px 0px;
-  padding: 13px 27px;
-  display: inline-block;
-}
-
-#chback-button {
-  width: 90px;
-  text-align: center;
-  margin-right: 110px;
-}
-
-#chcontinue-button {
-  width: 100px;
-  text-align: center;
-}
-
-//BUTTONS-------------------------------------------------------------------------------------------
-
-//Algemene styling input
+// Algemeen Input
 .inputveld {
   background-color: #cdb197;
-  border-radius: 8px;
-  cursor: pointer;
   color: #000000;
+  cursor: pointer;
   font-family: Arial;
-  font-size: 18px;
-  padding: 10px 10px;
   text-decoration: none;
-  margin: 0px 40px 20px 0px;
-  width: 200px;
   text-align: left;
-}
-
-.inputvelden {
-  margin: 10px 90px 90px 0px;
 }
 
 .inputveld:hover {
@@ -88,26 +38,370 @@ body {
 
 .groupname-input {
   background-color: #cdb197;
-  border-radius: 8px;
-  cursor: pointer;
   color: #000000;
+  cursor: pointer;
   font-family: Arial;
-  font-size: 18px;
-  padding: 10px 10px;
   text-decoration: none;
-  margin: 20px 40px 20px 0px;
-  width: 180px;
   text-align: left;
 }
 
 .groupname-input:hover {
   background-color: #ffffff;
 }
+///////////////////////////////////////////
+///////////////////////////////////////////
 
-// NGTI Logo
-.ngti-logo {
-  width: 150px;
-  margin: -95px -190px 0px 0px;
-  display: inline-block;
-  text-align: center;
+///////////////////////////////////////////
+// Iphone 5/SE
+///////////////////////////////////////////
+@media only screen and (max-width: 373px) and (min-width: 0px){
+  // Text
+  .choose-group {
+    font-size: 15px;
+    margin: -15px 170px 0px 0px;
+  }
+
+  // Button Classes
+  .chpbutton {
+    border-radius: 8px;
+    font-size: 15px;
+    margin-top: -30px;
+    padding: 10px 9px;
+  }
+
+  // Button ID's
+  #chback-button {
+    font-size: 13px;
+    margin-right: 110px;
+    text-align: center;
+    width: 80px;
+  }
+  
+  #chcontinue-button {
+    font-size: 13px;
+    text-align: center;
+    width: 80px;
+  }
+
+  #chgroup-button {
+    display: inline-block;
+    margin: 10px 0px 0px 0px;
+    width: 150px;
+  }
+  
+  #savegroup-button {
+    font-size: 13px;
+    margin: 5px 0px 0px 85px;
+    width: 100px;
+  }
+  
+  // inputvelden
+  .inputveld {
+    border-radius: 8px;
+    font-size: 14px;
+    margin: 0px 40px 14px 0px;
+    padding: 8px 8px;
+    width: 170px;
+  }
+
+  .inputvelden {
+    margin: 10px 90px 32px 0px;
+  }
+
+  .groupname-input {
+    border-radius: 8px;
+    font-size: 16px;
+    margin: 5px 40px 20px 0px;
+    padding: 8px 8px;
+    width: 145px;
+  }
+
+  // NGTI Logo
+  .ngti-logo {
+    margin: -70px 0px 0px 190px;
+    width: 95px;
+  }
+}
+
+///////////////////////////////////////////
+// Iphone 6/7/8
+///////////////////////////////////////////
+@media only screen and (max-width: 412px) and (min-width: 374px){
+  // Textht: 666px)
+  .choose-group {
+    font-size: 19px;
+    margin: -15px 170px 0px 0px;
+  }
+
+  // Button Classes
+  .chpbutton {
+    border-radius: 8px;
+    font-size: 16px;
+    margin-top: -30px;
+    padding: 12px 9px;
+  }
+
+  // Button ID's
+  #chback-button {
+    margin-right: 125px;
+    text-align: center;
+    width: 100px;
+  }
+  
+  #chcontinue-button {
+    text-align: center;
+    width: 100px;
+  }
+
+  #chgroup-button {
+    display: inline-block;
+    margin: 10px 0px 0px 0px;
+    width: 150px;
+  }
+  
+  #savegroup-button {
+    font-size: 16px;
+    margin: 5px 0px 0px 100px;
+    width: 130px;
+  }
+  
+  // inputvelden
+  .inputveld {
+    border-radius: 8px;
+    font-size: 16px;
+    margin: 0px 40px 16px 0px;
+    padding: 9px 9px;
+    width: 180px;
+  }
+
+  .inputvelden {
+    margin: 10px 90px 60px 0px;
+  }
+
+  .groupname-input {
+    border-radius: 8px;
+    font-size: 16px;
+    margin: 5px 40px 20px 0px;
+    padding: 10px 10px;
+    width: 155px;
+  }
+
+  // NGTI Logo
+  .ngti-logo {
+    margin: -75px 0px 0px 220px;
+    width: 120px;
+  }
+}
+
+///////////////////////////////////////////
+// Iphone 6/7/8 Plus
+///////////////////////////////////////////
+@media only screen and (max-width: 425px) and (min-width: 413px){
+  .choose-group {
+    font-size: 20px;
+    margin: -15px 170px 0px 0px;
+  }
+
+  // Button Classes
+  .chpbutton {
+    border-radius: 8px;
+    font-size: 17px;
+    padding: 13px 10px;
+  }
+
+  // Button ID's
+  #chback-button {
+    margin-right: 174px;
+    text-align: center;
+    width: 90px;
+  }
+  
+  #chcontinue-button {
+    text-align: center;
+    width: 100px;
+  }
+
+  #chgroup-button {
+    display: inline-block;
+    margin: 20px 0px 0px 0px;
+    width: 150px;
+  }
+  
+  #savegroup-button {
+    font-size: 17px;
+    margin: 10px 0px 0px 115px;
+    width: 140px;
+  }
+  
+  // inputvelden
+  .inputveld {
+    border-radius: 8px;
+    font-size: 17px;
+    margin: 0px 40px 11px 0px;
+    padding: 10px 10px;
+    width: 200px;
+  }
+
+  .inputvelden {
+    margin: 10px 90px 80px 0px;
+  }
+
+  .groupname-input {
+    border-radius: 8px;
+    font-size: 17px;
+    margin: 20px 40px 20px 0px;
+    padding: 10px 10px;
+    width: 176px;
+  }
+
+  // NGTI Logo
+  .ngti-logo {
+    display: inline-block;
+    margin: -85px 0px 0px 240px;
+    width: 130px;
+  }
+}
+
+///////////////////////////////////////////
+// Iphone X
+///////////////////////////////////////////
+@media only screen and (max-width: 375px) and (min-width: 374px) and (max-height: 812px) and (min-height: 811px){
+  .choose-group {
+    font-size: 20px;
+    margin: -15px 170px 0px 0px;
+  }
+
+  // Button Classes
+  .chpbutton {
+    border-radius: 8px;
+    font-size: 18px;
+    margin-top: -20px;
+    padding: 13px 10px;
+  }
+
+  // Button ID's
+  #chback-button {
+    margin-right: 135px;
+    text-align: center;
+    width: 90px;
+  }
+  
+  #chcontinue-button {
+    text-align: center;
+    width: 100px;
+  }
+
+  #chgroup-button {
+    display: inline-block;
+    margin: 35px 0px 0px 0px;
+    width: 150px;
+  }
+  
+  #savegroup-button {
+    font-size: 18px;
+    margin: 10px 0px 0px 90px;
+    width: 150px;
+  }
+  
+  // inputvelden
+  .inputveld {
+    border-radius: 8px;
+    font-size: 18px;
+    margin: 0px 40px 20px 0px;
+    padding: 10px 10px;
+    width: 200px;
+  }
+
+  .inputvelden {
+    margin: 10px 90px 90px 0px;
+  }
+
+  .groupname-input {
+    border-radius: 8px;
+    font-size: 18px;
+    margin: 20px 40px 20px 0px;
+    padding: 10px 10px;
+    width: 180px;
+  }
+
+  // NGTI Logo
+  .ngti-logo {
+    display: inline-block;
+    margin: -95px 0px 0px 190px;
+    width: 150px;
+  }
+}
+
+///////////////////////////////////////////
+// Desktop
+///////////////////////////////////////////
+@media only screen and (min-width: 425px){
+  .align-center{
+    text-align:center;
+  }
+
+  .choose-group {
+    font-size: 20px;
+    margin: 0px 170px 0px 0px;
+  }
+
+  // Button Classes
+  .chpbutton {
+    border-radius: 8px;
+    font-size: 18px;
+    margin-top: -20px;
+    padding: 13px 10px;
+  }
+
+  // Button ID's
+  #chback-button {
+    margin-right: 135px;
+    text-align: center;
+    width: 90px;
+  }
+  
+  #chcontinue-button {
+    text-align: center;
+    width: 100px;
+  }
+
+  #chgroup-button {
+    display: inline-block;
+    margin: 0px 0px 0px 20px;
+    width: 200px;
+  }
+  
+  #savegroup-button {
+    font-size: 18px;
+    margin: 10px 0px 0px 90px;
+    width: 150px;
+  }
+  
+  // inputvelden
+  .inputveld {
+    border-radius: 8px;
+    font-size: 18px;
+    margin: 0px 40px 20px 0px;
+    padding: 10px 10px;
+    width: 200px;
+  }
+
+  .inputvelden {
+    margin: 10px 90px 90px 0px;
+  }
+
+  .groupname-input {
+    border-radius: 8px;
+    font-size: 18px;
+    margin: 20px 40px 20px 0px;
+    padding: 10px 10px;
+    width: 180px;
+  }
+
+  // NGTI Logo
+  .ngti-logo {
+    position: static;
+    margin: 0px 0px 0px 0px;
+    width: 150px;
+  }
 }

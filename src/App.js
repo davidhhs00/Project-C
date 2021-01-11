@@ -102,7 +102,7 @@ class App extends React.Component {
             <Route exact path='/home' render={() => this.props.currentUser ? (<Home action={this.setNotificationToNull} />) : (<Redirect to='/' />) }/>
             <Route path='/allbookings' component={AllBookings}/>
             <Route path='/bookinginfo' component={BookingInfo}/>
-            <Route path='/choosesolo' component={MainSolo} />
+            <Route exact path='/choosesolo' render={() => this.props.currentUser ? (<MainSolo/>) : (<Redirect to='/choosesolo'/>)}/>
             <Route exact path='/choosegroup' render={() => this.props.currentUser ? (<ChooseGroup/>) : (<Redirect to='/choosegroup'/>)}/>
             <Route path='/custombutton' component={CustomButton}/>
             <Route path='/endgroup' component={EndGroup}/>
