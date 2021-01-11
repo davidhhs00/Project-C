@@ -87,6 +87,9 @@ const ChooseGroup = ({currentUser}) => {
   }, [])
   // Userlist Importeren
 
+  /////////////////////////////////
+  //Checking INPUT BEGIN
+  ////////////////////////////////
   const CheckSubmit = () => {
     if (colleague1 === "" && colleague2 === "" && colleague3 === "" && colleague4 === ""){
       return <button className="chpbutton-gray" id="savegroup-button"  type="button">Save Group</button>
@@ -195,7 +198,9 @@ const ChooseGroup = ({currentUser}) => {
       </select>
     )
   }
-
+  /////////////////////////////////
+  //Checking INPUT END
+  ////////////////////////////////
   return (
   <div className="align-center">
     <select id="chgroup-button" className="chpbutton" onChange={(e) => handleChange(e.target.value)}>
