@@ -108,7 +108,7 @@ class App extends React.Component {
             <Route path='/endgroup' component={EndGroup}/>
             <Route path='/yourbookingsadmin' component={YourBookingsAdmin}/>
             <Route path= '/soloend' component={SoloEndPage}/>
-            <Route path= '/yourbookings' component={YourBookingsSolo}/>
+            <Route path= '/yourbookings' render={() => this.props.currentUser ? (<YourBookingsSolo currentUserCheck={this.props.currentUser}/>) : (<Redirect to='/yourbookings'/>)}/>
             <Route path= '/map' component={map}/>
             <Route exact path='/admin' component={admin}/>
           </Switch>
