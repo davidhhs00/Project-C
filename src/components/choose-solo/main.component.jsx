@@ -20,8 +20,7 @@ class MainSolo extends React.Component {
         startDate: null,
         endDate: null,
         focused: false,
-        dates: {},
-        filled: true
+        dates: {}
     };
     
     this.buttonSelected = this.buttonSelected.bind(this);
