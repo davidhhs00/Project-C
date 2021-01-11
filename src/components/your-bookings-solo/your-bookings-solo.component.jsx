@@ -10,14 +10,14 @@ class yourBookingsSolo extends React.Component{
     
     super(props);
 
-    this.state = {reservations : []}
+    this.state = {
+      reservations : [],
+      }
     }
 
   componentDidMount(){
       console.log('hij mount je weet toch')
-     
 
-      
       firestore.collection('reservations')
         .get()
         .then( snapshot => {
@@ -84,6 +84,27 @@ class yourBookingsSolo extends React.Component{
       return(text)
   }
 
+  CheckEmailandAdmin() {
+    return (
+      this.state.reservations.map((data,i) =>{
+        return data.email === this.props.currentUserCheck.email || this.props.currentUserCheck.admin === true?
+          <tr key={data.displayName}>
+            <td>{data.displayName}</td>
+            <td>{this.Dates(data.firebaseDates)}</td>
+            <td>{data.workplace}</td>          
+            <td> <button onClick={event => this.isAuth(data.displayName, this.props.currentUser.displayName, i, this.props.currentUser.admin)} id="deleteButton">Delete</button>  </td>
+          </tr>
+         :
+         <tr key={data.displayName}>
+          <td>{data.displayName}</td>
+          <td>{this.Dates(data.firebaseDates)}</td>
+          <td>{data.workplace}</td>          
+          <td> </td>
+        </tr>
+      })
+    )
+  }
+
   render(){
 
     return(
@@ -96,22 +117,11 @@ class yourBookingsSolo extends React.Component{
             <th>When?</th>
             <th>Workplace</th>  
             <th></th>
-            <th>test</th>
           </tr>
         </thead>
         
-        <tbody> 
-        {this.state.reservations.map((data, i) => {
-        return(
-        <tr>
-          <td>{data.displayName}</td>
-          <td>{this.Dates(data.firebaseDates)}</td>
-          <td>{data.workplace}</td>          
-          <td> <button onClick={event => this.isAuth(data.displayName, this.props.currentUser.displayName, i, this.props.currentUser.admin)} id="deleteButton">Delete</button>  </td>
-          <td> </td>
-        </tr>
-        );
-        })}
+        <tbody>
+          {this.CheckEmailandAdmin()}
         </tbody>
       </table>
 
