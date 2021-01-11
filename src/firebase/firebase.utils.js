@@ -127,6 +127,30 @@ export const getAllUsers = async () => {
     }
 }
 
+// Get reservations for given date
+export const getReservationForDate = async (query) => {
+    try {
+        // Selected reservations collection
+        const reservationRef = await firestore.collection("reservations");
+        // Inside reservations collections
+        var reservationArray = await reservationRef.get().then((querySnapshot) => {
+            var takenSeats = [];
+            // Inside a document from reservations
+            const tempDoc = querySnapshot.docs.map((doc) => {
+                // Inside the firebaseDates of a document from reservations
+                return doc.data().firebaseDates.map((date) => {
+                    if (date.Date === query) takenSeats.push(date.Workplace);
+                })
+            })
+            return takenSeats;
+        })
+        console.log(reservationArray);
+        return reservationArray;
+    } catch (error) {
+        console.log("Error while fetching reservation data")
+    }
+}
+
 firebase.initializeApp(config);
 
 export const auth = firebase.auth();

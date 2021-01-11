@@ -2,12 +2,47 @@ import React from 'react';
 
 import './map.styles.scss'
 
+import { getReservationForDate } from '../../firebase/firebase.utils';
+
 export default class NgtiMap extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
+            allowedAmountOfPeople: 15,
             selected: 0,
+            selectedDate: "",
+            secondArr: [],
+            reservedFullTemplate: [
+                {tableNr: 1, amountOfSeats: 3, reservedSeats: 3},
+                {tableNr: 2, amountOfSeats: 4, reservedSeats: 4},
+                {tableNr: 3, amountOfSeats: 4, reservedSeats: 4},
+                {tableNr: 4, amountOfSeats: 4, reservedSeats: 4},
+                {tableNr: 5, amountOfSeats: 4, reservedSeats: 4},
+                {tableNr: 6, amountOfSeats: 4, reservedSeats: 4},
+                {tableNr: 7, amountOfSeats: 4, reservedSeats: 4},
+                {tableNr: 8, amountOfSeats: 4, reservedSeats: 4},
+                {tableNr: 9, amountOfSeats: 2, reservedSeats: 2},
+                {tableNr: 10, amountOfSeats: 7, reservedSeats: 7},
+                {tableNr: 11, amountOfSeats: 8, reservedSeats: 8},
+                {tableNr: 12, amountOfSeats: 4, reservedSeats: 4},
+                {tableNr: 13, amountOfSeats: 2, reservedSeats: 2}
+            ],
+            reservedTemplate: [
+                {tableNr: 1, amountOfSeats: 3, reservedSeats: 0},
+                {tableNr: 2, amountOfSeats: 4, reservedSeats: 0},
+                {tableNr: 3, amountOfSeats: 4, reservedSeats: 0},
+                {tableNr: 4, amountOfSeats: 4, reservedSeats: 0},
+                {tableNr: 5, amountOfSeats: 4, reservedSeats: 0},
+                {tableNr: 6, amountOfSeats: 4, reservedSeats: 0},
+                {tableNr: 7, amountOfSeats: 4, reservedSeats: 0},
+                {tableNr: 8, amountOfSeats: 4, reservedSeats: 0},
+                {tableNr: 9, amountOfSeats: 2, reservedSeats: 0},
+                {tableNr: 10, amountOfSeats: 7, reservedSeats: 0},
+                {tableNr: 11, amountOfSeats: 8, reservedSeats: 0},
+                {tableNr: 12, amountOfSeats: 4, reservedSeats: 0},
+                {tableNr: 13, amountOfSeats: 2, reservedSeats: 0}
+            ],
             reserved: [
                 {tableNr: 1, amountOfSeats: 3, reservedSeats: 4},
                 {tableNr: 2, amountOfSeats: 4, reservedSeats: 0},
@@ -25,6 +60,53 @@ export default class NgtiMap extends React.Component {
             ]
         } 
 
+        this.getReservationForDate = this.getReservationForDate.bind(this);
+        this.isEmpty = this.isEmpty.bind(this);
+        this.updateReserved = this.updateReserved.bind(this);
+    }
+
+    getReservationForDate(query) {
+        console.log(query);
+        // {Monday 1/11/2021: "8:30-11:00", Tuesday 1/12/2021: "8:30-11:00"}
+
+        var arr = [];
+        Object.keys(query).map((key) => {
+            let eu = key.split("/")
+            arr.push(eu[0] + "-" + eu[1] + "-" + eu[2]+ " " + query[key]);
+        })
+        // ["Monday 1-11-2021 8:30-11:00", "Tuesday 1-12-2021 8:30-11:00"]
+
+        var secondArr = [];
+        arr.forEach(e => {
+            secondArr.push(getReservationForDate(e));
+        })
+
+        Promise.all(secondArr).then(res => {
+            this.setState({ secondArr: res });
+            this.updateReserved();
+        });
+    }
+
+    updateReserved() {
+        var arr = this.state.secondArr[0];
+
+        if (arr.length > this.state.allowedAmountOfPeople) {
+            this.setState({ reserved: this.state.reservedFullTemplate });
+        } else {
+            let newArray = [...this.state.reservedTemplate];
+            arr.forEach(e => {
+                console.log(e)
+                
+                // if number is in the array we increment the amount of currently taken seats by 1
+                newArray[e-1] = {...newArray[e-1], reservedSeats: newArray[e-1].reservedSeats + 1}
+            });
+
+            this.setState({ reserved: newArray });
+        }
+    }
+
+    isEmpty(obj) {
+        return Object.keys(obj).length === 0;
     }
 
     setStateAndWorkplace = async (val) => {
@@ -33,6 +115,11 @@ export default class NgtiMap extends React.Component {
     }
 
     render() {
+        // Additional condition so that the setState doesnt crash the app
+        if (!this.isEmpty(this.props.dates) && this.state.selectedDate !== this.props.dates) {
+            this.setState({ selectedDate: this.props.dates });
+            this.getReservationForDate(this.props.dates);
+        }
         return(
             <div className="ngti-map">
                 <div className="mapImg">

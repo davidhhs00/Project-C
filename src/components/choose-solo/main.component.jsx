@@ -91,7 +91,7 @@ class MainSolo extends React.Component {
   render() {
     return (
       <div className="main">
-        <Map className='map' workplace={this.onWorkplace}/>
+        <Map className='map' workplace={this.onWorkplace} dates={this.state.dates}/>
         <div>
           <p className="choose-solo-text">Selected Workplace:</p>
           <input className="choose-solo-button" type="number" value={this.state.workplace} onChange={this.onWorkplace}/>
