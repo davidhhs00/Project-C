@@ -48,6 +48,7 @@ const ChooseGroup = ({currentUser}) => {
     } else if (ifExists()){
       alert("Groupname already used by a user")
     } else {
+      alert("Adding group to database")
       db.collection("groups").add({
         groupName: groupName,
         groupOwner: groupOwner,
@@ -56,7 +57,9 @@ const ChooseGroup = ({currentUser}) => {
         colleague3: colleague3,
         colleague4: colleague4,
       })
+      .then(() => {window.location.href='/choosegroup'});
     }
+    
   };
   // Group Form setup
 

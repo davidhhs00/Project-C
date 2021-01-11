@@ -4,24 +4,34 @@ import { firestore, auth} from '../../../firebase/firebase.utils';
 
 //Add unique id so every reservation is unique and it will not be overriden.
 
-const sendReservation = async (props) => {
-        const userRef = firestore.doc(`reservations/${auth.currentUser.displayName}`)
+const sendReservation = async (props, groupName, colleague1, colleague2, colleague3, colleague4) => {
+        const userRef = firestore.doc(`reservations/${groupName}`)
 
         const snapShot = await userRef.get()
         const {displayName, email} = auth.currentUser
         const {workplace, dates} = props
-        
+
         const firebaseDates = []
         Object.keys(dates).map((key) => {
             let eu = key.split("/")
             firebaseDates.push({Date: eu[0] + "-" + eu[1] + "-" + eu[2]+ " "+dates[key], Workplace: workplace});
         })
+        console.log(groupName)
+        console.log(colleague1)
+        console.log(colleague2)
+        console.log(colleague3)
+        console.log(colleague4)
 
         if(!snapShot.exists){
             try {
                 await userRef.set({
                         displayName,
                         email,
+                        groupName,
+                        colleague1,
+                        colleague2,
+                        colleague3,
+                        colleague4,
                         workplace,
                         firebaseDates  
                 })
@@ -54,9 +64,7 @@ const sendReservation = async (props) => {
             } catch (error) {
                 console.log('error sending user reservation', error.message);
             }
-        }
-        
-    }
+        }   
+}
 
 export default sendReservation;
-
