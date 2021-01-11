@@ -72,7 +72,9 @@ export default class NgtiMap extends React.Component {
         var arr = [];
         Object.keys(query).map((key) => {
             let eu = key.split("/")
-            arr.push(eu[0] + "-" + eu[1] + "-" + eu[2]+ " " + query[key]);
+            let fst = eu[0].split(" ")[0]
+            let snd = eu[0].split(" ")[1]
+            arr.push(fst + " "+ eu[1] + "-" + snd + "-" + eu[2]+ " " + query[key]);
         })
         // ["Monday 1-11-2021 8:30-11:00", "Tuesday 1-12-2021 8:30-11:00"]
 
