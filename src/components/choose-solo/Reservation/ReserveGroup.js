@@ -8,7 +8,8 @@ const sendReservation = async (props, groupName, colleague1, colleague2, colleag
         const userRef = firestore.doc(`reservations/${groupName}`)
 
         const snapShot = await userRef.get()
-        const {displayName, email} = auth.currentUser
+        const displayName = groupName + " (" + auth.currentUser.displayName + ")"
+        const {email} = auth.currentUser
         const {workplace, dates} = props
 
         const firebaseDates = []
