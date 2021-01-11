@@ -109,7 +109,7 @@ const CallCalendar = (props) => {
     setColleague1(eArray[0])
     setColleague2(eArray[1])
     setColleague3(eArray[2])
-    setColleague4(eArray[3])
+    setColleague4(eArray[3])   
   }
   // Groups importeren
 
