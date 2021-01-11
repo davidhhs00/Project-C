@@ -23,10 +23,11 @@ const ChooseGroup = ({currentUser}) => {
 
   const handleChange = (e) => {
     var eArray = e.split(",")
-    setColleague1(eArray[0])
-    setColleague2(eArray[1])
-    setColleague3(eArray[2])
-    setColleague4(eArray[3])
+    setgroupName(eArray[0])
+    setColleague1(eArray[1])
+    setColleague2(eArray[2])
+    setColleague3(eArray[3])
+    setColleague4(eArray[4])
   }
   // Groups importeren
 
@@ -37,6 +38,7 @@ const ChooseGroup = ({currentUser}) => {
   const [colleague2, setColleague2] = useState("");
   const [colleague3, setColleague3] = useState("");
   const [colleague4, setColleague4] = useState("");
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -65,7 +67,7 @@ const ChooseGroup = ({currentUser}) => {
 
   const ifExists = () => {
     for (var i = 0; i < groups.length; i++){
-      if (groupName === groups[i].groupName){
+      if (groupName === groups[i].groupName && groupOwner === groups[i].groupOwner){
         return true
       }
     }
@@ -85,14 +87,122 @@ const ChooseGroup = ({currentUser}) => {
   }, [])
   // Userlist Importeren
 
-  console.log(groups)
+  const CheckSubmit = () => {
+    if (colleague1 === "" && colleague2 === "" && colleague3 === "" && colleague4 === ""){
+      return <button className="chpbutton-gray" id="savegroup-button"  type="button">Save Group</button>
+    }else if (groupName === ""){
+      return <button className="chpbutton-gray" id="savegroup-button"  type="button">Save Group</button>
+    }else if ((colleague1 !== "" && colleague2 !== "" && colleague1 === colleague2)||
+               (colleague1 !== "" && colleague3 !== "" && colleague1 === colleague3)||
+               (colleague1 !== "" && colleague4 !== "" && colleague1 === colleague4)||
+               (colleague2 !== "" && colleague3 !== "" && colleague2 === colleague3)||
+               (colleague2 !== "" && colleague4 !== "" && colleague2 === colleague4)||
+               (colleague3 !== "" && colleague4 !== "" && colleague3 === colleague4)){
+      return <button className="chpbutton-gray" id="savegroup-button"  type="button">Save Group</button>
+    } else {
+      return <button className="chpbutton" id="savegroup-button"  type="submit">Save Group</button>
+    }
+  }
+  
+  const Input1 = () => {
+    var classCSS = ""
+    if ((colleague1 !== "" && colleague2 !== "" && colleague1 === colleague2)||
+        (colleague1 !== "" && colleague3 !== "" && colleague1 === colleague3)||
+        (colleague1 !== "" && colleague4 !== "" && colleague1 === colleague4)) {
+      classCSS = "inputveld-red"
+    } else {
+      classCSS = "inputveld"
+    }
+
+    return(
+      <select className={classCSS} id="colleaguenumber1" value={colleague1} onChange={(e) => setColleague1(e.target.value)}>
+        <option id="default" defaultValue value="">Select Colleague 1</option>
+        {users.map(user =>{
+        return user.email !== currentUser.email ?
+          <option key={user.email} value={user.email}>{user.displayName}</option>
+        :
+          null
+        })}
+      </select>
+    )
+  }
+
+  const Input2 = () => {
+    var classCSS = ""
+    if ((colleague2 !== "" && colleague1 !== "" && colleague2 === colleague1)||
+        (colleague2 !== "" && colleague3 !== "" && colleague2 === colleague3)||
+        (colleague2 !== "" && colleague4 !== "" && colleague2 === colleague4)) {
+      classCSS = "inputveld-red"
+    } else {
+      classCSS = "inputveld"
+    }
+
+    return(
+      <select className={classCSS} id="colleaguenumber2" value={colleague2} onChange={(e) => setColleague2(e.target.value)}>
+        <option id="default" defaultValue value="">Select Colleague 2</option>
+        {users.map(user =>{
+        return user.email !== currentUser.email ?
+          <option key={user.email} value={user.email}>{user.displayName}</option>
+        :
+          null
+        })}
+      </select>
+    )
+  }
+
+  const Input3 = () => {
+    var classCSS = ""
+    if ((colleague3 !== "" && colleague2 !== "" && colleague3 === colleague1)||
+        (colleague3 !== "" && colleague3 !== "" && colleague3 === colleague2)||
+        (colleague3 !== "" && colleague4 !== "" && colleague3 === colleague4)) {
+      classCSS = "inputveld-red"
+    } else {
+      classCSS = "inputveld"
+    }
+
+    return(
+      <select className={classCSS} id="colleaguenumber3" value={colleague3} onChange={(e) => setColleague3(e.target.value)}>
+        <option id="default" defaultValue value="">Select Colleague 3</option>
+        {users.map(user =>{
+        return user.email !== currentUser.email ?
+          <option key={user.email} value={user.email}>{user.displayName}</option>
+        :
+          null
+        })}
+      </select>
+    )
+  }
+
+  const Input4 = () => {
+    var classCSS = ""
+    if ((colleague4 !== "" && colleague1 !== "" && colleague4 === colleague1)||
+        (colleague4 !== "" && colleague2 !== "" && colleague4 === colleague2)||
+        (colleague4 !== "" && colleague3 !== "" && colleague4 === colleague3)) {
+      classCSS = "inputveld-red"
+    } else {
+      classCSS = "inputveld"
+    }
+
+    return(
+      <select className={classCSS} id="colleaguenumber4" value={colleague4} onChange={(e) => setColleague4(e.target.value)}>
+        <option id="default" defaultValue value="">Select Colleague 4</option>
+        {users.map(user =>{
+        return user.email !== currentUser.email ?
+          <option key={user.email} value={user.email}>{user.displayName}</option>
+        :
+          null
+        })}
+      </select>
+    )
+  }
+
   return (
   <div className="align-center">
     <select id="chgroup-button" className="chpbutton" onChange={(e) => handleChange(e.target.value)}>
       <option id="default" defaultValue value={["","","",""]} className="option-opmaak">Select Group</option>
       {groups.map((group, index) =>{
         return group.groupOwner === currentUser.email ?
-          <option key={group.groupName} value={[group.colleague1, group.colleague2, group.colleague3, group.colleague4]} className="option-opmaak">{group.groupName}</option>
+          <option key={group.groupName} value={[group.groupName,group.colleague1, group.colleague2, group.colleague3, group.colleague4]} className="option-opmaak">{group.groupName}</option>
         :
           null
       })}
@@ -109,54 +219,16 @@ const ChooseGroup = ({currentUser}) => {
         </select><br/>
 
         {/*Collegues*/}
-        <select className="inputveld" id="colleaguenumber1" value={colleague1} onChange={(e) => setColleague1(e.target.value)}>
-          <option id="default" defaultValue value="">Select Colleague 1</option>
-          {users.map(user =>{
-          return user.displayName !== currentUser.displayName ?
-            <option key={user.email} value={user.email}>{user.displayName}</option>
-          :
-            null
-          })}
-        </select><br/>
-
-        <select className="inputveld" id="colleaguenumber2" value={colleague2} onChange={(e) => setColleague2(e.target.value)}>
-          <option id="default" defaultValue value="">Select Colleague 2</option>
-          {users.map(user =>{
-          return user.displayName !== currentUser.displayName ?
-            <option key={user.email} value={user.email}>{user.displayName}</option>
-          :
-            null
-          })}
-        </select><br/>
-
-        <select className="inputveld" id="colleaguenumber3" value={colleague3} onChange={(e) => setColleague3(e.target.value)}>
-          <option id="default" defaultValue value="">Select Colleague 3</option>
-          {users.map(user =>{
-          return user.displayName !== currentUser.displayName ?
-            <option key={user.email} value={user.email}>{user.displayName}</option>
-          :
-            null
-          })}
-        </select><br/>
-
-        <select className="inputveld" id="colleaguenumber4" value={colleague4} onChange={(e) => setColleague4(e.target.value)}>
-          <option id="default" defaultValue value="">Select Colleague 4</option>
-          {users.map(user =>{
-          return user.displayName !== currentUser.displayName ?
-            <option key={user.email} value={user.email}>{user.displayName}</option>
-          :
-            null
-          })}
-        </select><br/>
-        {/*Collegues*/}
+        {Input1()}<br/>
+        {Input2()}<br/>
+        {Input3()}<br/>
+        {Input4()}<br/>
 
         <input className="groupname-input" placeholder="Group Name" value={groupName} onChange={(e) => setgroupName(e.target.value)}/><br />
         
         <div id="savegroup-div">
-          <button className="chpbutton" id="savegroup-button"  type="submit">Save Group</button>
+          {CheckSubmit()}
         </div>
-        
-
       </form>
     </div>
     <button className="chpbutton" id="chback-button" onClick={event => window.location.href='/home'} type="button">Back</button>

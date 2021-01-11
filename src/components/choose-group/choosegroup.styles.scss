@@ -22,6 +22,16 @@
   top: 0px;
 }
 
+.chpbutton-gray {
+  background-color: #cdb197;
+  color: #000000;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Arial;
+  opacity: 0.3;
+  text-decoration: none;
+}
+
 // Algemeen Input
 .inputveld {
   background-color: #cdb197;
@@ -33,6 +43,19 @@
 }
 
 .inputveld:hover {
+  background-color: #ffffff;
+}
+
+.inputveld-red {
+  background-color: red;
+  color: #000000;
+  cursor: pointer;
+  font-family: Arial;
+  text-decoration: none;
+  text-align: left;
+}
+
+.inputveld-red:hover {
   background-color: #ffffff;
 }
 
@@ -69,6 +92,13 @@
     padding: 10px 9px;
   }
 
+  .chpbutton-gray {
+    border-radius: 8px;
+    font-size: 15px;
+    margin-top: -30px;
+    padding: 10px 9px;
+  }
+
   // Button ID's
   #chback-button {
     font-size: 13px;
@@ -97,6 +127,14 @@
   
   // inputvelden
   .inputveld {
+    border-radius: 8px;
+    font-size: 14px;
+    margin: 0px 40px 14px 0px;
+    padding: 8px 8px;
+    width: 170px;
+  }
+
+  .inputveld-red {
     border-radius: 8px;
     font-size: 14px;
     margin: 0px 40px 14px 0px;
@@ -141,6 +179,13 @@
     padding: 12px 9px;
   }
 
+  .chpbutton-gray {
+    border-radius: 8px;
+    font-size: 16px;
+    margin-top: -30px;
+    padding: 12px 9px;
+  }
+
   // Button ID's
   #chback-button {
     margin-right: 125px;
@@ -167,6 +212,14 @@
   
   // inputvelden
   .inputveld {
+    border-radius: 8px;
+    font-size: 16px;
+    margin: 0px 40px 16px 0px;
+    padding: 9px 9px;
+    width: 180px;
+  }
+
+  .inputveld-red {
     border-radius: 8px;
     font-size: 16px;
     margin: 0px 40px 16px 0px;
@@ -209,6 +262,12 @@
     padding: 13px 10px;
   }
 
+  .chpbutton-gray {
+    border-radius: 8px;
+    font-size: 17px;
+    padding: 13px 10px;
+  }
+
   // Button ID's
   #chback-button {
     margin-right: 174px;
@@ -235,6 +294,14 @@
   
   // inputvelden
   .inputveld {
+    border-radius: 8px;
+    font-size: 17px;
+    margin: 0px 40px 11px 0px;
+    padding: 10px 10px;
+    width: 200px;
+  }
+
+  .inputveld-red {
     border-radius: 8px;
     font-size: 17px;
     margin: 0px 40px 11px 0px;
@@ -279,6 +346,13 @@
     padding: 13px 10px;
   }
 
+  .chpbutton-gray {
+    border-radius: 8px;
+    font-size: 18px;
+    margin-top: -20px;
+    padding: 13px 10px;
+  }
+
   // Button ID's
   #chback-button {
     margin-right: 135px;
@@ -305,6 +379,14 @@
   
   // inputvelden
   .inputveld {
+    border-radius: 8px;
+    font-size: 18px;
+    margin: 0px 40px 20px 0px;
+    padding: 10px 10px;
+    width: 200px;
+  }
+
+  .inputveld-red {
     border-radius: 8px;
     font-size: 18px;
     margin: 0px 40px 20px 0px;
@@ -353,6 +435,13 @@
     padding: 13px 10px;
   }
 
+  .chpbutton-gray {
+    border-radius: 8px;
+    font-size: 18px;
+    margin-top: -20px;
+    padding: 13px 10px;
+  }
+
   // Button ID's
   #chback-button {
     margin-right: 135px;
@@ -379,6 +468,14 @@
   
   // inputvelden
   .inputveld {
+    border-radius: 8px;
+    font-size: 18px;
+    margin: 0px 40px 20px 0px;
+    padding: 10px 10px;
+    width: 200px;
+  }
+
+  .inputveld-red {
     border-radius: 8px;
     font-size: 18px;
     margin: 0px 40px 20px 0px;
