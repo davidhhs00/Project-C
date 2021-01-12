@@ -15,7 +15,6 @@ const Choose = ({ currentUser, action }) => (
       <h2  className="home-text" id="home-h2"> Welcome, {currentUser.displayName} </h2>
       <p   className="home-text" id="home-p"> Choose an option:</p>
 
-      <button className="home-button" > I'm sick </button>
       <button className="home-button"                     onClick={(event) => (window.location.href = "/choosesolo")}> Book a workplace </button>
       <button className="home-button"                     onClick={(event) => (window.location.href = "/choosegroup")}> Group Creator </button>
       <button className="home-button"                     onClick={(event) => (window.location.href = "/yourbookings")}> See Bookings </button>
