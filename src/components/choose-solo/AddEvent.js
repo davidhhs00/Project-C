@@ -185,8 +185,18 @@ const CallCalendar = (props) => {
   }, [])
 
   const handleChange = (e) => {
+    console.log(e);
     var eArray = e.split(",")
-    console.log(eArray)
+
+    var amountOfUSers = 0;
+
+    eArray.forEach(e => {
+      if (e !== "") amountOfUSers += 1;
+    });
+    if (amountOfUSers === 0) amountOfUSers = 1;
+    props.action(amountOfUSers);
+
+    console.log(eArray);
     setgroupName(eArray[0])
     setColleague1(eArray[1])
     setColleague2(eArray[2])
@@ -209,7 +219,7 @@ const CallCalendar = (props) => {
     <div>
       <div >
         <select className="choose-solo-button" onChange={(e) => handleChange(e.target.value)}>
-          <option id="default" defaultValue value={["","","","",""]}>{props.currentUser.displayName}</option>
+          <option id="default"  defaultValue value={["","","","",""]}>{props.currentUser.displayName}</option>
           {groups.map((group, index) =>{
             return group.groupOwner === props.currentUser.email ?
               <option key={group.groupName} value={[group.groupName,group.colleague1, group.colleague2, group.colleague3, group.colleague4]}>{group.groupName}</option>
