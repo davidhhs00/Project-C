@@ -17,6 +17,7 @@ class MainSolo extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+        amountOfUsers: 1,
         workplace: "",
         startDate: null,
         endDate: null,
@@ -30,6 +31,7 @@ class MainSolo extends React.Component {
     this.onWorkplace = this.onWorkplace.bind(this);
     this.onSetTime = this.onSetTime.bind(this);
     this.createNotification = this.createNotification.bind(this);
+    this.changeAmountOfUsers = this.changeAmountOfUsers.bind(this);
   }
 
   buttonSelected = (tt) => {
@@ -87,10 +89,14 @@ class MainSolo extends React.Component {
     this.setState({ focusedInput });
   }
 
+  changeAmountOfUsers(e) {
+    this.setState({ amountOfUsers: e });
+  }
+
   render() {
     return (
       <div className="main">
-        <Map className='map' workplace={this.onWorkplace} dates={this.state.dates}/>
+        <Map className='map' workplace={this.onWorkplace} dates={this.state.dates} amountOfUsers={this.state.amountOfUsers}/>
         <div>
           <p className="choose-solo-text">Selected Workplace:</p>
           <input className="choose-solo-button" type="number" value={this.state.workplace} onChange={this.onWorkplace}/>
@@ -117,7 +123,7 @@ class MainSolo extends React.Component {
 
           <p className="choose-solo-text">Booking for:</p>
           
-          <SetReservation userInfo={this.state} action={this.createNotification} />
+          <SetReservation userInfo={this.state} action={this.createNotification} action={this.changeAmountOfUsers} />
         </div>
       </div>  
     );
