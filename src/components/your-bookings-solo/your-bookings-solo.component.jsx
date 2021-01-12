@@ -1,3 +1,4 @@
+// Import van firebase, styling en react
 import { connect } from 'react-redux';
 import React from "react";
 import { firestore } from '../../firebase/firebase.utils'
@@ -14,10 +15,11 @@ class yourBookingsSolo extends React.Component{
       reservations : [],
       }
     }
-
+  
   componentDidMount(){
       console.log('hij mount je weet toch')
 
+      //Alle reservaties uit de database halen
       firestore.collection('reservations')
         .get()
         .then( snapshot => {
@@ -37,6 +39,7 @@ class yourBookingsSolo extends React.Component{
         .catch(error => console.log(error))
   }
   
+  //Verwijdert de correcte reservering uit de database.
   removeToCollection(i) {
     let key = this.state.documentid[i]
     console.log(key)
@@ -44,6 +47,8 @@ class yourBookingsSolo extends React.Component{
     setTimeout(function(){window.location.reload(true);}, 500)
   }
 
+  // Bijbehorende functie van CheckEmailandAdmin()
+  // Checkt of je email hetzelfde is en of je admin bent
   isAuth(x, y, z, a){
     if (x === y){
       this.removeToCollection(z)
@@ -57,6 +62,7 @@ class yourBookingsSolo extends React.Component{
     }
   }
 
+  //Schrijft de datums van de reservaties uit.
   Dates(x){
     var text = ""
       for(let i = 0; i < x.length; i++){
@@ -70,6 +76,9 @@ class yourBookingsSolo extends React.Component{
       return(text)
   }
 
+  //Laat de deletebutton zien bij de correcte reserveringen zien als 1 van de 2 waar is:
+  // 1 -> Je bent admin -> Laat bij alle reserveringen deletebutton zien.
+  // 2 -> Je bent de eigenaar van de reservatie -> laat de door jouw gemaakte reservaties zien.
   CheckEmailandAdmin() {
     return (
       this.state.reservations.map((data,i) =>{
@@ -91,8 +100,8 @@ class yourBookingsSolo extends React.Component{
     )
   }
 
+  // HTML
   render(){
-
     return(
     <div>
       
@@ -117,6 +126,8 @@ class yourBookingsSolo extends React.Component{
     )
   }
 }
+
+//Wordt gebruikt om de ingelogde persoon te krijgen
 const mapStateToProps = ({ user: { currentUser } }) => ({
   currentUser,
 });

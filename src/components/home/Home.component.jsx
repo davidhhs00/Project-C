@@ -1,12 +1,18 @@
+/* Import van React */
 import React from "react";
 import { Link } from 'react-router-dom';
 import { connect } from "react-redux";
 import { auth } from "../../firebase/firebase.utils";
 
+/* Import van visuele aspecten */
 import Logo from "../../assets/logo.png";
 import "./Home.styles.scss";
 
 
+//Homescreen
+//Standaard HTML
+//currentUser.displayName laat de ingelede persoon zien
+//Admin button is alleen te zien als je admin bent
 const Choose = ({ currentUser, action }) => (
   <div>    
     <img className="home-logo" src={Logo} alt="logo" />
@@ -34,6 +40,7 @@ const Choose = ({ currentUser, action }) => (
   </div>
 );
 
+//Wordt gebruikt om de ingelogde persoon te krijgen
 const mapStateToProps = ({ user: { currentUser } }) => ({
   currentUser,
 });

@@ -88,6 +88,8 @@ class App extends React.Component {
     });
   }
 
+
+  // Routing die zorgt voor de correcte navigatie tussen pagina's
   render() {
     return (
       <Router>
@@ -95,12 +97,9 @@ class App extends React.Component {
           <Switch>
             <Route exact path='/' render={() => this.props.currentUser ? (<Redirect to='/home' />) : (<Login />)} />
             <Route exact path='/home' render={() => this.props.currentUser ? (<Home action={this.setNotificationToNull} />) : (<Redirect to='/' />) }/>
-
             <Route exact path='/choosesolo' render={() => this.props.currentUser ? (<MainSolo/>) : (<Redirect to='/choosesolo'/>)}/>
             <Route exact path='/choosegroup' render={() => this.props.currentUser ? (<ChooseGroup/>) : (<Redirect to='/choosegroup'/>)}/>
             <Route path='/custombutton' component={CustomButton}/>
-
-
             <Route path= '/yourbookings' render={() => this.props.currentUser ? (<YourBookingsSolo currentUserCheck={this.props.currentUser}/>) : (<Redirect to='/yourbookings'/>)}/>
             <Route path= '/map' component={map}/>
             <Route exact path='/admin' component={admin}/>
