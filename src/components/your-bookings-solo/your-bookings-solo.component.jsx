@@ -44,20 +44,6 @@ class yourBookingsSolo extends React.Component{
     setTimeout(function(){window.location.reload(true);}, 500)
   }
 
-
-  // onderstaande functie is nutteloos en kut
-  renderDelete(x, y){
-    if (x===y){
-      return(true)
-    }
-    //if (a){
-      //return(true)
-    //}
-    //else{
-      //return(console.log(x,y,z,a))
-    //}
-  }
-
   isAuth(x, y, z, a){
     if (x === y){
       this.removeToCollection(z)
@@ -92,7 +78,7 @@ class yourBookingsSolo extends React.Component{
             <td>{data.displayName}</td>
             <td>{this.Dates(data.firebaseDates)}</td>
             <td>{data.workplace}</td>          
-            <td> <button onClick={event => this.isAuth(data.displayName, this.props.currentUser.displayName, i, this.props.currentUser.admin)} id="deleteButton">Delete</button>  </td>
+            <td> <button onClick={event => this.isAuth(data.email, this.props.currentUser.email, i, this.props.currentUser.admin)} id="deleteButton">Delete</button>  </td>
           </tr>
          :
          <tr key={data.displayName}>
@@ -115,8 +101,8 @@ class yourBookingsSolo extends React.Component{
           <tr>
             <th>Who?</th>
             <th>When?</th>
-            <th>Workplace</th>  
-            <th></th>
+            <th>Workplace</th>
+            <th>Delete button</th>
           </tr>
         </thead>
         
