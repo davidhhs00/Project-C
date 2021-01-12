@@ -16,7 +16,7 @@ const ChooseGroup = ({currentUser}) => {
     const fetchData = async () => {
       const db = firebase.firestore()
       const data = await db.collection("groups").get()
-      setGroups(data.docs.map(doc => doc.data()))
+      setGroups(data.docs.map(doc => ({...doc.data(), id: doc.id})))
     }
     fetchData()
   }, [])
@@ -48,10 +48,10 @@ const ChooseGroup = ({currentUser}) => {
     if (groupName === "") {
       alert("Please Give your group a name");
     } else if (ifExists()){
-      alert("Groupname already used by a user")
+      alert("Your group has been updated")
     } else {
       alert("Adding group to database")
-      db.collection("groups").add({
+      db.collection("groups").doc(`${groupOwner}_${groupName}`).set({
         groupName: groupName,
         groupOwner: groupOwner,
         colleague1: colleague1,
@@ -68,6 +68,15 @@ const ChooseGroup = ({currentUser}) => {
   const ifExists = () => {
     for (var i = 0; i < groups.length; i++){
       if (groupName === groups[i].groupName && groupOwner === groups[i].groupOwner){
+        const db = firebase.firestore()
+        db.collection("groups").doc(`${groupOwner}_${groupName}`).set({
+          groupName: groupName,
+          groupOwner: groupOwner,
+          colleague1: colleague1,
+          colleague2: colleague2,
+          colleague3: colleague3,
+          colleague4: colleague4,
+        })
         return true
       }
     }
