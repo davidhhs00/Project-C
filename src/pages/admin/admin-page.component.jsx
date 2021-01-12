@@ -64,8 +64,9 @@ class AdminPage extends React.Component {
                     <label htmlFor="Answer2">2st Notification Answer: </label>
                     <input onChange={(e) => this.setState({answer2: e.target.value})} name="Answer2" placeholder="Enter Answer here..."></input>
                     <br></br>
-                    <button onClick={this.createNotification} type="submit">CREATE NOTIFICATION</button>
+                    <button onClick={this.createNotification} type="submit">CREATE NOTIFICATION</button><br/>
                 </form>
+                <button onClick={(event) => (window.location.href = "/home")}> Home </button>
             </div>
         )
     }

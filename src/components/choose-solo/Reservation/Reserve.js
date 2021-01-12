@@ -5,7 +5,7 @@ import { firestore, auth} from '../../../firebase/firebase.utils';
 //Add unique id so every reservation is unique and it will not be overriden.
 
 const sendReservation = async (props) => {
-        const userRef = firestore.doc(`reservations/${auth.currentUser.displayName}`)
+        const userRef = firestore.doc(`reservations/${auth.currentUser.email}`)
 
         const snapShot = await userRef.get()
         const {displayName, email} = auth.currentUser
@@ -14,8 +14,9 @@ const sendReservation = async (props) => {
         const firebaseDates = []
         Object.keys(dates).map((key) => {
             let eu = key.split("/")
-            console.log(eu)
-            firebaseDates.push(eu[1] + "-" + eu[0] + "-" + eu[2]+ " "+dates[key]);
+            let fst = eu[0].split(" ")[0]
+            let snd = eu[0].split(" ")[1]
+            firebaseDates.push({Date: fst + " "+ eu[1] + "-" + snd + "-" + eu[2]+ " "+dates[key], Workplace: workplace});
         })
 
         if(!snapShot.exists){
@@ -24,25 +25,41 @@ const sendReservation = async (props) => {
                         displayName,
                         email,
                         workplace,
-                        firebaseDates  
+                        firebaseDates,
+                        colleagues_total: 1  
                 })
+                return true
             } catch (error) {
                 console.log('error sending user reservation', error.message);
             }
-            return userRef
+            
         } else if (snapShot.exists){
+            let storedDates = snapShot.data().firebaseDates
+            if(typeof storedDates !== "undefined"){
+                for(var j = 0; j < storedDates.length; j++){
+                    for(var i = 0; i < firebaseDates.length; i++){
+                        let newDate = firebaseDates[i]['Date'].split(' ')[1]
+                        let oldDate = storedDates[j]['Date'].split(' ')[1]
+                        let newTime = firebaseDates[i]['Date'].split(' ')[2]
+                        let oldTime = storedDates[j]['Date'].split(' ')[2]
+                        if(newDate == oldDate && newTime == oldTime){
+                            storedDates[j] = firebaseDates[i]
+                            firebaseDates.splice(i, 1)
+                        }
+                    }}
+                for(var i = storedDates.length-1; i >= 0; i--){
+                        firebaseDates.unshift(storedDates[i])
+                    }
+                }
             try {
                 await userRef.set({
-                        displayName,
-                        email,
-                        workplace,
-                        firebaseDates  
-                })
+                        firebaseDates
+                }, {merge: true})
+                return true
             } catch (error) {
                 console.log('error sending user reservation', error.message);
             }
         }
-        
     }
 
 export default sendReservation;

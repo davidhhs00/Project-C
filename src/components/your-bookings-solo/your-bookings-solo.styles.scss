@@ -2,14 +2,19 @@
   background-color: #cdb197;
   border-radius: 10px;
   border: none;
-  position: absolute;
-  top: 95%;
+  position: fixed;
+  bottom: 0;
   left: 15%; //change accordingly or even not necessary to define
   transform: translate(-50%, -50%);
   width: 22%;
   height: 5%;
   font-size: 3vh;
+  max-width: 100px;
 }
+#backButton:hover{
+  background-color: #ffffff;
+}
+
 #deleteButton {
   background-color: #cdb197;
   border-radius: 10px;
@@ -17,6 +22,9 @@
   width: auto;
   height: auto;
   font-size: 3vh;
+}
+#deleteButton:hover {
+  background-color: #ffffff;
 }
 
 #reservations {

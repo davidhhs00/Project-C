@@ -111,8 +111,9 @@ export const createNotification = async (senderID, receiverID, notification) => 
     } catch (error) {
         console.log('Something went wrong when trying to create a notification', error.message);
     }
-}
+    }
 
+// Get all registered user from the database
 export const getAllUsers = async () => {
     try {
         const userRef = await firestore.collection("users");
@@ -123,6 +124,30 @@ export const getAllUsers = async () => {
         return userArray;
     } catch (error) {
         console.log("Error while fetching all users", error.message);
+    }
+}
+
+// Get reservations for given date
+export const getReservationForDate = async (query) => {
+    try {
+        // Selected reservations collection
+        const reservationRef = await firestore.collection("reservations");
+        // Inside reservations collections
+        var reservationArray = await reservationRef.get().then((querySnapshot) => {
+            var takenSeats = [];
+            // Inside a document from reservations
+            const tempDoc = querySnapshot.docs.map((doc) => {
+                // Inside the firebaseDates of a document from reservations
+                return doc.data().firebaseDates.map((date) => {
+                    if (date.Date === query) takenSeats.push(date.Workplace);
+                })
+            })
+            return takenSeats;
+        })
+        console.log(reservationArray);
+        return reservationArray;
+    } catch (error) {
+        console.log("Error while fetching reservation data")
     }
 }
 
