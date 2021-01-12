@@ -213,7 +213,7 @@ const ChooseGroup = ({currentUser}) => {
   return (
   <div className="align-center">
     <select id="chgroup-button" className="chpbutton" onChange={(e) => handleChange(e.target.value)}>
-      <option id="default" defaultValue value={["","","",""]} className="option-opmaak">Select Group</option>
+      <option id="default" defaultValue value={["","","","",""]} className="option-opmaak">Select Group</option>
       {groups.map((group, index) =>{
         return group.groupOwner === currentUser.email ?
           <option key={group.groupName} value={[group.groupName,group.colleague1, group.colleague2, group.colleague3, group.colleague4]} className="option-opmaak">{group.groupName}</option>
