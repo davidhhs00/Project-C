@@ -1,0 +1,43 @@
+.submit-btn{
+    background-color: #cdb197;
+    color: #000000;
+    cursor: pointer;
+    display: inline-block;
+    font-family: Arial;
+    text-decoration: none;
+    margin-top: 10px;
+    border-radius: 7px;
+    display: block;
+    font-size: 15px;
+    padding: 8px 8px;
+    text-align: center;
+    width: 150px;
+}
+
+.input-btn{
+    background-color: #cdb197;
+    color: #000000;
+    cursor: pointer;
+    font-family: Arial;
+    text-decoration: none;
+    text-align: left;
+    border-radius: 7px;
+    font-size: 20px;
+  }
+  
+  .input-btn:hover {
+    background-color: #ffffff;
+  }
+  
+  .input-btn-red {
+    background-color: red;
+    color: #000000;
+    cursor: pointer;
+    font-family: Arial;
+    text-decoration: none;
+    text-align: left;
+  }
+  
+  .input-btn-red:hover {
+    background-color: #ffffff;
+  }
