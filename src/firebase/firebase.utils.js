@@ -41,6 +41,31 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
     return userRef;
 };
 
+export const createNewDocument = async (person, data) => {
+    if(!person) return;
+    
+    let userRef = firestore.doc(`users/${person}`);
+    let snapShot = await userRef.get();
+    const title = data
+
+    const {displayName, email } = snapShot.data()
+    userRef = firestore.doc(`BHV/${person}`);
+    snapShot = await userRef.get();
+
+    if(!snapShot.exists) {
+        try {
+            await userRef.set({
+                displayName,
+                email,
+                title
+            })
+        }
+        catch (error) {
+            console.log('error creating user', error.message);
+        }
+    }
+}
+
 export const placeReservation = async (data) => {
     const { email, time, workplace } = data;
 
