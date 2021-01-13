@@ -55,6 +55,7 @@ const ChooseGroup = ({currentUser}) => {
       alert("Please Give your group a name");
     } else if (ifExists()){
       alert("Your group has been updated")
+      .then(() => {window.location.href='/choosegroup'});
     } else {
       alert("Adding group to database")
       db.collection("groups").doc(`${groupOwner}_${groupName}`).set({
