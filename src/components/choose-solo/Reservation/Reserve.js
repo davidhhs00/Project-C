@@ -25,8 +25,7 @@ const sendReservation = async (props) => {
                         displayName,
                         email,
                         workplace,
-                        firebaseDates,
-                        colleagues_total: 1  
+                        firebaseDates, 
                 })
                 return true
             } catch (error) {
