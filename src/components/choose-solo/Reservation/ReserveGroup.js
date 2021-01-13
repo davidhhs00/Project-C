@@ -27,7 +27,7 @@ const SendReservation = async (props, groupName, colleague1, colleague2, colleag
     const userRef = firestore.doc(`reservations/${groupName}_${auth.currentUser.email}_${colleague1}_${colleague2}_${colleague3}_${colleague4}`)
 
     const snapShot = await userRef.get()
-    const displayName = `Group: ${groupName} (Reserved by: ${auth.currentUser.displayName})`
+    const displayName = `Group: ${groupName} (Reserved by: ${auth.currentUser.displayName} ${cName1} ${cName2} ${cName3} ${cName4})`
     const {email} = auth.currentUser
     const {workplace, dates} = props
 
