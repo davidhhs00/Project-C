@@ -41,6 +41,7 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
     return userRef;
 };
 
+//BHV'er toevoegen
 export const createNewDocument = async (person, data) => {
     if(!person) return;
     
@@ -59,10 +60,13 @@ export const createNewDocument = async (person, data) => {
                 email,
                 title
             })
+            alert("User has been added to the BHV list")
         }
         catch (error) {
             console.log('error creating user', error.message);
         }
+    } else {
+        alert("User is already a BHV'er")
     }
 }
 

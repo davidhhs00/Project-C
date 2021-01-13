@@ -24,17 +24,17 @@ export default class AddBhv extends React.Component {
     addBHV(e){
         e.preventDefault();
         createNewDocument(this.state.personID, this.state.title)
-        
     }
 
     render(){
         return(
             <div>
-            <h2>Appoint a new BHV</h2>
+            <h1>Appoint a new BHV</h1>
             <form>
                 <label htmlFor="people">Appoint new BHV: </label>
                 <br />
                 <select onChange={(e) => this.setState({personID: e.target.value})} name="people">
+                    <option key="default" value="">Select a user</option>
                     { this.state.people.map(person => <option key={person.id} value={person.id}>{person.displayName}</option>) }
                 </select>
                 <br />
