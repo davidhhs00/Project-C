@@ -57,8 +57,8 @@ class yourBookingsSolo extends React.Component{
       this.removeToCollection(z)
       //console.log('admin detected')
     }
-    else{
-      console.log(x, y, z, a)
+    else if(x !== y && !a) {
+      alert('dit kan niet')
     }
   }
 
