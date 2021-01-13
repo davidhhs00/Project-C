@@ -4,7 +4,7 @@ import { firestore, auth} from '../../../firebase/firebase.utils';
 
 //Add unique id so every reservation is unique and it will not be overriden.
 
-const SendReservation = async (props, groupName, colleague1, colleague2, colleague3, colleague4) => {
+const SendReservation = async (props, groupName, colleague1, colleague2, colleague3, colleague4, cName1, cName2, cName3, cName4) => {
     var amountofColleagues = 1
     
     if (colleague1 !== ""){
@@ -78,7 +78,8 @@ const SendReservation = async (props, groupName, colleague1, colleague2, colleag
             }
         try {
             await userRef.set({
-                    firebaseDates
+                    firebaseDates,
+                    workplace
             }, {merge: true})
             return true
         } catch (error) {
