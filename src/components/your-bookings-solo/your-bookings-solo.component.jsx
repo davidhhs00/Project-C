@@ -45,8 +45,10 @@ class yourBookingsSolo extends React.Component{
   removeToCollection(i) {
     // fetched het documentID door het nummer van de reservatie in de tabel te pakken en die id uit het documentid array te pakken
     let key = this.state.documentid[i]
+
     //stuurt de command naar firebase om de reservatie te verwijderen, naar aanleiding van de key die hiervoor gefetched is
     firebase.firestore().collection("reservations").doc(key).delete()
+    
     //reload de pagina na 500ms, dit moet met een delay omdat anders de firebase geen command krijgt om de reservatie te verwijderen. 500ms is gekozen omdat het niet te lang is en wel goed werkt
     setTimeout(function(){window.location.reload(true);}, 500)
   }
