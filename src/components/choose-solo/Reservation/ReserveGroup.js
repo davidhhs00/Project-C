@@ -5,27 +5,30 @@ import { firestore, auth} from '../../../firebase/firebase.utils';
 //Add unique id so every reservation is unique and it will not be overriden.
 
 const SendReservation = async (props, groupName, colleague1, colleague2, colleague3, colleague4, cName1, cName2, cName3, cName4) => {
-    if(colleague1 !== ""){
-        Reservation(props, cName1, colleague1)
+    var amountofColleagues = 1
+    
+    if (colleague1 !== ""){
+        amountofColleagues++
     }
-    if(colleague2 !== ""){
-        Reservation(props, cName2, colleague2)
-    }
-    if(colleague3 !== ""){
-        Reservation(props, cName3, colleague3)
-    }
-    if(colleague4 !== ""){
-        Reservation(props, cName4, colleague4)
-    }
-    Reservation(props, auth.currentUser.displayName, auth.currentUser.email)
-    .then(() => {window.location.href='/home'})
-}
 
-const Reservation = async (props, displayName, email) => {
+    if (colleague2 !== ""){
+        amountofColleagues++
+    }
 
-    const userRef = firestore.doc(`reservations/${email}`)
+    if (colleague3 !== ""){
+        amountofColleagues++
+    }
+
+    if (colleague4 !== ""){
+        amountofColleagues++
+    }
+
+
+    const userRef = firestore.doc(`reservations/${groupName}_${auth.currentUser.email}_${colleague1}_${colleague2}_${colleague3}_${colleague4}`)
 
     const snapShot = await userRef.get()
+    const displayName = `Group: ${groupName} (Reserved by: ${auth.currentUser.displayName})`
+    const {email} = auth.currentUser
     const {workplace, dates} = props
 
     const firebaseDates = []
@@ -41,8 +44,14 @@ const Reservation = async (props, displayName, email) => {
             await userRef.set({
                 displayName,
                 email,
+                groupName,
+                colleague1,
+                colleague2,
+                colleague3,
+                colleague4,
                 workplace,
                 firebaseDates,
+                colleagues_total: amountofColleagues  
             })
             return true
         } catch (error) {
@@ -69,14 +78,14 @@ const Reservation = async (props, displayName, email) => {
             }
         try {
             await userRef.set({
-                firebaseDates,
-                workplace
+                    firebaseDates,
+                    workplace
             }, {merge: true})
             return true
         } catch (error) {
             console.log('error sending user reservation', error.message);
         }
-    }
+    }   
 }
 
 export default SendReservation;
