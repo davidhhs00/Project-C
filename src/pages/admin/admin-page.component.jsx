@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import '../../firebase/firebase.utils';
 import { createNotification, getAllUsers } from '../../firebase/firebase.utils';
 
+import AddBHV from '../addBHV/add-bhv.component'
+
 import './admin-page.styles.scss';
 
 class AdminPage extends React.Component {
@@ -42,30 +44,36 @@ class AdminPage extends React.Component {
     render() {
         return (
             <div className="admin-page">
-                <h1>Welcome to admin Dashboard</h1>
-                <h2>Send notification to a user</h2>
-            
-                <form method="set" autoComplete="off">
-                    <label htmlFor="people">Choose Person: </label>
-                    <select onChange={(e) => this.setState({receiverID: e.target.value })} name="people">
-                        { this.state.people.map(person => <option key={person.id} value={person.id}>{person.displayName}</option>) }
-                    </select> 
-                    <br></br>
-                    <label htmlFor="Title">Notification Title: </label>
-                    <input onChange={(e) => this.setState({title: e.target.value})} name="Title" placeholder="Enter title here..."></input>
-                    <br></br>
-                    <label htmlFor="Message">Notification Message: </label>
-                    <input onChange={(e) => this.setState({message: e.target.value})} name="Message" placeholder="Enter message here..."></input>
-                    <br></br>
-                    <label htmlFor="Answer1">1st Notification Answer: </label>
-                    <input onChange={(e) => this.setState({answer1: e.target.value})} name="Answer1" placeholder="Enter Answer here..."></input>
-                    <br></br>
-                    <label htmlFor="Answer2">2st Notification Answer: </label>
-                    <input onChange={(e) => this.setState({answer2: e.target.value})} name="Answer2" placeholder="Enter Answer here..."></input>
-                    <br></br>
-                    <button onClick={this.createNotification} type="submit">CREATE NOTIFICATION</button><br/>
-                </form>
-                <button onClick={(event) => (window.location.href = "/home")}> Home </button>
+                <div className="admin-left">
+                    <h1>Welcome to admin Dashboard</h1>
+                    <h2>Send notification to a user</h2>
+                
+                    <form method="set" autoComplete="off">
+                        <label htmlFor="people">Choose Person: </label>
+                        <select onChange={(e) => this.setState({receiverID: e.target.value })} name="people">
+                            { this.state.people.map(person => <option key={person.id} value={person.id}>{person.displayName}</option>) }
+                        </select> 
+                        <br></br>
+                        <label htmlFor="Title">Notification Title: </label>
+                        <input onChange={(e) => this.setState({title: e.target.value})} name="Title" placeholder="Enter title here..."></input>
+                        <br></br>
+                        <label htmlFor="Message">Notification Message: </label>
+                        <input onChange={(e) => this.setState({message: e.target.value})} name="Message" placeholder="Enter message here..."></input>
+                        <br></br>
+                        <label htmlFor="Answer1">1st Notification Answer: </label>
+                        <input onChange={(e) => this.setState({answer1: e.target.value})} name="Answer1" placeholder="Enter Answer here..."></input>
+                        <br></br>
+                        <label htmlFor="Answer2">2st Notification Answer: </label>
+                        <input onChange={(e) => this.setState({answer2: e.target.value})} name="Answer2" placeholder="Enter Answer here..."></input>
+                        <br></br>
+                        <button onClick={this.createNotification} type="submit">CREATE NOTIFICATION</button><br/>
+                    </form>
+                    <button className="admin-back-button" onClick={(event) => (window.location.href = "/home")}> Home </button>
+                </div>
+
+                <div className="admin-right">
+                    <AddBHV/>
+                </div>
             </div>
         )
     }

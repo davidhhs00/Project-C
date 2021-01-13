@@ -20,10 +20,15 @@ const CallCalendar = (props) => {
   var SCOPES = "https://www.googleapis.com/auth/calendar";
 
   const handleClick = () => {
-    if (groupName != "") {
-      handleClickGroup()
+    console.log(props)
+    if(props.userInfo.workplace === 0 || props.userInfo.workplace === ""){
+      alert("Please choose a workplace")
     } else {
-      handleClickSolo()
+      if (groupName != "") {
+        handleClickGroup()
+      } else {
+        handleClickSolo()
+      }
     }
   }
 
@@ -31,6 +36,7 @@ const CallCalendar = (props) => {
       props.userInfo.filled = checkState(props.userInfo)
       if(!props.userInfo.filled)
       {
+        alert("Please choose a date")
         return;
       }
       gapi.load('client:auth2', () => {
@@ -90,7 +96,7 @@ const CallCalendar = (props) => {
             var newArr = [colleague1, colleague2, colleague3, colleague4];
             props.action(newArr);
           })
-          ReserveGroup(props.userInfo, groupName ,colleague1 ,colleague2 ,colleague3 ,colleague4).then(v => {
+          ReserveGroup(props.userInfo, groupName ,colleague1 ,colleague2 ,colleague3 ,colleague4, cName1, cName2, cName3, cName4).then(v => {
             if(v){
               window.location.href = "/home"
             } else {
@@ -106,6 +112,7 @@ const CallCalendar = (props) => {
       props.userInfo.filled = checkState(props.userInfo)
       if(!props.userInfo.filled)
       {
+        alert("Please choose a date")
         return;
       }
       gapi.load('client:auth2', () => {
@@ -186,6 +193,7 @@ const CallCalendar = (props) => {
     fetchData()
   }, [])
 
+  // Emails en Namen van collega's setten.
   const handleChange = (e) => {
     var eArray = e.split(",")
 
@@ -202,6 +210,22 @@ const CallCalendar = (props) => {
     setColleague2(eArray[2])
     setColleague3(eArray[3])
     setColleague4(eArray[4])
+
+
+    for(var i = 0; i < users.length; i++){
+      if (eArray[1] === users[i].email){
+        setCName1(users[i].displayName)
+      }
+      if (eArray[2] === users[i].email){
+        setCName2(users[i].displayName)
+      }
+      if (eArray[3] === users[i].email){
+        setCName3(users[i].displayName)
+      }
+      if (eArray[4] === users[i].email){
+        setCName4(users[i].displayName)
+      }
+    }
   }
   // Groups importeren
 
@@ -213,6 +237,24 @@ const CallCalendar = (props) => {
   const [colleague3, setColleague3] = useState("");
   const [colleague4, setColleague4] = useState("");
   // Group Form setup
+
+  // User list Importeren
+  const [users, setUsers] = React.useState([])
+
+  React.useEffect(() => {
+    const fetchData = async () => {
+      const db = firebase.firestore()
+      const data = await db.collection("users").get()
+      setUsers(data.docs.map(doc => doc.data()))
+    }
+    fetchData()
+  }, [])
+
+  // Namen van collega's verkrijgen uit database
+  const [cName1, setCName1] = useState("");
+  const [cName2, setCName2] = useState("");
+  const [cName3, setCName3] = useState("");
+  const [cName4, setCName4] = useState("");
 
   return (
     <div>

@@ -25,8 +25,7 @@ const sendReservation = async (props) => {
                         displayName,
                         email,
                         workplace,
-                        firebaseDates,
-                        colleagues_total: 1  
+                        firebaseDates, 
                 })
                 return true
             } catch (error) {
@@ -53,7 +52,8 @@ const sendReservation = async (props) => {
                 }
             try {
                 await userRef.set({
-                        firebaseDates
+                        firebaseDates,
+                        workplace
                 }, {merge: true})
                 return true
             } catch (error) {

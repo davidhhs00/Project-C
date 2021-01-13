@@ -13,6 +13,7 @@ const config = {
     measurementId: "G-Q9DKFKB4TQ"
 };
 
+// Gebruiker in firebase zetten als die niet bestaat
 export const createUserProfileDocument = async (userAuth, additionalData) => {
     if (!userAuth) return;
     const userRef = firestore.doc(`users/${userAuth.uid}`);
@@ -39,6 +40,35 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
 
     return userRef;
 };
+
+//BHV'er toevoegen
+export const createNewDocument = async (person, data) => {
+    if(!person) return;
+    
+    let userRef = firestore.doc(`users/${person}`);
+    let snapShot = await userRef.get();
+    const title = data
+
+    const {displayName, email } = snapShot.data()
+    userRef = firestore.doc(`BHV/${person}`);
+    snapShot = await userRef.get();
+
+    if(!snapShot.exists) {
+        try {
+            await userRef.set({
+                displayName,
+                email,
+                title
+            })
+            alert("User has been added to the BHV list")
+        }
+        catch (error) {
+            console.log('error creating user', error.message);
+        }
+    } else {
+        alert("User is already a BHV'er")
+    }
+}
 
 export const placeReservation = async (data) => {
     const { email, time, workplace } = data;

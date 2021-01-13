@@ -1,3 +1,4 @@
+// Import van firebase, styling en react
 import { connect } from 'react-redux';
 import React from "react";
 import { firestore } from '../../firebase/firebase.utils'
@@ -14,10 +15,11 @@ class yourBookingsSolo extends React.Component{
       reservations : [],
       }
     }
-
+  
   componentDidMount(){
-      console.log('hij mount je weet toch')
+      //console.log('hij mount je weet toch')
 
+      //Alle reservaties uit de database halen
       firestore.collection('reservations')
         .get()
         .then( snapshot => {
@@ -28,8 +30,8 @@ class yourBookingsSolo extends React.Component{
             const docID = doc.id
             reservations.push(data)
             documentid.push(docID)
-            console.log(documentid)
-            console.log(data.firebaseDates)
+            //console.log(documentid)
+            //console.log(data.firebaseDates)
           })
           this.setState({ reservations: reservations })
           this.setState({ documentid: documentid })
@@ -37,13 +39,16 @@ class yourBookingsSolo extends React.Component{
         .catch(error => console.log(error))
   }
   
+  //Verwijdert de correcte reservering uit de database.
   removeToCollection(i) {
     let key = this.state.documentid[i]
-    console.log(key)
+    //console.log(key)
     firebase.firestore().collection("reservations").doc(key).delete()
     setTimeout(function(){window.location.reload(true);}, 500)
   }
 
+  // Bijbehorende functie van CheckEmailandAdmin()
+  // Checkt of je email hetzelfde is en of je admin bent
   isAuth(x, y, z, a){
     if (x === y){
       this.removeToCollection(z)
@@ -57,42 +62,44 @@ class yourBookingsSolo extends React.Component{
     }
   }
 
+  //Schrijft de datums van de reservaties uit.
   Dates(x){
     var text = ""
       for(let i = 0; i < x.length; i++){
         if(i < x.length-1){
-          text += x[i].Date + ", "
+          text += x[i].Date + " Workplace: " + x[i].Workplace + ", "
         }
         else{
-          text += x[i].Date
+          text += x[i].Date + " Workplace: " + x[i].Workplace
         }
       }
       return(text)
   }
 
+  //Laat de deletebutton zien bij de correcte reserveringen zien als 1 van de 2 waar is:
+  // 1 -> Je bent admin -> Laat bij alle reserveringen deletebutton zien.
+  // 2 -> Je bent de eigenaar van de reservatie -> laat de door jouw gemaakte reservaties zien.
   CheckEmailandAdmin() {
     return (
       this.state.reservations.map((data,i) =>{
         return data.email === this.props.currentUserCheck.email || this.props.currentUserCheck.admin === true?
-          <tr key={data.displayName}>
+          <tr key={data.groupName ? [data.groupName,data.email,data.colleague1,data.colleague2,data.colleague3,data.colleague4] : data.email}>
             <td>{data.displayName}</td>
-            <td>{this.Dates(data.firebaseDates)}</td>
-            <td>{data.workplace}</td>          
+            <td>{this.Dates(data.firebaseDates)}</td>         
             <td> <button onClick={event => this.isAuth(data.email, this.props.currentUser.email, i, this.props.currentUser.admin)} id="deleteButton">Delete</button>  </td>
           </tr>
          :
-         <tr key={data.displayName}>
+         <tr key={data.groupName ? [data.groupName,data.email,data.colleague1,data.colleague2,data.colleague3,data.colleague4] : data.email}>
           <td>{data.displayName}</td>
-          <td>{this.Dates(data.firebaseDates)}</td>
-          <td>{data.workplace}</td>          
+          <td>{this.Dates(data.firebaseDates)}</td>         
           <td> </td>
         </tr>
       })
     )
   }
 
+  // HTML
   render(){
-
     return(
     <div>
       
@@ -101,7 +108,6 @@ class yourBookingsSolo extends React.Component{
           <tr>
             <th>Who?</th>
             <th>When?</th>
-            <th>Workplace</th>
             <th>Delete button</th>
           </tr>
         </thead>
@@ -117,6 +123,8 @@ class yourBookingsSolo extends React.Component{
     )
   }
 }
+
+//Wordt gebruikt om de ingelogde persoon te krijgen
 const mapStateToProps = ({ user: { currentUser } }) => ({
   currentUser,
 });
