@@ -16,7 +16,7 @@ class yourBookingsSolo extends React.Component{
     }
 
   componentDidMount(){
-      console.log('hij mount je weet toch')
+      //console.log('hij mount je weet toch')
 
       firestore.collection('reservations')
         .get()
@@ -28,8 +28,8 @@ class yourBookingsSolo extends React.Component{
             const docID = doc.id
             reservations.push(data)
             documentid.push(docID)
-            console.log(documentid)
-            console.log(data.firebaseDates)
+            //console.log(documentid)
+            //console.log(data.firebaseDates)
           })
           this.setState({ reservations: reservations })
           this.setState({ documentid: documentid })
@@ -39,7 +39,7 @@ class yourBookingsSolo extends React.Component{
   
   removeToCollection(i) {
     let key = this.state.documentid[i]
-    console.log(key)
+    //console.log(key)
     firebase.firestore().collection("reservations").doc(key).delete()
     setTimeout(function(){window.location.reload(true);}, 500)
   }
@@ -61,10 +61,10 @@ class yourBookingsSolo extends React.Component{
     var text = ""
       for(let i = 0; i < x.length; i++){
         if(i < x.length-1){
-          text += x[i].Date + ", "
+          text += x[i].Date + " Workplace: " + x[i].Workplace + ", "
         }
         else{
-          text += x[i].Date
+          text += x[i].Date + " Workplace: " + x[i].Workplace
         }
       }
       return(text)
@@ -74,17 +74,15 @@ class yourBookingsSolo extends React.Component{
     return (
       this.state.reservations.map((data,i) =>{
         return data.email === this.props.currentUserCheck.email || this.props.currentUserCheck.admin === true?
-          <tr key={data.displayName}>
+          <tr key={data.groupName ? [data.groupName,data.email,data.colleague1,data.colleague2,data.colleague3,data.colleague4] : data.email}>
             <td>{data.displayName}</td>
-            <td>{this.Dates(data.firebaseDates)}</td>
-            <td>{data.workplace}</td>          
+            <td>{this.Dates(data.firebaseDates)}</td>         
             <td> <button onClick={event => this.isAuth(data.email, this.props.currentUser.email, i, this.props.currentUser.admin)} id="deleteButton">Delete</button>  </td>
           </tr>
          :
-         <tr key={data.displayName}>
+         <tr key={data.groupName ? [data.groupName,data.email,data.colleague1,data.colleague2,data.colleague3,data.colleague4] : data.email}>
           <td>{data.displayName}</td>
-          <td>{this.Dates(data.firebaseDates)}</td>
-          <td>{data.workplace}</td>          
+          <td>{this.Dates(data.firebaseDates)}</td>         
           <td> </td>
         </tr>
       })
@@ -101,7 +99,6 @@ class yourBookingsSolo extends React.Component{
           <tr>
             <th>Who?</th>
             <th>When?</th>
-            <th>Workplace</th>
             <th>Delete button</th>
           </tr>
         </thead>

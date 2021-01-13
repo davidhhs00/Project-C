@@ -53,7 +53,8 @@ const sendReservation = async (props) => {
                 }
             try {
                 await userRef.set({
-                        firebaseDates
+                        firebaseDates,
+                        workplace
                 }, {merge: true})
                 return true
             } catch (error) {
