@@ -4,9 +4,30 @@
 
 .admin-left{
     position: absolute;
+    left:5%;
 }
 
 .admin-right{
     position: absolute;
     right: 50%;
 }
+
+.admin-back-button {
+    background-color: #cdb197;
+    color: #000000;
+    cursor: pointer;
+    display: inline-block;
+    font-family: Arial;
+    text-decoration: none;
+    margin-top: 550px;
+
+    border-radius: 7px;
+    display: block;
+    font-size: 20px;
+    padding: 8px 8px;
+    text-align: center;
+    width: 200px;
+  }
+.admin-back-button:hover {
+    background-color: #ffffff;
+  }

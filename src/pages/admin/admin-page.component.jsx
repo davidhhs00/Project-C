@@ -69,7 +69,7 @@ class AdminPage extends React.Component {
                         <br></br>
                         <button onClick={this.createNotification} type="submit">CREATE NOTIFICATION</button><br/>
                     </form>
-                    <button onClick={(event) => (window.location.href = "/home")}> Home </button>
+                    <button className="admin-back-button" onClick={(event) => (window.location.href = "/home")}> Home </button>
                 </div>
 
                 <div className="admin-right">
