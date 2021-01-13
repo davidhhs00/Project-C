@@ -68,10 +68,8 @@ export const findNotification = async (receiverID) => {
             var filteredDoc = tempDoc.filter((e) => {
                 return e != null;
             });
-            console.log(filteredDoc);
             return filteredDoc;
         })
-        console.log(filteredNotifications)
         return filteredNotifications;
     } catch (error) {
         console.log('error while getting notifications', error.message);
@@ -86,9 +84,6 @@ export const sendNotificationReply = async (notificationID, reply) => {
 
     return notificationRef.update({
         answer: reply
-    })
-    .then(function() {
-        console.log("Document successfully updated!");
     })
     .catch(function(error) {
         console.error("Error updating document: ", error);
@@ -107,11 +102,10 @@ export const createNotification = async (senderID, receiverID, notification) => 
             receiverID: receiverID,
             senderID: senderID
         });
-        console.log("Succesfully created a notification");
     } catch (error) {
         console.log('Something went wrong when trying to create a notification', error.message);
     }
-    }
+}
 
 // Get all registered user from the database
 export const getAllUsers = async () => {
@@ -139,12 +133,20 @@ export const getReservationForDate = async (query) => {
             const tempDoc = querySnapshot.docs.map((doc) => {
                 // Inside the firebaseDates of a document from reservations
                 return doc.data().firebaseDates.map((date) => {
-                    if (date.Date === query) takenSeats.push(date.Workplace);
+                    if (doc.data().colleagues_total) {
+                        var col_tot = doc.data().colleagues_total;
+                        if (date.Date === query && col_tot >= 2) {
+                            for (var i = 0; i < col_tot; i++) {
+                                takenSeats.push(date.Workplace);
+                            }
+                        }
+                    } else {
+                        if (date.Date === query) takenSeats.push(date.Workplace);
+                    }
                 })
             })
             return takenSeats;
         })
-        console.log(reservationArray);
         return reservationArray;
     } catch (error) {
         console.log("Error while fetching reservation data")

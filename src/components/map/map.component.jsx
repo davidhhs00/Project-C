@@ -4,6 +4,7 @@ import './map.styles.scss'
 
 import { getReservationForDate } from '../../firebase/firebase.utils';
 
+// TODO: Add check for amount of people in group when reservation from a group
 export default class NgtiMap extends React.Component {
     constructor(props) {
         super(props);
@@ -73,7 +74,6 @@ export default class NgtiMap extends React.Component {
     }
 
     getReservationForDate(query) {
-        console.log(query);
         // {Monday 1/11/2021: "8:30-11:00", Tuesday 1/12/2021: "8:30-11:00"}
 
         var arr = [];

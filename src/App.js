@@ -69,15 +69,10 @@ class App extends React.Component {
   }
 
   checkNotification(userID) {
-      console.log(userID);
       return findNotification(userID).then(function(result) {
-        console.log(result);
         if (result.length >= 1) {
-          console.log("Found Notifications!");
-          console.log(result)
           return result
         } else {
-          console.log("Nothing!!!!!");
           return null;
         }
       })
@@ -102,7 +97,7 @@ class App extends React.Component {
             <Route exact path='/home' render={() => this.props.currentUser ? (<Home action={this.setNotificationToNull} />) : (<Redirect to='/' />) }/>
             <Route path='/allbookings' component={AllBookings}/>
             <Route path='/bookinginfo' component={BookingInfo}/>
-            <Route exact path='/choosesolo' render={() => this.props.currentUser ? (<MainSolo/>) : (<Redirect to='/choosesolo'/>)}/>
+            <Route exact path='/choosesolo' render={() => this.props.currentUser ? (<MainSolo user={this.props.currentUser}/>) : (<Redirect to='/choosesolo'/>)}/>
             <Route exact path='/choosegroup' render={() => this.props.currentUser ? (<ChooseGroup/>) : (<Redirect to='/choosegroup'/>)}/>
             <Route path='/custombutton' component={CustomButton}/>
             <Route path='/endgroup' component={EndGroup}/>

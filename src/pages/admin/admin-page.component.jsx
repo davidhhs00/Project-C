@@ -36,7 +36,6 @@ class AdminPage extends React.Component {
             answer1: this.state.answer1,
             answer2: this.state.answer2
         }
-        console.log(this.props.currentUser.id, this.state.receiverID, notification)
         createNotification(this.props.currentUser.id, this.state.receiverID, notification)
     }
 

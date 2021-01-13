@@ -13,7 +13,6 @@ import firebase from '../../firebase/firebase.utils';
 
 
 const CallCalendar = (props) => {
-
   var gapi = window.gapi
   var CLIENT_ID = "899935600703-gqi84kbl6j9lqme8u2m3hh1e97j54h4o.apps.googleusercontent.com" //add firebase au
   var API_KEY = "AIzaSyDpfFHATPm9yV3eTwP5iOGfpy4bb1swoOw"
@@ -87,6 +86,9 @@ const CallCalendar = (props) => {
             })
           batch.then(function() {
             console.log("Done");
+
+            var newArr = [colleague1, colleague2, colleague3, colleague4];
+            props.action(newArr);
           })
           ReserveGroup(props.userInfo, groupName ,colleague1 ,colleague2 ,colleague3 ,colleague4).then(v => {
             if(v){
@@ -185,7 +187,6 @@ const CallCalendar = (props) => {
   }, [])
 
   const handleChange = (e) => {
-    console.log(e);
     var eArray = e.split(",")
 
     var amountOfUSers = 0;
@@ -194,9 +195,8 @@ const CallCalendar = (props) => {
       if (e !== "") amountOfUSers += 1;
     });
     if (amountOfUSers === 0) amountOfUSers = 1;
-    props.action(amountOfUSers);
+    props.actionTwo(amountOfUSers);
 
-    console.log(eArray);
     setgroupName(eArray[0])
     setColleague1(eArray[1])
     setColleague2(eArray[2])
@@ -214,7 +214,6 @@ const CallCalendar = (props) => {
   const [colleague4, setColleague4] = useState("");
   // Group Form setup
 
-  console.log(groupName)
   return (
     <div>
       <div >
