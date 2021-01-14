@@ -99,19 +99,22 @@ export default class NgtiMap extends React.Component {
 
     updateReserved() {
         var arr = this.state.secondArr[0];
+        if(typeof arr !== "undefined") {
+            if (arr.length > this.state.allowedAmountOfPeople) {
+                this.setState({ reserved: this.state.reservedFullTemplate });
+            } else {
+                let newArray = [...this.state.reservedTemplate];
+                arr.forEach(e => {
+                    console.log(e)
+                    
+                    // if number is in the array we increment the amount of currently taken seats by 1
+                    newArray[e-1] = {...newArray[e-1], reservedSeats: newArray[e-1].reservedSeats + 1}
+                });
 
-        if (arr.length > this.state.allowedAmountOfPeople) {
-            this.setState({ reserved: this.state.reservedFullTemplate });
+                this.setState({ reserved: newArray });
+            }
         } else {
-            let newArray = [...this.state.reservedTemplate];
-            arr.forEach(e => {
-                console.log(e)
-                
-                // if number is in the array we increment the amount of currently taken seats by 1
-                newArray[e-1] = {...newArray[e-1], reservedSeats: newArray[e-1].reservedSeats + 1}
-            });
-
-            this.setState({ reserved: newArray });
+            console.log("error")
         }
     }
 

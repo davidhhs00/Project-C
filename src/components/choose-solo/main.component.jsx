@@ -23,7 +23,8 @@ class MainSolo extends React.Component {
         startDate: null,
         endDate: null,
         focused: false,
-        dates: {}
+        dates: {},
+        currentUser: this.props.currentUser
     };
     
     this.buttonSelected = this.buttonSelected.bind(this);
@@ -106,11 +107,12 @@ class MainSolo extends React.Component {
   }
 
   render() {
+    console.log(this.state.currentUser)
     return (
       <div className="main">
         <Map className='map' workplace={this.onWorkplace} dates={this.state.dates} amountOfUsers={this.state.amountOfUsers}/>
         <div>
-          <p className="choose-solo-text">Selected Workplace: {this.props.currentUser}</p>
+          <p className="choose-solo-text">Selected Workplace: </p>
           <input className="choose-solo-button" type="number" value={this.state.workplace} onChange={this.onWorkplace}/>
           <div>
             <p className="choose-solo-text">Select Dates:</p>
@@ -142,7 +144,7 @@ class MainSolo extends React.Component {
 }
 
 const mapStateToProps = ({ user }) => ({
-  currentUser: user.currentUser
+  currentUser: user.currentUser.displayName
 });
 
-export default connect()(MainSolo);
+export default connect(mapStateToProps)(MainSolo);
