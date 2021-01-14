@@ -22,7 +22,7 @@ class MainSolo extends React.Component {
         workplace: "",
         startDate: null,
         endDate: null,
-        focused: false,
+        focused: null,
         dates: {},
         currentUser: this.props.currentUser
     };
@@ -107,7 +107,6 @@ class MainSolo extends React.Component {
   }
 
   render() {
-    console.log(this.state.currentUser)
     return (
       <div className="main">
         <Map className='map' workplace={this.onWorkplace} dates={this.state.dates} amountOfUsers={this.state.amountOfUsers}/>
@@ -125,10 +124,10 @@ class MainSolo extends React.Component {
               focusedInput={this.state.focused}
               onFocusChange={focusedInput => this.setState({ focused: focusedInput})}
               numberOfMonths={1}
+              displayFormat="DD/MM/YYYY"
               withPortal={window.matchMedia("(max-width: 400px").matches}
               enableOutsideDays
               noBorder
-              autoFocus
               daySize={56}
             />
           </div>
