@@ -55,6 +55,15 @@ const ChooseGroup = ({currentUser}) => {
       alert("Please Give your group a name");
     } else if (ifExists()){
       alert("Your group has been updated")
+      const db = firebase.firestore()
+      db.collection("groups").doc(`${groupOwner}_${groupName}`).set({
+        groupName: groupName,
+        groupOwner: groupOwner,
+        colleague1: colleague1,
+        colleague2: colleague2,
+        colleague3: colleague3,
+        colleague4: colleague4,
+      })
       .then(() => {window.location.href='/choosegroup'});
     } else {
       alert("Adding group to database")
@@ -74,15 +83,6 @@ const ChooseGroup = ({currentUser}) => {
   const ifExists = () => {
     for (var i = 0; i < groups.length; i++){
       if (groupName === groups[i].groupName && groupOwner === groups[i].groupOwner){
-        const db = firebase.firestore()
-        db.collection("groups").doc(`${groupOwner}_${groupName}`).set({
-          groupName: groupName,
-          groupOwner: groupOwner,
-          colleague1: colleague1,
-          colleague2: colleague2,
-          colleague3: colleague3,
-          colleague4: colleague4,
-        })
         return true
       }
     }
