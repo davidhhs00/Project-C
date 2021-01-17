@@ -103,7 +103,7 @@
         width: 6.8%;
         height: 0.01%;
         background-color: green;
-        opacity: 50%;
+        opacity: 0.5;
         color: transparent;
         text-align: center;
         padding: 4.1% 0;
@@ -111,24 +111,24 @@
         cursor: pointer;
 
         &:hover {
-            opacity: 80%;
+            opacity: 0.8;
             color: black;
         }
 
         &.selected {
-            opacity: 90%;
+            opacity: 0.9;
             color: black;
         }
     }
     .reserved {
         background-color: grey;
-        opacity: 90%;
+        opacity: 0.9;
         color: transparent;
         text-align: center;
 
         &:hover {
             color: black;
-            opacity: 90%;
+            opacity: 0.9;
         }
     }
 }
