@@ -1,5 +1,5 @@
 import React from "react";
-import { DateRangePicker } from "react-dates";
+import { DateRangePicker, isAfterDay, isBeforeDay } from "react-dates";
 import Map from '../map/map.component';
 import "react-dates/initialize";
 import "react-dates/lib/css/_datepicker.css";
@@ -11,7 +11,9 @@ import SetReservation from "./AddEvent";
 import setRangeDates from './Reservation/SetRangeDates';
 import SetTimeslot from './TimeSlot/timeslot.component';
 
-import { createNotification, getAllUsers } from '../../firebase/firebase.utils';
+import { createNotification, getAllUsers, getBHV } from '../../firebase/firebase.utils';
+
+const maximumDays = 3;
 
 class MainSolo extends React.Component {
   constructor(props) {
@@ -23,7 +25,9 @@ class MainSolo extends React.Component {
         startDate: null,
         endDate: null,
         focused: null,
+        check: false,
         dates: {},
+        BHV: getBHV(),
         currentUser: this.props.currentUser
     };
     
@@ -106,6 +110,13 @@ class MainSolo extends React.Component {
     this.setState({ amountOfUsers: e });
   }
 
+  blockWeekends = day => {
+    if(day.format('ddd') === 'Sat' || day.format('ddd') === 'Sun'){
+      return true;
+    }
+    return false;
+  }
+
   render() {
     return (
       <div className="main">
@@ -124,9 +135,10 @@ class MainSolo extends React.Component {
               focusedInput={this.state.focused}
               onFocusChange={focusedInput => this.setState({ focused: focusedInput})}
               numberOfMonths={1}
-              displayFormat="DD/MM/YYYY"
+              displayFormat="DD/MM/YYYY" 
               withPortal={window.matchMedia("(max-width: 400px").matches}
               enableOutsideDays
+              isDayBlocked={this.blockWeekends}
               noBorder
               daySize={56}
             />
