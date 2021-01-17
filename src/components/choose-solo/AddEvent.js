@@ -13,7 +13,6 @@ import firebase from '../../firebase/firebase.utils';
 
 
 const CallCalendar = (props) => {
-
   var gapi = window.gapi
   var CLIENT_ID = "899935600703-gqi84kbl6j9lqme8u2m3hh1e97j54h4o.apps.googleusercontent.com" //add firebase au
   var API_KEY = "AIzaSyDpfFHATPm9yV3eTwP5iOGfpy4bb1swoOw"
@@ -21,10 +20,15 @@ const CallCalendar = (props) => {
   var SCOPES = "https://www.googleapis.com/auth/calendar";
 
   const handleClick = () => {
-    if (groupName != "") {
-      handleClickGroup()
+    console.log(props)
+    if(props.userInfo.workplace === 0 || props.userInfo.workplace === ""){
+      alert("Please choose a workplace")
     } else {
-      handleClickSolo()
+      if (groupName != "") {
+        handleClickGroup()
+      } else {
+        handleClickSolo()
+      }
     }
   }
 
@@ -32,6 +36,7 @@ const CallCalendar = (props) => {
       props.userInfo.filled = checkState(props.userInfo)
       if(!props.userInfo.filled)
       {
+        alert("Please choose a date")
         return;
       }
       gapi.load('client:auth2', () => {
@@ -87,8 +92,11 @@ const CallCalendar = (props) => {
             })
           batch.then(function() {
             console.log("Done");
+
+            var newArr = [colleague1, colleague2, colleague3, colleague4];
+            props.action(newArr);
           })
-          ReserveGroup(props.userInfo, groupName ,colleague1 ,colleague2 ,colleague3 ,colleague4).then(v => {
+          ReserveGroup(props.userInfo, groupName ,colleague1 ,colleague2 ,colleague3 ,colleague4, cName1, cName2, cName3, cName4).then(v => {
             if(v){
               window.location.href = "/home"
             } else {
@@ -104,6 +112,7 @@ const CallCalendar = (props) => {
       props.userInfo.filled = checkState(props.userInfo)
       if(!props.userInfo.filled)
       {
+        alert("Please choose a date")
         return;
       }
       gapi.load('client:auth2', () => {
@@ -184,14 +193,39 @@ const CallCalendar = (props) => {
     fetchData()
   }, [])
 
+  // Emails en Namen van collega's setten.
   const handleChange = (e) => {
     var eArray = e.split(",")
-    console.log(eArray)
+
+    var amountOfUSers = 0;
+
+    eArray.forEach(e => {
+      if (e !== "") amountOfUSers += 1;
+    });
+    if (amountOfUSers === 0) amountOfUSers = 1;
+    props.actionTwo(amountOfUSers);
+
     setgroupName(eArray[0])
     setColleague1(eArray[1])
     setColleague2(eArray[2])
     setColleague3(eArray[3])
     setColleague4(eArray[4])
+
+
+    for(var i = 0; i < users.length; i++){
+      if (eArray[1] === users[i].email){
+        setCName1(users[i].displayName)
+      }
+      if (eArray[2] === users[i].email){
+        setCName2(users[i].displayName)
+      }
+      if (eArray[3] === users[i].email){
+        setCName3(users[i].displayName)
+      }
+      if (eArray[4] === users[i].email){
+        setCName4(users[i].displayName)
+      }
+    }
   }
   // Groups importeren
 
@@ -204,12 +238,29 @@ const CallCalendar = (props) => {
   const [colleague4, setColleague4] = useState("");
   // Group Form setup
 
-  console.log(groupName)
+  // User list Importeren
+  const [users, setUsers] = React.useState([])
+
+  React.useEffect(() => {
+    const fetchData = async () => {
+      const db = firebase.firestore()
+      const data = await db.collection("users").get()
+      setUsers(data.docs.map(doc => doc.data()))
+    }
+    fetchData()
+  }, [])
+
+  // Namen van collega's verkrijgen uit database
+  const [cName1, setCName1] = useState("");
+  const [cName2, setCName2] = useState("");
+  const [cName3, setCName3] = useState("");
+  const [cName4, setCName4] = useState("");
+
   return (
     <div>
       <div >
         <select className="choose-solo-button" onChange={(e) => handleChange(e.target.value)}>
-          <option id="default" defaultValue value={["","","","",""]}>{props.currentUser.displayName}</option>
+          <option id="default"  defaultValue value={["","","","",""]}>{props.currentUser.displayName}</option>
           {groups.map((group, index) =>{
             return group.groupOwner === props.currentUser.email ?
               <option key={group.groupName} value={[group.groupName,group.colleague1, group.colleague2, group.colleague3, group.colleague4]}>{group.groupName}</option>

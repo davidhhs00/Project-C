@@ -3,25 +3,28 @@ import { DateRangePicker } from "react-dates";
 import Map from '../map/map.component';
 import "react-dates/initialize";
 import "react-dates/lib/css/_datepicker.css";
+import { connect } from 'react-redux';
 
 import "./homepage.styles.scss";
-//import Message from './DisplayMessage/displayMessage.component';
 
 import SetReservation from "./AddEvent";
 import setRangeDates from './Reservation/SetRangeDates';
 import SetTimeslot from './TimeSlot/timeslot.component';
 
-import { createNotification } from '../../firebase/firebase.utils';
+import { createNotification, getAllUsers } from '../../firebase/firebase.utils';
 
 class MainSolo extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+        allUserList: [],
+        amountOfUsers: 1,
         workplace: "",
         startDate: null,
         endDate: null,
-        focused: false,
-        dates: {}
+        focused: null,
+        dates: {},
+        currentUser: this.props.currentUser
     };
     
     this.buttonSelected = this.buttonSelected.bind(this);
@@ -30,6 +33,7 @@ class MainSolo extends React.Component {
     this.onWorkplace = this.onWorkplace.bind(this);
     this.onSetTime = this.onSetTime.bind(this);
     this.createNotification = this.createNotification.bind(this);
+    this.changeAmountOfUsers = this.changeAmountOfUsers.bind(this);
   }
 
   buttonSelected = (tt) => {
@@ -61,38 +65,53 @@ class MainSolo extends React.Component {
     );
   };
 
-  createNotification(e) {
-        e.preventDefault();
+  createNotification(arr) {
+      var keyName = Object.keys(this.state.dates)[0];
+      var keyVal = this.state.dates[keyName];
+      var date = keyName + " " + keyVal
        
-        let notification = {
+      getAllUsers().then(res => {
+        this.setState({ allUserList: res });
+
+        arr.forEach(e => {
+          let notification = {
             title: "Work Invitation",
-            message: `You have been invited to work on ${this.state.dates} in workplace number ${this.state.workplace}`,
+            message: `You have been invited to work on ${date} in workplace number ${this.state.workplace}`,
             code: 200,
             body: {
               workplace: this.state.workplace,
-              startDate: this.state.startDate,
-              endDate: this.state.endDate,
-              focused: this.state.focused,
-              dates: this.state.dates
+              dates: this.state.dates // Need
             },
             answer1: "Accept",
             answer2: "Deny"
-        }
-        
-        console.log(this.props.currentUser.id, this.state.receiverID, notification)
-        createNotification(this.props.currentUser.id, this.state.receiverID, notification)
+          }
+
+          var receiverID;
+          this.state.allUserList.forEach(user => {
+            if (user.email === e) receiverID = user.id;
+          })
+
+          if (receiverID) {
+            createNotification(this.props.user.id, receiverID, notification)
+          }
+        })
+      })
     }
 
   onFocusChange(focusedInput) {
     this.setState({ focusedInput });
   }
 
+  changeAmountOfUsers(e) {
+    this.setState({ amountOfUsers: e });
+  }
+
   render() {
     return (
       <div className="main">
-        <Map className='map' workplace={this.onWorkplace} dates={this.state.dates}/>
+        <Map className='map' workplace={this.onWorkplace} dates={this.state.dates} amountOfUsers={this.state.amountOfUsers}/>
         <div>
-          <p className="choose-solo-text">Selected Workplace:</p>
+          <p className="choose-solo-text">Selected Workplace: </p>
           <input className="choose-solo-button" type="number" value={this.state.workplace} onChange={this.onWorkplace}/>
           <div>
             <p className="choose-solo-text">Select Dates:</p>
@@ -105,35 +124,26 @@ class MainSolo extends React.Component {
               focusedInput={this.state.focused}
               onFocusChange={focusedInput => this.setState({ focused: focusedInput})}
               numberOfMonths={1}
+              displayFormat="DD/MM/YYYY"
               withPortal={window.matchMedia("(max-width: 400px").matches}
               enableOutsideDays
               noBorder
-              autoFocus
               daySize={56}
             />
           </div>
-
           <SetTimeslot onSetTime={this.onSetTime} dates={this.state.dates}/>
 
           <p className="choose-solo-text">Booking for:</p>
           
-          <SetReservation userInfo={this.state} action={this.createNotification} />
+          <SetReservation userInfo={this.state} action={this.createNotification} actionTwo={this.changeAmountOfUsers} />
         </div>
       </div>  
     );
   }
 }
 
-/*
-<br />
-<div className="lowerBtn">
-    <SetReservation userInfo={this.state} />
-    <button
-      onClick={(event) => (window.location.href = "/home")}
-      className="backBtn"
-      type="button">
-      Back
-    </button>
-*/
+const mapStateToProps = ({ user }) => ({
+  currentUser: user.currentUser.displayName
+});
 
-export default MainSolo;
+export default connect(mapStateToProps)(MainSolo);

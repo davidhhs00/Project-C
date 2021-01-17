@@ -8,6 +8,8 @@ import store from './redux/store';
 import './index.css';
 import App from './App';
 
+//Root van de applicatie
+//Dit rendert alles
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>

@@ -1,3 +1,82 @@
 .admin-page {
-    color: white;
+  color: white;
 }
+
+.admin-left {
+  left: 5%;
+}
+
+.admin-right {
+  left: 5%;
+  margin-top: 1%;
+}
+
+.admin-back-button {
+  position: absolute;
+  transform: translate(0%,-105%);
+  top: 100%;
+  background-color: #cdb197;
+  color: #000000;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Arial;
+  text-decoration: none;
+
+  border-radius: 7px;
+  display: block;
+  font-size: 20px;
+  padding: 8px 8px;
+  text-align: center;
+  width: 200px;
+}
+.admin-back-button:hover {
+  background-color: #ffffff;
+}
+
+.submitbtn{
+  background-color: #cdb197;
+  color: #000000;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Arial;
+  text-decoration: none;
+  margin-top: 10px;
+  border-radius: 7px;
+  display: block;
+  font-size: 15px;
+  padding: 8px 8px;
+  text-align: center;
+  width: 200px;
+}
+
+.inputbtn{
+  font-size: 20px;
+    background-color: #cdb197;
+    color: #000000;
+    cursor: pointer;
+    font-family: Arial;
+    text-decoration: none;
+    text-align: left;
+    border-radius: 7px;
+  }
+  
+  .inputbtn:hover {
+    background-color: #ffffff;
+  }
+  
+  .inputbtn-red {
+    background-color: red;
+    color: #000000;
+    cursor: pointer;
+    font-family: Arial;
+    text-decoration: none;
+    text-align: left;
+  }
+  
+  .inputbtn-red:hover {
+    background-color: #ffffff;
+  }
+
+  .mainpage{
+    font-size: 20px;
+  }

@@ -2,70 +2,108 @@ import React from 'react'
 import '../../../firebase/firebase.utils'
 import { firestore, auth} from '../../../firebase/firebase.utils';
 
-//Add unique id so every reservation is unique and it will not be overriden.
+let currentDate = new Date();
 
-const sendReservation = async (props, groupName, colleague1, colleague2, colleague3, colleague4) => {
-        const userRef = firestore.doc(`reservations/${groupName}`)
-
-        const snapShot = await userRef.get()
-        const displayName = groupName + " (" + auth.currentUser.displayName + ")"
-        const {email} = auth.currentUser
-        const {workplace, dates} = props
-
-        const firebaseDates = []
-        Object.keys(dates).map((key) => {
-            let eu = key.split("/")
-            firebaseDates.push({Date: eu[0] + "-" + eu[1] + "-" + eu[2]+ " "+dates[key], Workplace: workplace});
-        })
-        console.log(groupName)
-        console.log(colleague1)
-        console.log(colleague2)
-        console.log(colleague3)
-        console.log(colleague4)
-
-        if(!snapShot.exists){
-            try {
-                await userRef.set({
-                        displayName,
-                        email,
-                        groupName,
-                        colleague1,
-                        colleague2,
-                        colleague3,
-                        colleague4,
-                        workplace,
-                        firebaseDates  
-                })
-                return true
-            } catch (error) {
-                console.log('error sending user reservation', error.message);
-            }
-            
-        } else if (snapShot.exists){
-            let oldDates = snapShot.data().firebaseDates
-            for(var j = 0; j < firebaseDates.length; j++){
-                for(var i = 0; i < oldDates.length; i++){
-                    if(firebaseDates.length !== 0 && oldDates[i].split(' ')[1] === firebaseDates[j].split(' ')[1])
-                    {
-                        oldDates[i] = firebaseDates[j]
-                        firebaseDates.splice(j, 1)
-                    }
-                }
-            }
-            for(var i = oldDates.length-1; i >= 0; i--){
-                firebaseDates.unshift(oldDates[i])
-            }
-            let newWorkplace = workplace
-            try {
-                await userRef.set({
-                        firebaseDates,
-                        newWorkplace
-                }, {merge: true})
-                return true
-            } catch (error) {
-                console.log('error sending user reservation', error.message);
-            }
-        }   
+const checkDate = (date) =>{
+    let newdate = date.split('-')
+    let usedate = newdate.reverse().join('-')
+    let dbDate = new Date(usedate)
+    
+    if(dbDate.getTime() < currentDate.getTime()){
+        if(dbDate.toLocaleDateString() == currentDate.toLocaleDateString()){
+            return true
+        }
+        return false
+    }
+    return true
 }
 
-export default sendReservation;
+const SendReservation = async (props, groupName, colleague1, colleague2, colleague3, colleague4, cName1, cName2, cName3, cName4) => {
+    var amountofColleagues = 1
+    
+    if (colleague1 !== ""){
+        amountofColleagues++
+    }
+
+    if (colleague2 !== ""){
+        amountofColleagues++
+    }
+
+    if (colleague3 !== ""){
+        amountofColleagues++
+    }
+
+    if (colleague4 !== ""){
+        amountofColleagues++
+    }
+
+
+    const userRef = firestore.doc(`reservations/${groupName}_${auth.currentUser.email}_${colleague1}_${colleague2}_${colleague3}_${colleague4}`)
+
+    const snapShot = await userRef.get()
+    const displayName = `Group: ${groupName} (Reserved by: ${auth.currentUser.displayName} ${cName1} ${cName2} ${cName3} ${cName4})`
+    const {email} = auth.currentUser
+    const {workplace, dates} = props
+
+    const firebaseDates = []
+    Object.keys(dates).map((key) => {
+        let eu = key.split("/")
+        let fst = eu[0].split(" ")[0]
+        let snd = eu[0].split(" ")[1]
+        firebaseDates.push({Date: fst + " "+ eu[1] + "-" + snd + "-" + eu[2]+ " "+dates[key], Workplace: workplace});
+    })
+
+    if(!snapShot.exists){
+        try {
+            await userRef.set({
+                displayName,
+                email,
+                groupName,
+                colleague1,
+                colleague2,
+                colleague3,
+                colleague4,
+                workplace,
+                firebaseDates,
+                colleagues_total: amountofColleagues  
+            })
+            return true
+        } catch (error) {
+            console.log('error sending user reservation', error.message);
+        }
+        
+    } else if (snapShot.exists){
+        let storedDates = snapShot.data().firebaseDates
+        if(typeof storedDates !== "undefined"){
+            for(var j = 0; j < storedDates.length; j++){
+                if(checkDate(storedDates[j]['Date'].split(' ')[1])){
+                    for(var i = 0; i < firebaseDates.length; i++){
+                        let newDate = firebaseDates[i]['Date'].split(' ')[1]
+                        let oldDate = storedDates[j]['Date'].split(' ')[1]
+                        let newTime = firebaseDates[i]['Date'].split(' ')[2]
+                        let oldTime = storedDates[j]['Date'].split(' ')[2]
+                        if(newDate == oldDate && newTime == oldTime){
+                            storedDates[j] = firebaseDates[i]
+                            firebaseDates.splice(i, 1)
+                        }
+                    }} else {
+                        storedDates.splice(j, 1)
+                    }
+            for(var i = storedDates.length-1; i >= 0; i--){
+                    firebaseDates.unshift(storedDates[i])
+                }
+            }
+        }
+        try {
+            await userRef.set({
+                    firebaseDates,
+                    workplace
+            }, {merge: true})
+            return true
+        } catch (error) {
+            console.log('error sending user reservation', error.message);
+        }
+    }   
+}
+
+export default SendReservation;
