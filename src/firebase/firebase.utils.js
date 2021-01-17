@@ -42,7 +42,7 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
 };
 
 //BHV'er toevoegen
-export const createNewDocument = async (person, data) => {
+export const createNewDocument = async (person, data, days) => {
     if(!person) return;
     
     let userRef = firestore.doc(`users/${person}`);
@@ -58,7 +58,8 @@ export const createNewDocument = async (person, data) => {
             await userRef.set({
                 displayName,
                 email,
-                title
+                title,
+                days
             })
             alert("User has been added to the BHV list")
         }
@@ -146,6 +147,19 @@ export const getAllUsers = async () => {
             return tempDoc;
         })
         return userArray;
+    } catch (error) {
+        console.log("Error while fetching all users", error.message);
+    }
+}
+// Get all registered BHV from the database
+export const getBHV = async () => {
+    try{
+        const userRef = await firestore.collection("BHV");
+        var userArray = await userRef.get().then((querySnapshot) => {
+            const tempDoc = querySnapshot.docs.map((doc) => { return { id: doc.id, ...doc.data() } })
+            return tempDoc;
+        })
+        return userArray
     } catch (error) {
         console.log("Error while fetching all users", error.message);
     }
